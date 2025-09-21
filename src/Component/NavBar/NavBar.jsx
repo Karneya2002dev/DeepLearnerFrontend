@@ -96,7 +96,7 @@ const Navbar = () => {
 
         {/* Desktop Nav */}
         <ul
-          className="hidden md:flex space-x-8 font-medium text-gray-300 font-logo"
+          className="hidden md:flex space-x-8 font-medium text-gray-300 font-logo "
           style={{ fontFamily: "EB Garamond, serif" }}
         >
           {navLinks.map((link) => {

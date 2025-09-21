@@ -5,6 +5,7 @@ import { Star, Users, Clock, Lock } from "lucide-react";
 import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
+import comingSoonImage from '../../assets/upcome.jpg'
 
 import "swiper/css";
 import "swiper/css/navigation";
@@ -15,6 +16,7 @@ import "swiper/css/pagination";
 // -------------------------
 const CourseCard = ({ course, index }) => {
   const navigate = useNavigate();
+  // const comingSoonImage = "/assets/coming-soon.jpg"; // ✅ Replace with your placeholder path
 
   const students =
     course.students && Number(course.students) > 0
@@ -42,26 +44,15 @@ const CourseCard = ({ course, index }) => {
         </span>
       )}
 
-      {/* Thumbnail or Video */}
+      {/* Thumbnail Image */}
       <div className="relative">
-        {course.comingSoon && course.video ? (
-          <video
-            src={course.video}
-            className="w-full h-48 object-cover opacity-80"
-            autoPlay
-            muted
-            loop
-            playsInline
-          />
-        ) : (
-          <img
-            src={course.image}
-            alt={course.title}
-            className={`w-full h-48 object-cover ${
-              course.comingSoon ? "opacity-50 grayscale" : ""
-            }`}
-          />
-        )}
+        <img
+          src={course.comingSoon ? comingSoonImage : course.image}
+          alt={course.title}
+          className={`w-full h-48 object-cover ${
+            course.comingSoon ? "opacity-80 grayscale" : ""
+          }`}
+        />
 
         {/* Lock Overlay */}
         {course.comingSoon && (
@@ -198,40 +189,36 @@ const CoursesSection = () => {
       </div>
 
       {/* Courses Carousel */}
-     <div className="px-6 max-w-7xl mx-auto">
-  {loading ? (
-    <p className="text-center text-gray-400">⏳ Loading courses...</p>
-  ) : filteredCourses.length > 0 ? (
-    <Swiper
-      modules={[Navigation, Pagination, Autoplay]}
-      spaceBetween={20}
-      slidesPerView={1}
-      navigation
-      pagination={{ clickable: true }}
-      autoplay={{ delay: 3000 }}
-      breakpoints={{
-        640: { slidesPerView: 1 },
-        768: { slidesPerView: 2 },
-        1024: { slidesPerView: 3 },
-      }}
-      className="pb-10"
-    >
-      {filteredCourses.map((course, index) => (
-        <SwiperSlide
-          key={course.id}
-          className="flex h-[480px]" // ⬅️ increased height
-        >
-          <CourseCard course={course} index={index} />
-        </SwiperSlide>
-      ))}
-    </Swiper>
-  ) : (
-    <p className="text-center text-gray-500">
-      No courses found in this category.
-    </p>
-  )}
-</div>
-
+      <div className="px-6 max-w-7xl mx-auto">
+        {loading ? (
+          <p className="text-center text-gray-400">⏳ Loading courses...</p>
+        ) : filteredCourses.length > 0 ? (
+          <Swiper
+            modules={[Navigation, Pagination, Autoplay]}
+            spaceBetween={20}
+            slidesPerView={1}
+            navigation
+            pagination={{ clickable: true }}
+            autoplay={{ delay: 3000 }}
+            breakpoints={{
+              640: { slidesPerView: 1 },
+              768: { slidesPerView: 2 },
+              1024: { slidesPerView: 3 },
+            }}
+            className="pb-10"
+          >
+            {filteredCourses.map((course, index) => (
+              <SwiperSlide key={course.id} className="flex h-[480px]">
+                <CourseCard course={course} index={index} />
+              </SwiperSlide>
+            ))}
+          </Swiper>
+        ) : (
+          <p className="text-center text-gray-500">
+            No courses found in this category.
+          </p>
+        )}
+      </div>
     </section>
   );
 };

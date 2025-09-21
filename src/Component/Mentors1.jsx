@@ -168,7 +168,7 @@ export default function Dashboard() {
                 >
                   <option value="">Years of Experience</option>
                   {Array.from({ length: 21 }, (_, i) => (
-                    <option key={i} value={i} className="text-black">
+                    <option key={i} value={i} className="text-white">
                       {i} {i === 1 ? "year" : "years"}
                     </option>
                   ))}

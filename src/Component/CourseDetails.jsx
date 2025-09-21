@@ -4,12 +4,14 @@ import { Star, Users, Clock, Lock } from "lucide-react";
 import { motion } from "framer-motion";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
+import placeholderImage from "../assets/upcome.jpg"
 
 // ----------------------
 // CourseCard Component
 // ----------------------
 const CourseCard = ({ course, index }) => {
   const navigate = useNavigate();
+  // const placeholderImage = "/assets/coming-soon.jpg"; // <-- Fixed image path for upcoming courses
 
   return (
     <motion.div
@@ -26,28 +28,23 @@ const CourseCard = ({ course, index }) => {
         </span>
       )}
 
-      {/* Thumbnail or Video */}
+      {/* Thumbnail */}
       <div className="relative">
-        {course.comingSoon && course.video ? (
-          <video
-            src={course.video}
-            className="w-full h-48 object-cover opacity-80"
-            autoPlay
-            muted
-            loop
-            playsInline
+        {course.comingSoon ? (
+          <img
+            src={placeholderImage}
+            alt="Coming Soon"
+            className="w-full h-48 object-cover opacity-70 grayscale"
           />
         ) : (
           <img
             src={course.image}
             alt={course.title}
-            className={`w-full h-48 object-cover ${
-              course.comingSoon ? "opacity-50 grayscale" : ""
-            }`}
+            className="w-full h-48 object-cover"
           />
         )}
 
-        {/* Lock Overlay for Upcoming */}
+        {/* Lock Overlay */}
         {course.comingSoon && (
           <div className="absolute inset-0 flex items-end justify-center bg-black/40 pb-4">
             <Lock size={40} className="text-white opacity-80" />
@@ -127,7 +124,9 @@ const CourseDetails = () => {
   useEffect(() => {
     const fetchCourses = async () => {
       try {
-        const res = await axios.get("https://deeplearner-production.up.railway.app/api/courses"); // 🔗 Replace with your backend URL
+        const res = await axios.get(
+          "https://deeplearner-production.up.railway.app/api/courses"
+        );
         setCourses(res.data);
       } catch (err) {
         console.error("Error fetching courses:", err);

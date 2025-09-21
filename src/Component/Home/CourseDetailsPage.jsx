@@ -1,3 +1,4 @@
+// src/pages/CourseDetailsPage.jsx
 import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { Star, Users, Clock, X, BookOpen } from "lucide-react";
@@ -10,7 +11,7 @@ gsap.registerPlugin(ScrollTrigger);
 const CourseDetailsPage = () => {
   const { id } = useParams();
   const [course, setCourse] = useState(null);
-  const [loading, setLoading] = useState(true);
+  const [loadingCourse, setLoadingCourse] = useState(true);
   const [formData, setFormData] = useState({
     name: "",
     email: "",
@@ -19,31 +20,35 @@ const CourseDetailsPage = () => {
   });
   const [submitted, setSubmitted] = useState(false);
   const [isModalOpen, setIsModalOpen] = useState(false);
-
+  const [submitting, setSubmitting] = useState(false);
   const syllabusRef = useRef(null);
 
-  // ✅ Fetch course by ID
+  // Fetch course by ID
   useEffect(() => {
     const fetchCourse = async () => {
       try {
         const res = await fetch(
           `https://deeplearner-production.up.railway.app/api/courses/${id}`
         );
-        if (!res.ok) throw new Error("Failed to fetch course");
         const data = await res.json();
-        setCourse(data);
-      } catch (error) {
-        console.error("Error fetching course:", error);
+        if (!res.ok || data.error) {
+          setCourse(null);
+        } else {
+          setCourse(data);
+        }
+      } catch (err) {
+        console.error("Error fetching course:", err);
+        setCourse(null);
       } finally {
-        setLoading(false);
+        setLoadingCourse(false);
       }
     };
     fetchCourse();
   }, [id]);
 
-  // ✅ Animate syllabus cards
+  // Animate syllabus
   useEffect(() => {
-    if (syllabusRef.current) {
+    if (course && syllabusRef.current) {
       const cards = syllabusRef.current.querySelectorAll(".syllabus-card");
       cards.forEach((card, i) => {
         gsap.fromTo(
@@ -55,18 +60,66 @@ const CourseDetailsPage = () => {
             scale: 1,
             duration: 0.7,
             delay: i * 0.2,
-            scrollTrigger: {
-              trigger: card,
-              start: "top 85%",
-              toggleActions: "play none none reverse",
-            },
+            scrollTrigger: { trigger: card, start: "top 85%" },
           }
         );
       });
     }
-  }, []);
+  }, [course]);
 
-  if (loading) {
+  // Handle form change
+  const handleChange = (e) =>
+    setFormData({ ...formData, [e.target.name]: e.target.value });
+
+  // Handle form submit
+  const handleSubmit = async (e) => {
+    e.preventDefault();
+
+    // Validate form
+    if (!formData.name || !formData.email || !formData.phone || !formData.currentStatus) {
+      alert("Please fill all fields.");
+      return;
+    }
+
+    setSubmitting(true);
+
+    try {
+      const payload = {
+        name: formData.name.trim(),
+        email: formData.email.trim(),
+        phone: formData.phone.trim(),
+        currentStatus: formData.currentStatus,
+        courseId: course.id,
+      };
+
+      const res = await fetch(
+        "https://deeplearner-production.up.railway.app/api/enroll",
+        {
+          method: "POST",
+          headers: { "Content-Type": "application/json" },
+          body: JSON.stringify(payload),
+        }
+      );
+
+      const result = await res.json();
+
+      if (!res.ok) {
+        console.error("Backend error response:", result);
+        throw new Error(result.message || "Enrollment failed");
+      }
+
+      setSubmitted(true);
+      setFormData({ name: "", email: "", phone: "", currentStatus: "" });
+      setIsModalOpen(false);
+    } catch (err) {
+      console.error("Enrollment error:", err);
+      alert(`Failed to enroll: ${err.message}`);
+    } finally {
+      setSubmitting(false);
+    }
+  };
+
+  if (loadingCourse) {
     return (
       <div className="min-h-screen flex items-center justify-center text-white bg-black">
         <p>⏳ Loading course...</p>
@@ -82,42 +135,6 @@ const CourseDetailsPage = () => {
     );
   }
 
-  // ✅ Enrollment form handlers
-  const handleChange = (e) =>
-    setFormData({ ...formData, [e.target.name]: e.target.value });
-
-  const handleSubmit = async (e) => {
-    e.preventDefault();
-
-    try {
-      const payload = {
-        name: formData.name,
-        email: formData.email,
-        phone: formData.phone,
-        status: formData.currentStatus,
-        courseId: course.id,
-      };
-
-      const response = await fetch(
-        "https://deeplearner-production.up.railway.app/api/enroll",
-        {
-          method: "POST",
-          headers: { "Content-Type": "application/json" },
-          body: JSON.stringify(payload),
-        }
-      );
-
-      if (!response.ok) throw new Error("Enrollment failed");
-
-      setSubmitted(true);
-      setFormData({ name: "", email: "", phone: "", currentStatus: "" });
-      setIsModalOpen(false);
-    } catch (error) {
-      console.error("Enrollment error:", error);
-      alert("Failed to enroll. Please try again.");
-    }
-  };
-
   return (
     <motion.div
       className="min-h-screen bg-gradient-to-b from-black via-zinc-900 to-black text-white pb-20"
@@ -125,7 +142,7 @@ const CourseDetailsPage = () => {
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
     >
-      {/* ✅ Banner */}
+      {/* Banner */}
       <div className="relative w-full h-[400px] md:h-[500px] overflow-hidden">
         <motion.img
           src={course.image}
@@ -150,7 +167,7 @@ const CourseDetailsPage = () => {
         </div>
       </div>
 
-      {/* ✨ Course Info Cards */}
+      {/* Course Info */}
       <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 px-6 mt-12">
         {[
           { icon: <Users size={28} />, text: `${course.students} Students` },
@@ -169,58 +186,47 @@ const CourseDetailsPage = () => {
         ))}
       </div>
 
-      {/* 🚀 Syllabus */}
+      {/* Syllabus */}
       <section ref={syllabusRef} className="mt-20 max-w-5xl mx-auto px-6">
         <h2 className="text-4xl font-extrabold text-center mb-12 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
           Course Syllabus
         </h2>
         <div className="relative">
           <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-[#81007f] to-transparent"></div>
-
           <div className="space-y-12">
-            {[
-              "Introduction & Basics",
-              "Advanced Topics",
-              "Hands-on Projects",
-              "Capstone Project",
-            ].map((topic, index) => (
-              <motion.div
-                key={index}
-                className={`syllabus-card relative flex items-center justify-between w-full`}
-                whileHover={{ scale: 1.02 }}
-              >
-                {index % 2 === 0 ? (
-                  <>
-                    <div className="w-5/12 bg-zinc-900/80 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-white/10">
-                      <h3 className="text-xl font-semibold text-white">
-                        {topic}
-                      </h3>
-                      <p className="text-gray-400 mt-2">
-                        Explore essential concepts in{" "}
-                        <span className="font-medium">{topic}</span>.
-                      </p>
-                    </div>
-                    <div className="absolute left-1/2 transform -translate-x-1/2 bg-[#81007f] w-6 h-6 rounded-full border-4 border-black"></div>
-                    <div className="w-5/12"></div>
-                  </>
-                ) : (
-                  <>
-                    <div className="w-5/12"></div>
-                    <div className="absolute left-1/2 transform -translate-x-1/2 bg-[#81007f] w-6 h-6 rounded-full border-4 border-black"></div>
-                    <div className="w-5/12 bg-zinc-900/80 backdrop-blur-md p-6 rounded-2xl shadow-lg border border-white/10">
-                      <h3 className="text-xl font-semibold text-white">
-                        {topic}
-                      </h3>
-                      <p className="text-gray-400 mt-2">
-                        Dive deep into{" "}
-                        <span className="font-medium">{topic}</span> with
-                        practical exercises.
-                      </p>
-                    </div>
-                  </>
-                )}
-              </motion.div>
-            ))}
+            {["Introduction & Basics", "Advanced Topics", "Hands-on Projects", "Capstone Project"].map(
+              (topic, index) => (
+                <motion.div
+                  key={index}
+                  className="syllabus-card relative flex items-center justify-between w-full"
+                  whileHover={{ scale: 1.02 }}
+                >
+                  {index % 2 === 0 ? (
+                    <>
+                      <div className="w-5/12 bg-zinc-900/80 p-6 rounded-2xl border border-white/10">
+                        <h3 className="text-xl font-semibold text-white">{topic}</h3>
+                        <p className="text-gray-400 mt-2">
+                          Explore essential concepts in <span className="font-medium">{topic}</span>.
+                        </p>
+                      </div>
+                      <div className="absolute left-1/2 -translate-x-1/2 bg-[#81007f] w-6 h-6 rounded-full border-4 border-black"></div>
+                      <div className="w-5/12"></div>
+                    </>
+                  ) : (
+                    <>
+                      <div className="w-5/12"></div>
+                      <div className="absolute left-1/2 -translate-x-1/2 bg-[#81007f] w-6 h-6 rounded-full border-4 border-black"></div>
+                      <div className="w-5/12 bg-zinc-900/80 p-6 rounded-2xl border border-white/10">
+                        <h3 className="text-xl font-semibold text-white">{topic}</h3>
+                        <p className="text-gray-400 mt-2">
+                          Dive deep into <span className="font-medium">{topic}</span> with practical exercises.
+                        </p>
+                      </div>
+                    </>
+                  )}
+                </motion.div>
+              )
+            )}
           </div>
         </div>
       </section>
@@ -229,18 +235,17 @@ const CourseDetailsPage = () => {
       <div className="mt-20 text-center">
         <motion.button
           onClick={() => setIsModalOpen(true)}
-          className="px-10 py-4 bg-gradient-to-r from-purple-500 to-pink-500 text-white rounded-full hover:shadow-lg hover:shadow-purple-500/50 transition text-lg font-bold tracking-wide"
+          className="px-10 py-4 bg-[#81007f] text-white rounded-full text-lg font-bold"
           whileHover={{ scale: 1.08 }}
           whileTap={{ scale: 0.95 }}
         >
-          🚀 Enroll Now
+          Enroll Now
         </motion.button>
       </div>
 
-      {/* Success Message */}
       {submitted && (
         <p className="text-green-400 text-center mt-8 font-semibold text-lg">
-          ✅ Thank you for enrolling! We’ll reach out to you soon.
+          Thank you for enrolling! We’ll reach out to you soon.
         </p>
       )}
 
@@ -255,11 +260,11 @@ const CourseDetailsPage = () => {
             className="bg-gradient-to-b from-zinc-900 to-black rounded-2xl shadow-xl w-full max-w-lg p-10 relative border border-white/10"
             initial={{ scale: 0.8, y: -50, opacity: 0 }}
             animate={{ scale: 1, y: 0, opacity: 1 }}
-            transition={{ duration: 0.5, ease: "easeOut" }}
+            transition={{ duration: 0.5 }}
           >
             <button
               onClick={() => setIsModalOpen(false)}
-              className="absolute top-4 right-4 text-gray-400 hover:text-white transition"
+              className="absolute top-4 right-4 text-gray-400 hover:text-white"
             >
               <X size={26} />
             </button>
@@ -276,8 +281,7 @@ const CourseDetailsPage = () => {
                 onChange={handleChange}
                 placeholder="Full Name"
                 required
-                disabled={loading}
-                className="w-full bg-black/40 backdrop-blur-md text-white px-4 py-3 rounded-lg border border-gray-700 focus:ring-2 focus:ring-[#81007f]"
+                className="w-full bg-black/40 text-white px-4 py-3 rounded-lg border border-gray-700 focus:ring-2 focus:ring-[#81007f]"
               />
               <input
                 type="email"
@@ -286,8 +290,7 @@ const CourseDetailsPage = () => {
                 onChange={handleChange}
                 placeholder="Email"
                 required
-                disabled={loading}
-                className="w-full bg-black/40 backdrop-blur-md text-white px-4 py-3 rounded-lg border border-gray-700 focus:ring-2 focus:ring-[#81007f]"
+                className="w-full bg-black/40 text-white px-4 py-3 rounded-lg border border-gray-700 focus:ring-2 focus:ring-[#81007f]"
               />
               <input
                 type="tel"
@@ -296,16 +299,14 @@ const CourseDetailsPage = () => {
                 onChange={handleChange}
                 placeholder="Phone Number"
                 required
-                disabled={loading}
-                className="w-full bg-black/40 backdrop-blur-md text-white px-4 py-3 rounded-lg border border-gray-700 focus:ring-2 focus:ring-[#81007f]"
+                className="w-full bg-black/40 text-white px-4 py-3 rounded-lg border border-gray-700 focus:ring-2 focus:ring-[#81007f]"
               />
               <select
                 name="currentStatus"
                 value={formData.currentStatus}
                 onChange={handleChange}
                 required
-                disabled={loading}
-                className="w-full bg-black/40 backdrop-blur-md text-white px-4 py-3 rounded-lg border border-gray-700 focus:ring-2 focus:ring-[#81007f]"
+                className="w-full bg-black/40 text-white px-4 py-3 rounded-lg border border-gray-700 focus:ring-2 focus:ring-[#81007f]"
               >
                 <option value="" disabled>
                   Select your current status
@@ -316,23 +317,20 @@ const CourseDetailsPage = () => {
                 <option value="other">Other</option>
               </select>
 
-              {/* Submit Button with Loader */}
               <button
                 type="submit"
-                disabled={loading}
-                className={`w-full flex items-center justify-center bg-gradient-to-r from-[#81007f] to-pink-500 text-white font-bold px-6 py-3 rounded-lg text-lg transition
-                  ${loading ? "opacity-60 cursor-not-allowed" : "hover:shadow-lg hover:shadow-[#81007f]/40"}`}
+                disabled={submitting}
+                className={`w-full flex items-center justify-center bg-gradient-to-r from-[#81007f] to-pink-500 text-white font-bold px-6 py-3 rounded-lg text-lg transition ${
+                  submitting
+                    ? "opacity-60 cursor-not-allowed"
+                    : "hover:shadow-lg hover:shadow-[#81007f]/40"
+                }`}
               >
-                {loading ? (
+                {submitting ? (
                   <motion.div
                     className="w-5 h-5 border-2 border-white border-t-transparent rounded-full animate-spin"
-                    initial={{ rotate: 0 }}
                     animate={{ rotate: 360 }}
-                    transition={{
-                      repeat: Infinity,
-                      duration: 1,
-                      ease: "linear",
-                    }}
+                    transition={{ repeat: Infinity, duration: 1 }}
                   />
                 ) : (
                   "Submit Enrollment"
