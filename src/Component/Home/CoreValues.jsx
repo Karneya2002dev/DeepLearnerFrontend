@@ -2,6 +2,7 @@ import React from "react";
 import { BookOpen, Languages, Users, Workflow, Star } from "lucide-react";
 import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
+import logo from '../../assets/loogoo1.png'
 
 const values = [
   {
@@ -58,11 +59,11 @@ export default function CoreValues() {
             <motion.div
               animate={{ scale: [1, 1.3, 1], rotate: [0, 15, -15, 0] }}
               transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-            >
-              <Star
-                size={22}
-                className="mx-2 sm:mx-3 text-[#81007f] drop-shadow-lg"
-              />
+            > <img 
+    src={logo} // 👉 import logo from your assets
+    alt="Logo" 
+    className="mx-2 sm:mx-3 h-6 sm:h-8 w-auto object-contain"
+  />
             </motion.div>
             <motion.div
               initial={{ scaleX: 0 }}
@@ -95,7 +96,75 @@ export default function CoreValues() {
             ))}
           </div>
         </div>
+              {/* Why Choose This Course */}
+      <section className="mt-20 max-w-6xl mx-auto px-6">
+        <h2 className="text-4xl font-extrabold text-center mb-12 bg-gradient-to-r from-[#81007f] to-[#81007f] bg-clip-text text-transparent">
+          Why to Choose DLA ?
+        </h2>
+
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {/* Course Certificate */}
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            className="bg-zinc-900/80 p-6 rounded-2xl border border-white/10 shadow-lg hover:border-[#81007f] hover:shadow-[#81007f]/40 transition"
+          >
+            <h3 className="text-xl font-bold text-white mb-3">Course Certificate</h3>
+            <p className="text-gray-400 text-sm">
+              Earn an industry-recognized certificate upon successful completion of your course.
+            </p>
+          </motion.div>
+
+          {/* Internship Certificate + Stipend */}
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            className="bg-zinc-900/80 p-6 rounded-2xl border border-white/10 shadow-lg hover:border-[#81007f] hover:shadow-[#81007f]/40 transition"
+          >
+            <h3 className="text-xl font-bold text-white mb-3">Internship Certificate + Stipend</h3>
+            <p className="text-gray-400 text-sm">
+              Gain real-world experience during your internship, earn a certificate, and receive a{" "}
+              <span className="text-[#81007f] font-semibold">stipend based on your tasks</span>.
+            </p>
+          </motion.div>
+
+          {/* Live Projects at Marqwon Dynamics */}
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            className="bg-zinc-900/80 p-6 rounded-2xl border border-white/10 shadow-lg hover:border-[#81007f] hover:shadow-[#81007f]/40 transition"
+          >
+            <h3 className="text-xl font-bold text-white mb-3">Live Project Experience</h3>
+            <p className="text-gray-400 text-sm">
+              Contribute to{" "}
+              <span className="text-[#81007f] font-semibold">Marqwon Dynamics</span> product-based
+              projects and sharpen your skills with live industry challenges.
+            </p>
+          </motion.div>
+
+          {/* Job Assistance */}
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            className="bg-zinc-900/80 p-6 rounded-2xl border border-white/10 shadow-lg hover:border-[#81007f] hover:shadow-[#81007f]/40 transition"
+          >
+            <h3 className="text-xl font-bold text-white mb-3">Job Assistance</h3>
+            <p className="text-gray-400 text-sm">
+              Receive career support, placement guidance, and connections with top recruiters.
+            </p>
+          </motion.div>
+
+          {/* Interview Preparation */}
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            className="bg-zinc-900/80 p-6 rounded-2xl border border-white/10 shadow-lg hover:border-[#81007f] hover:shadow-[#81007f]/40 transition"
+          >
+            <h3 className="text-xl font-bold text-white mb-3">Interview Preparation</h3>
+            <p className="text-gray-400 text-sm">
+              Practice with mock interviews, resume reviews, and personalized tips to crack your dream job.
+            </p>
+          </motion.div>
+        </div>
       </section>
+
+      </section>
+      
     </>
   );
 }

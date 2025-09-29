@@ -158,3 +158,9 @@ body {
   -ms-overflow-style: none;  /* IE and Edge */
   scrollbar-width: none;     /* Firefox */
 }
+
+/* Folded paper corner */
+/* Folded paper corner */
+.clip-triangle {
+  clip-path: polygon(100% 0, 0 100%, 100% 100%);
+}

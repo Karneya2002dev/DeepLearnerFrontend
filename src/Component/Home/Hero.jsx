@@ -17,7 +17,9 @@ const courses = [
 
 const HeroSection = () => {
   const navigate = useNavigate();
-  const [selectedCard, setSelectedCard] = useState(1);
+
+  // ✅ First card expanded by default
+  const [selectedCard, setSelectedCard] = useState(courses[0].id);
 
   return (
     <div
@@ -31,19 +33,24 @@ const HeroSection = () => {
       {/* Main Content */}
       <div
         className="container mx-auto px-4 sm:px-6 lg:px-12 
-                   flex flex-col-reverse lg:flex-row   /* reverse for mobile */
-                   items-start justify-between flex-1 gap-10 lg:gap-20 relative z-10"
+                   flex flex-col lg:flex-row
+                   items-start justify-between flex-1 gap-10 lg:gap-20 relative z-10 pt-10 sm:pt-12 lg:pt-20"
       >
         {/* ✅ Left Text Section */}
-        <div className="w-full lg:w-1/2 max-w-xl space-y-6 text-left pt-6 sm:pt-10 lg:pt-36">
-          <h1 className="hero-title text-3xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-snug sm:leading-tight">
+        <div className="w-full lg:w-1/2 max-w-xl space-y-6 text-left pt-4 sm:pt-8 lg:pt-12 relative top-10">
+          <h1
+            className="hero-title 
+                       text-2xl sm:text-4xl md:text-5xl lg:text-6xl 
+                       font-extrabold leading-snug sm:leading-tight
+                       mt-10 sm:mt-0"
+          >
             <span className="relative inline-block text-[#c9c9c9] animate-glow">
               Learn Today,
             </span>
             <br />
             <span
               className="relative inline-block bg-gradient-to-r from-[#81007f] via-pink-500 to-[#81007f] 
-                             bg-clip-text text-transparent animate-shine"
+                         bg-clip-text text-transparent animate-shine"
             >
               Lead Tomorrow
             </span>
@@ -60,7 +67,7 @@ const HeroSection = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-start">
             <button
               onClick={() => navigate("/courses")}
-              className="px-6 py-3 rounded-full font-semibold text-base sm:text-lg text-white 
+              className="px-5 py-2 sm:px-6 sm:py-3 rounded-full font-semibold text-sm sm:text-lg text-white 
                          bg-gradient-to-r from-[#81007f] to-[#81007f]
                          hover:from-pink-500 hover:to-pink-700
                          transition duration-300"
@@ -71,9 +78,10 @@ const HeroSection = () => {
         </div>
 
         {/* ✅ Right Side Zig-Zag Course Cards */}
-        <div className="w-full lg:w-1/2 flex justify-center items-center pt-10 sm:pt-16 lg:pt-32">
+        <div className="w-full lg:w-1/2 flex justify-center items-center pt-6 sm:pt-10 lg:pt-20">
           <motion.div
-            className="flex gap-4 sm:gap-6 overflow-x-auto flex-nowrap p-2 scrollbar-hide"
+            className="flex gap-3 sm:gap-6  flex-nowrap p-2 scrollbar-hide w-full 
+                       justify-center pl-4"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: "easeOut" }}
@@ -81,36 +89,46 @@ const HeroSection = () => {
             {courses.map((course, index) => {
               const isExpanded = selectedCard === course.id;
               return (
-               <div
-  key={course.id}
-  onClick={() => setSelectedCard(course.id)} // ✅ click works on mobile
-  onMouseEnter={() => setSelectedCard(course.id)} // ✅ hover works on desktop
-  onMouseLeave={() => setSelectedCard(null)} // reset when mouse leaves
-  className={`group relative 
-    ${selectedCard === course.id ? "w-60 sm:w-72" : "w-20 sm:w-24"} 
-    h-72 sm:h-96 rounded-2xl overflow-hidden shadow-lg   
-    flex-shrink-0 transition-all duration-500 cursor-pointer
-    ${index % 2 === 0 ? "translate-y-4 sm:translate-y-6" : "-translate-y-4 sm:-translate-y-6"}
-  `}
->
-  <img src={course.image} alt={course.title} className="w-full h-full object-cover" />
+                <div
+                  key={course.id}
+                  onClick={() =>
+                    setSelectedCard(selectedCard === course.id ? null : course.id)
+                  }
+                  onMouseEnter={() => setSelectedCard(course.id)}
+                  onMouseLeave={() => setSelectedCard(null)}
+                  className={`group relative transition-all duration-500 cursor-pointer
+                    flex-shrink-0 overflow-hidden shadow-lg rounded-2xl 
+                    ${
+                      isExpanded
+                        ? "w-35 h-50 sm:w-60 md:w-72 sm:h-72 md:h-96"
+                        : "w-20 h-44 sm:w-20 md:w-24 sm:h-72 md:h-96"
+                    }
+                    ${
+                      index % 2 === 0
+                        ? "translate-y-2 sm:translate-y-4"
+                        : "-translate-y-2 sm:-translate-y-4"
+                    }
+                  `}
+                >
+                  <img
+                    src={course.image}
+                    alt={course.title}
+                    className="w-full h-full object-cover"
+                  />
 
-  {/* 🔹 Title with rotation */}
-  <div
-    className={`absolute bottom-3 sm:bottom-5 left-7 text-white transition-all duration-500
-      ${
-        selectedCard === course.id
-          ? "rotate-0" // expanded → normal position
-          : "transform -rotate-90 origin-bottom-left" // collapsed → L shape
-      }`}
-  >
-    <h3 className="font-semibold text-sm sm:text-lg whitespace-nowrap">
-      {course.title}
-    </h3>
-    {course.topics && <p className="text-xs sm:text-sm">{course.topics} Topics</p>}
-  </div>
-</div>
-
+                  {/* 🔹 Title */}
+                  <div
+                    className={`absolute bottom-3 left-4 text-white transition-all duration-500
+                      ${
+                        isExpanded
+                          ? "rotate-0 text-base sm:text-lg"
+                          : "-rotate-90 origin-bottom-left text-xs sm:text-sm"
+                      }`}
+                  >
+                    <h3 className="font-semibold whitespace-nowrap">{course.title}</h3>
+                    {course.topics && <p className="text-xs">{course.topics} Topics</p>}
+                  </div>
+                </div>
               );
             })}
           </motion.div>

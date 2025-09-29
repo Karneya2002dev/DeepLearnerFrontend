@@ -21,6 +21,7 @@ const HomePage = () => {
         <FallOfWall />
         {/* <StatsSection /> */}
         <Mentors />
+        
 
     </>
   )

@@ -4,6 +4,7 @@ import { Star, CheckCircle2, ChevronDown, ChevronUp, Heart } from "lucide-react"
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import axios from "axios";
+import logo from '../../assets/loogoo1.png'
 
 import CoreValues from "./CoreValues";
 
@@ -92,17 +93,31 @@ export default function WallOfLove() {
               Meet our students & hear their success stories.
             </p>
 
-            {/* Heart Divider */}
-            <div className="flex items-center justify-center mt-6">
-              <div className="flex-1 border-t border-gray-700"></div>
-              <Heart
-                ref={heartRef}
-                className="mx-3 text-[#81007f] drop-shadow-lg"
-                size={28}
-              />
-              <div className="flex-1 border-t border-gray-700"></div>
-            </div>
-          </div>
+            {/*  Divider */}
+           <div className="flex items-center justify-center mt-6">
+                       <motion.div
+                         initial={{ scaleX: 0 }}
+                         whileInView={{ scaleX: 1 }}
+                         transition={{ duration: 0.8, ease: "easeInOut" }}
+                         className="flex-1 max-w-[120px] sm:max-w-xs border-t border-gray-700 origin-right"
+                       />
+                       <motion.div
+                         animate={{ scale: [1, 1.3, 1], rotate: [0, 15, -15, 0] }}
+                         transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+                       > <img 
+               src={logo} // 👉 import logo from your assets
+               alt="Logo" 
+               className="mx-2 sm:mx-3 h-6 sm:h-8 w-auto object-contain"
+             />
+                       </motion.div>
+                       <motion.div
+                         initial={{ scaleX: 0 }}
+                         whileInView={{ scaleX: 1 }}
+                         transition={{ duration: 0.8, ease: "easeInOut", delay: 0.2 }}
+                         className="flex-1 max-w-[120px] sm:max-w-xs border-t border-gray-700 origin-left"
+                       />
+                     </div>
+                     </div>
 
           {/* Testimonials Grid */}
           <div className="grid md:grid-cols-3 gap-6">

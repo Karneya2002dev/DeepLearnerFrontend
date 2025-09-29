@@ -5,18 +5,18 @@ import { Star, Users, Clock, Lock } from "lucide-react";
 import { motion } from "framer-motion";
 import { Swiper, SwiperSlide } from "swiper/react";
 import { Navigation, Pagination, Autoplay } from "swiper/modules";
-import comingSoonImage from '../../assets/upcome.jpg'
+import comingSoonImage from "../../assets/upcome.jpg";
 
 import "swiper/css";
 import "swiper/css/navigation";
 import "swiper/css/pagination";
+import BrochureRequest from "./BrochureRequest";
 
 // -------------------------
 // Course Card Component
 // -------------------------
-const CourseCard = ({ course, index }) => {
+const CourseCard = ({ course, index, onBrochureClick }) => {
   const navigate = useNavigate();
-  // const comingSoonImage = "/assets/coming-soon.jpg"; // ✅ Replace with your placeholder path
 
   const students =
     course.students && Number(course.students) > 0
@@ -105,15 +105,18 @@ const CourseCard = ({ course, index }) => {
               >
                 View Details
               </button>
-              <button className="px-4 py-2 rounded-lg bg-[#81007f] text-white hover:bg-[#6a0067] transition">
-                📄 Brochure
+              <button
+                onClick={() => onBrochureClick(course)}
+                className="px-4 py-2 rounded-lg bg-[#81007f] text-white hover:bg-[#6a0067] transition"
+              >
+                Brochure
               </button>
             </div>
           </>
         ) : (
           <div className="text-center text-gray-400 text-sm py-6 flex flex-col items-center mt-auto">
             <Lock size={20} className="mb-2 text-gray-500" />
-            🚀 Stay tuned! This course will be available soon.
+            Stay tuned! This course will be available soon.
           </div>
         )}
       </div>
@@ -129,6 +132,10 @@ const CoursesSection = () => {
   const [courses, setCourses] = useState([]);
   const [loading, setLoading] = useState(true);
 
+  // ✅ Add these states for brochure modal
+  const [showBrochure, setShowBrochure] = useState(false);
+  const [selectedCourse, setSelectedCourse] = useState(null);
+
   useEffect(() => {
     fetch("https://deeplearner-production.up.railway.app/api/courses")
       .then((res) => res.json())
@@ -143,7 +150,7 @@ const CoursesSection = () => {
     "Data Science",
     "UI/UX",
     "Marketing",
-    "Security",
+    "Cyber",
   ];
 
   const filteredCourses =
@@ -209,7 +216,14 @@ const CoursesSection = () => {
           >
             {filteredCourses.map((course, index) => (
               <SwiperSlide key={course.id} className="flex h-[480px]">
-                <CourseCard course={course} index={index} />
+                <CourseCard
+                  course={course}
+                  index={index}
+                  onBrochureClick={(c) => {
+                    setSelectedCourse(c);
+                    setShowBrochure(true);
+                  }}
+                />
               </SwiperSlide>
             ))}
           </Swiper>
@@ -219,6 +233,13 @@ const CoursesSection = () => {
           </p>
         )}
       </div>
+
+      {/* ✅ Brochure Modal */}
+      <BrochureRequest
+        isOpen={showBrochure}
+        onClose={() => setShowBrochure(false)}
+        course={selectedCourse}
+      />
     </section>
   );
 };

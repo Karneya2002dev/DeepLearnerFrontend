@@ -1,6 +1,7 @@
 // Footer.jsx
 import { Facebook, Instagram, Linkedin, Youtube } from "lucide-react";
 import { Link } from "react-router-dom"; // ✅ Import Link for internal navigation
+import logo from '../../assets/loogoo1.png'
 
 export default function Footer() {
   return (
@@ -60,12 +61,13 @@ export default function Footer() {
         <div className="text-center sm:text-left">
           <h3 className="text-white font-semibold mb-4">COURSES</h3>
           <ul className="space-y-2 text-sm">
-            <li><Link to="/courses/data-science">Data Analysis</Link></li>
-            <li><Link to="courses/:id">Mern Stack Development</Link></li>
-            <li><Link to="/courses/">Python Full Stack</Link></li>
+            <li><Link to="/courses/3">Data Analysis</Link></li>
+            <li><Link to="/courses/2">Mern Stack Development</Link></li>
+            <li><Link to="/courses/1">Python Full Stack</Link></li>
 
-            <li><Link to="/courses/marketing">UI/UX Design</Link></li>
-            <li><Link to="/courses/ai">Software Development</Link></li>
+            <li><Link to="/courses/4">Graphic Design</Link></li>
+            <li><Link to="/courses/9">Software Development</Link></li>
+            <li><Link to="/courses/8">Python Game Developement</Link></li>
           </ul>
         </div>
 
@@ -73,9 +75,9 @@ export default function Footer() {
         <div className="text-center sm:text-left">
           <h3 className="text-white font-semibold mb-4">WORKSHOPS</h3>
           <ul className="space-y-2 text-sm">
-            <li><Link to="/workshops/data-science">Data Analysis</Link></li>
-            <li><Link to="/workshops/full-stack">Mobile App Development with React Native (Android)</Link></li>
-            <li><Link to="/workshops/electronics">UI/UX Design</Link></li>
+            <li><Link to="/workshops/">Data Analysis</Link></li>
+            <li><Link to="/workshops/">Mobile App Development with React Native (Android)</Link></li>
+            <li><Link to="/workshops/">UI/UX Design</Link></li>
             {/* <li><Link to="/workshops/ai">Game Development using Python</Link></li>
             <li><Link to="/workshops/content-marketing">Java Programming</Link></li>
             <li><Link to="/workshops/meta-ads">Python Programming</Link></li> */}
@@ -95,11 +97,19 @@ export default function Footer() {
       </div>
 
       {/* Divider */}
-      <div className="flex items-center justify-center mt-12">
-        <div className="flex-1 border-t border-gray-800"></div>
-        <div className="mx-3 w-2 h-2 bg-purple-600 rounded-full"></div>
-        <div className="flex-1 border-t border-gray-800"></div>
-      </div>
+     <div className="flex items-center justify-center mt-12">
+  <div className="flex-1 border-t border-gray-800"></div>
+  
+  {/* Logo instead of dot */}
+  <img
+    src={logo}
+    alt="Logo"
+    className="mx-3 w-8 h-8 object-contain"
+  />
+
+  <div className="flex-1 border-t border-gray-800"></div>
+</div>
+
 
       {/* Bottom Copyright */}
       <div className="text-center text-gray-500 text-sm mt-6 px-4">

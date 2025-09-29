@@ -35,7 +35,7 @@ export default function ContactForm() {
         <div className="flex flex-col items-center space-y-8">
           <div className="bg-black border border-white/20 rounded-2xl shadow-xl p-8 w-full max-w-md">
             <h2 className="text-3xl font-semibold mb-6 text-white text-center">
-              Call Center
+           Talk with an Advisor
             </h2>
             <div className="flex items-center mb-4 justify-center">
               <PhoneCall className="text-[#81007f] mr-3" size={28} />
@@ -48,7 +48,7 @@ export default function ContactForm() {
             </div>
             <div className="flex items-center justify-center">
               <Clock className="text-[#81007f] mr-3" size={24} />
-              <p className="text-gray-300 text-lg">Mon - Fri: 10:00 AM - 6:00 PM</p>
+              <p className="text-gray-300 text-lg">deeplearneracademy@gmail.com</p>
             </div>
           </div>
         </div>

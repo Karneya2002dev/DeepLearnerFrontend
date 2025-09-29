@@ -2,7 +2,9 @@ import React, { useEffect, useRef, useState } from "react";
 import { Star, X, CheckCircle2 } from "lucide-react";
 import gsap from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import logo from '../../assets/loogoo1.png'
 
+import {motion} from 'framer-motion'
 // Register GSAP plugin
 gsap.registerPlugin(ScrollTrigger);
 
@@ -165,11 +167,30 @@ const Workshops = () => {
 
         {/* Divider */}
         <div className="flex items-center justify-center mt-6">
-          <div className="flex-1 max-w-[100px] sm:max-w-xs border-t border-gray-700"></div>
-          <Star size={22} ref={starRef} className="mx-2 sm:mx-3 text-[#8b1289]" />
-          <div className="flex-1 max-w-[100px] sm:max-w-xs border-t border-gray-700"></div>
-        </div>
-      </div>
+            <motion.div
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              transition={{ duration: 0.8, ease: "easeInOut" }}
+              className="flex-1 max-w-[120px] sm:max-w-xs border-t border-gray-700 origin-right"
+            />
+            <motion.div
+              animate={{ scale: [1, 1.3, 1], rotate: [0, 15, -15, 0] }}
+              transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
+            > <img 
+    src={logo} // 👉 import logo from your assets
+    alt="Logo" 
+    className="mx-2 sm:mx-3 h-6 sm:h-8 w-auto object-contain"
+  />
+            </motion.div>
+            <motion.div
+              initial={{ scaleX: 0 }}
+              whileInView={{ scaleX: 1 }}
+              transition={{ duration: 0.8, ease: "easeInOut", delay: 0.2 }}
+              className="flex-1 max-w-[120px] sm:max-w-xs border-t border-gray-700 origin-left"
+            />
+          </div>
+          </div>
+
 
       {/* Cards */}
       <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto px-4 sm:px-6">
@@ -305,7 +326,7 @@ const Workshops = () => {
               <div className="flex flex-col items-center justify-center py-8">
                 <CheckCircle2 size={40} className="sm:size-12 text-green-500 mb-4" />
                 <p className="text-base sm:text-lg font-semibold">
-                  Registration Successfully Completed! 
+                  Registration Successfully Completed!
                 </p>
               </div>
             )}

@@ -5,6 +5,7 @@ import { motion } from "framer-motion";
 import axios from "axios";
 import { useNavigate } from "react-router-dom";
 import placeholderImage from "../assets/upcome.jpg"
+import BrochureRequest from "./Home/BrochureRequest";
 
 // ----------------------
 // CourseCard Component
@@ -88,14 +89,14 @@ const CourseCard = ({ course, index }) => {
                 View Details
               </button>
               <button className="px-4 py-2 rounded-lg bg-[#81007f] text-white hover:bg-[#81007f]/90 transition">
-                📄 Brochure
+                Brochure
               </button>
             </div>
           </>
         ) : (
           <div className="text-center text-gray-400 text-sm py-6 flex flex-col items-center">
             <Lock size={20} className="mb-2 text-gray-500" />
-            🚀 Stay tuned! This course will be available soon.
+           Stay tuned! This course will be available soon.
           </div>
         )}
       </div>
@@ -114,10 +115,11 @@ const CourseDetails = () => {
   const filters = [
     "All Courses",
     "Web Development",
-    "Data Science",
+    "Data Analysis",
     "UI/UX",
     "Marketing",
-    "Security",
+    "Cyber",
+    "Mobile Application Development",
   ];
 
   // ✅ Fetch courses from backend API
@@ -161,7 +163,7 @@ const CourseDetails = () => {
         </p>
 
         {/* Divider with Animated Star */}
-        <div className="flex items-center justify-center mt-6 ">
+        {/* <div className="flex items-center justify-center mt-6 ">
           <motion.div
             initial={{ scaleX: 0 }}
             whileInView={{ scaleX: 1 }}
@@ -180,7 +182,7 @@ const CourseDetails = () => {
             transition={{ duration: 0.8, ease: "easeInOut", delay: 0.2 }}
             className="flex-1 border-t border-gray-700 origin-left"
           />
-        </div>
+        </div> */}
       </motion.div>
 
       {/* Filter Buttons */}
@@ -218,7 +220,9 @@ const CourseDetails = () => {
           </p>
         )}
       </div>
+      
     </section>
+    
   );
 };
 

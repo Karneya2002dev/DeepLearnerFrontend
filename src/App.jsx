@@ -16,6 +16,7 @@ import About from './Component/Home/About'
 import HelpSupport from './Component/Home/HelpSupport'
 import AuthPage from './Component/Home/AuthPage'
 import Mentors1 from './Component/Mentors1'
+import BrochureRequest from './Component/Home/BrochureRequest'
 
 const App = () => {
   return (
@@ -35,6 +36,7 @@ const App = () => {
       <Route path='/mentor' element={<Mentors1/>} />
       <Route path='/support' element={<HelpSupport /> } />
       <Route path='/community' element={<AuthPage /> } />
+      <Route path='/bro' element={<BrochureRequest /> } />
     
    
     </Routes>

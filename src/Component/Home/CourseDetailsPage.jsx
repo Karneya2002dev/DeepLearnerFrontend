@@ -74,8 +74,6 @@ const CourseDetailsPage = () => {
   // Handle form submit
   const handleSubmit = async (e) => {
     e.preventDefault();
-
-    // Validate form
     if (!formData.name || !formData.email || !formData.phone || !formData.currentStatus) {
       alert("Please fill all fields.");
       return;
@@ -135,6 +133,14 @@ const CourseDetailsPage = () => {
     );
   }
 
+  // Dynamic syllabus
+  const syllabusTopics = course.syllabus || [
+    { title: "Introduction & Basics", description: "Explore essential concepts in Introduction & Basics." },
+    { title: "Advanced Topics", description: "Dive deep into Advanced Topics with practical exercises." },
+    { title: "Hands-on Projects", description: "Build real projects to strengthen your skills." },
+    { title: "Capstone Project", description: "Showcase your mastery by completing a capstone project." },
+  ];
+
   return (
     <motion.div
       className="min-h-screen bg-gradient-to-b from-black via-zinc-900 to-black text-white pb-20"
@@ -152,25 +158,32 @@ const CourseDetailsPage = () => {
           animate={{ scale: 1 }}
           transition={{ duration: 1.5, ease: "easeOut" }}
         />
-        <div className="absolute inset-0 flex flex-col items-center justify-center text-center px-6">
-          <motion.div
-            className="backdrop-blur-md bg-white/10 p-8 rounded-2xl shadow-xl border border-white/20"
-            initial={{ y: 50, opacity: 0 }}
-            animate={{ y: 0, opacity: 1 }}
-            transition={{ duration: 1 }}
-          >
-            <h1 className="text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
-              {course.title}
-            </h1>
-            <p className="text-gray-300 max-w-2xl">{course.description}</p>
-          </motion.div>
-        </div>
+      </div>
+
+      {/* Course Header */}
+      <div className="max-w-4xl mx-auto px-6 mt-10 text-center">
+        <motion.h1
+          className="text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent"
+          initial={{ y: 30, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 0.8 }}
+        >
+          {course.title}
+        </motion.h1>
+        <motion.p
+          className="text-gray-300 text-lg md:text-xl"
+          initial={{ y: 30, opacity: 0 }}
+          animate={{ y: 0, opacity: 1 }}
+          transition={{ duration: 1, delay: 0.2 }}
+        >
+          {course.description}
+        </motion.p>
       </div>
 
       {/* Course Info */}
       <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 px-6 mt-12">
         {[
-          { icon: <Users size={28} />, text: `${course.students} Students` },
+          { icon: <Users size={28} />, text: `Trusted by Students` },
           { icon: <Clock size={28} />, text: course.duration },
           { icon: <Star size={28} />, text: `${course.rating} Rating` },
           { icon: <BookOpen size={28} />, text: course.category },
@@ -186,52 +199,61 @@ const CourseDetailsPage = () => {
         ))}
       </div>
 
-      {/* Syllabus */}
+      {/* Overview Section */}
+      <section className="max-w-5xl mx-auto px-6 mt-20">
+        <h2 className="text-4xl font-extrabold text-center mb-8 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
+          Overview
+        </h2>
+        <motion.p
+          className="text-gray-300 text-lg leading-relaxed text-center"
+          initial={{ opacity: 0, y: 40 }}
+          whileInView={{ opacity: 1, y: 0 }}
+          transition={{ duration: 0.8 }}
+        >
+          {course.overview ||
+            "This course provides a comprehensive learning path, starting from foundational concepts and moving towards advanced applications. You’ll gain practical skills, work on real projects, and finish with the confidence to apply your knowledge in real-world scenarios."}
+        </motion.p>
+      </section>
+
+      {/* Syllabus Timeline */}
       <section ref={syllabusRef} className="mt-20 max-w-5xl mx-auto px-6">
         <h2 className="text-4xl font-extrabold text-center mb-12 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
           Course Syllabus
         </h2>
+
         <div className="relative">
+          {/* Vertical central line */}
           <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-[#81007f] to-transparent"></div>
+
           <div className="space-y-12">
-            {["Introduction & Basics", "Advanced Topics", "Hands-on Projects", "Capstone Project"].map(
-              (topic, index) => (
-                <motion.div
-                  key={index}
-                  className="syllabus-card relative flex items-center justify-between w-full"
-                  whileHover={{ scale: 1.02 }}
-                >
-                  {index % 2 === 0 ? (
-                    <>
-                      <div className="w-5/12 bg-zinc-900/80 p-6 rounded-2xl border border-white/10">
-                        <h3 className="text-xl font-semibold text-white">{topic}</h3>
-                        <p className="text-gray-400 mt-2">
-                          Explore essential concepts in <span className="font-medium">{topic}</span>.
-                        </p>
-                      </div>
-                      <div className="absolute left-1/2 -translate-x-1/2 bg-[#81007f] w-6 h-6 rounded-full border-4 border-black"></div>
-                      <div className="w-5/12"></div>
-                    </>
-                  ) : (
-                    <>
-                      <div className="w-5/12"></div>
-                      <div className="absolute left-1/2 -translate-x-1/2 bg-[#81007f] w-6 h-6 rounded-full border-4 border-black"></div>
-                      <div className="w-5/12 bg-zinc-900/80 p-6 rounded-2xl border border-white/10">
-                        <h3 className="text-xl font-semibold text-white">{topic}</h3>
-                        <p className="text-gray-400 mt-2">
-                          Dive deep into <span className="font-medium">{topic}</span> with practical exercises.
-                        </p>
-                      </div>
-                    </>
-                  )}
-                </motion.div>
-              )
-            )}
+            {syllabusTopics.map((topic, index) => (
+              <motion.div key={index} className="syllabus-card relative flex items-center justify-between w-full">
+                {index % 2 === 0 ? (
+                  <>
+                    <div className="w-5/12 bg-zinc-900/80 p-6 rounded-2xl border border-white/10">
+                      <h3 className="text-xl font-semibold text-white">{topic.title}</h3>
+                      <p className="text-gray-400 mt-2">{topic.description}</p>
+                    </div>
+                    <div className="absolute left-1/2 -translate-x-1/2 bg-[#81007f] w-6 h-6 rounded-full border-4 border-black"></div>
+                    <div className="w-5/12"></div>
+                  </>
+                ) : (
+                  <>
+                    <div className="w-5/12"></div>
+                    <div className="absolute left-1/2 -translate-x-1/2 bg-[#81007f] w-6 h-6 rounded-full border-4 border-black"></div>
+                    <div className="w-5/12 bg-zinc-900/80 p-6 rounded-2xl border border-white/10">
+                      <h3 className="text-xl font-semibold text-white">{topic.title}</h3>
+                      <p className="text-gray-400 mt-2">{topic.description}</p>
+                    </div>
+                  </>
+                )}
+              </motion.div>
+            ))}
           </div>
         </div>
       </section>
 
-      {/* CTA */}
+      {/* CTA & Modal */}
       <div className="mt-20 text-center">
         <motion.button
           onClick={() => setIsModalOpen(true)}
@@ -249,7 +271,6 @@ const CourseDetailsPage = () => {
         </p>
       )}
 
-      {/* Modal */}
       {isModalOpen && (
         <motion.div
           className="fixed inset-0 z-50 flex items-center justify-center bg-black/70 backdrop-blur-lg"
