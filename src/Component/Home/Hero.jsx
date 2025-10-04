@@ -20,37 +20,29 @@ const HeroSection = () => {
 
   // ✅ First card expanded by default
   const [selectedCard, setSelectedCard] = useState(courses[0].id);
+  const [hoveredCard, setHoveredCard] = useState(null);
 
   return (
     <div
-      className="relative text-white min-h-screen flex flex-col 
-                 justify-between overflow-hidden bg-cover bg-center"
+      className="relative text-white min-h-screen flex flex-col justify-between overflow-hidden bg-cover bg-center"
       style={{ backgroundImage: `url(${bgUrl})` }}
     >
       {/* Gradient Overlay */}
       <div className="absolute inset-0 bg-gradient-to-b from-black/90 via-black/90 to-black/90 z-0"></div>
 
       {/* Main Content */}
-      <div
-        className="container mx-auto px-4 sm:px-6 lg:px-12 
-                   flex flex-col lg:flex-row
-                   items-start justify-between flex-1 gap-10 lg:gap-20 relative z-10 pt-10 sm:pt-12 lg:pt-20"
-      >
+      <div className="container mx-auto px-4 sm:px-6 lg:px-12 flex flex-col lg:flex-row items-start justify-between flex-1 gap-10 lg:gap-20 relative z-10 pt-10 sm:pt-12 lg:pt-20">
         {/* ✅ Left Text Section */}
         <div className="w-full lg:w-1/2 max-w-xl space-y-6 text-left pt-4 sm:pt-8 lg:pt-12 relative top-10">
           <h1
-            className="hero-title 
-                       text-2xl sm:text-4xl md:text-5xl lg:text-6xl 
-                       font-extrabold leading-snug sm:leading-tight
-                       mt-10 sm:mt-0"
+            className="hero-title text-2xl sm:text-4xl md:text-5xl lg:text-6xl font-extrabold leading-snug sm:leading-tight mt-10 sm:mt-0"
           >
             <span className="relative inline-block text-[#c9c9c9] animate-glow">
               Learn Today,
             </span>
             <br />
             <span
-              className="relative inline-block bg-gradient-to-r from-[#81007f] via-pink-500 to-[#81007f] 
-                         bg-clip-text text-transparent animate-shine"
+              className="relative inline-block bg-gradient-to-r from-[#81007f] via-pink-500 to-[#81007f] bg-clip-text text-transparent animate-shine"
             >
               Lead Tomorrow
             </span>
@@ -67,10 +59,7 @@ const HeroSection = () => {
           <div className="flex flex-col sm:flex-row gap-4 justify-start">
             <button
               onClick={() => navigate("/courses")}
-              className="px-5 py-2 sm:px-6 sm:py-3 rounded-full font-semibold text-sm sm:text-lg text-white 
-                         bg-gradient-to-r from-[#81007f] to-[#81007f]
-                         hover:from-pink-500 hover:to-pink-700
-                         transition duration-300"
+              className="px-5 py-2 sm:px-6 sm:py-3 rounded-full font-semibold text-sm sm:text-lg text-white bg-gradient-to-r from-[#81007f] to-[#81007f] hover:from-pink-500 hover:to-pink-700 transition duration-300"
             >
               Explore Courses
             </button>
@@ -80,24 +69,22 @@ const HeroSection = () => {
         {/* ✅ Right Side Zig-Zag Course Cards */}
         <div className="w-full lg:w-1/2 flex justify-center items-center pt-6 sm:pt-10 lg:pt-20">
           <motion.div
-            className="flex gap-3 sm:gap-6  flex-nowrap p-2 scrollbar-hide w-full 
-                       justify-center pl-4"
+            className="flex gap-3 sm:gap-6 flex-nowrap p-2 scrollbar-hide w-full justify-center pl-4"
             initial={{ opacity: 0, y: 50 }}
             animate={{ opacity: 1, y: 0 }}
             transition={{ duration: 1, ease: "easeOut" }}
           >
             {courses.map((course, index) => {
-              const isExpanded = selectedCard === course.id;
+              const isExpanded =
+                hoveredCard === course.id || selectedCard === course.id;
+
               return (
                 <div
                   key={course.id}
-                  onClick={() =>
-                    setSelectedCard(selectedCard === course.id ? null : course.id)
-                  }
-                  onMouseEnter={() => setSelectedCard(course.id)}
-                  onMouseLeave={() => setSelectedCard(null)}
-                  className={`group relative transition-all duration-500 cursor-pointer
-                    flex-shrink-0 overflow-hidden shadow-lg rounded-2xl 
+                  onClick={() => setSelectedCard(course.id)}
+                  onMouseEnter={() => setHoveredCard(course.id)}
+                  onMouseLeave={() => setHoveredCard(null)}
+                  className={`group relative transition-all duration-500 cursor-pointer flex-shrink-0 overflow-hidden shadow-lg rounded-2xl
                     ${
                       isExpanded
                         ? "w-35 h-50 sm:w-60 md:w-72 sm:h-72 md:h-96"
@@ -125,7 +112,9 @@ const HeroSection = () => {
                           : "-rotate-90 origin-bottom-left text-xs sm:text-sm"
                       }`}
                   >
-                    <h3 className="font-semibold whitespace-nowrap">{course.title}</h3>
+                    <h3 className="font-semibold whitespace-nowrap">
+                      {course.title}
+                    </h3>
                     {course.topics && <p className="text-xs">{course.topics} Topics</p>}
                   </div>
                 </div>

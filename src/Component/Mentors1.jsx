@@ -4,19 +4,19 @@ import { motion, AnimatePresence } from "framer-motion";
 
 // Mentor Jobs Data
 const jobs = [
-  { title: "React Mentor", type: "Part-Time", salary: "2000-3000 / Monthly", posted: "1 week ago", category: "Web Development" },
-  { title: "Frontend Mentor (HTML/CSS/JS)", type: "Remote", salary: "1800-2500 / Monthly", posted: "4 days ago", category: "Web Development" },
-  { title: "MERN Stack Mentor", type: "Remote", salary: "2500-3500 / Monthly", posted: "2 weeks ago", category: "Full Stack" },
-  { title: "Node.js & Express Mentor", type: "Part-Time", salary: "2200-3000 / Monthly", posted: "5 days ago", category: "Full Stack" },
-  { title: "UI/UX Mentor", type: "Contract", salary: "2500-3500 / Monthly", posted: "3 weeks ago", category: "UI/UX" },
-  { title: "Figma & Prototyping Mentor", type: "Remote", salary: "2700-3700 / Monthly", posted: "6 days ago", category: "UI/UX" },
-  { title: "Design Thinking Mentor", type: "Part-Time", salary: "2300-3200 / Monthly", posted: "1 day ago", category: "UI/UX" },
-  { title: "Data Analysis Mentor", type: "Temporary", salary: "2200-3200 / Monthly", posted: "1 month ago", category: "Data Analysis" },
-  { title: "Python for Data Mentor", type: "Remote", salary: "2000-2800 / Monthly", posted: "3 days ago", category: "Data Analysis" },
-  { title: "React Native Mentor", type: "Contract", salary: "2800-3800 / Monthly", posted: "1 week ago", category: "Mobile App (React Native)" },
-  { title: "Expo & Navigation Mentor", type: "Remote", salary: "2600-3400 / Monthly", posted: "2 weeks ago", category: "Mobile App (React Native)" },
-  { title: "SEO Mentor", type: "Part-Time", salary: "2000-3000 / Monthly", posted: "5 days ago", category: "Digital Marketing" },
-  { title: "Social Media Marketing Mentor", type: "Remote", salary: "2200-3200 / Monthly", posted: "3 days ago", category: "Digital Marketing" },
+  { title: "React Mentor", type: "Part-Time", posted: "1 week ago", category: "Web Development" },
+  { title: "Frontend Mentor (HTML/CSS/JS)", type: "Remote", posted: "4 days ago", category: "Web Development" },
+  { title: "MERN Stack Mentor", type: "Remote", posted: "2 weeks ago", category: "Full Stack" },
+  { title: "Node.js & Express Mentor", type: "Part-Time",posted: "5 days ago", category: "Full Stack" },
+  { title: "UI/UX Mentor", type: "Contract", posted: "3 weeks ago", category: "UI/UX" },
+  { title: "Figma & Prototyping Mentor", type: "Remote", posted: "6 days ago", category: "UI/UX" },
+  { title: "Design Thinking Mentor", type: "Part-Time", posted: "1 day ago", category: "UI/UX" },
+  { title: "Data Analysis Mentor", type: "Temporary", posted: "1 month ago", category: "Data Analysis" },
+  { title: "Python for Data Mentor", type: "Remote", posted: "3 days ago", category: "Data Analysis" },
+  { title: "React Native Mentor", type: "Contract", posted: "1 week ago", category: "Mobile App (React Native)" },
+  { title: "Expo & Navigation Mentor", type: "Remote",posted: "2 weeks ago", category: "Mobile App (React Native)" },
+  { title: "SEO Mentor", type: "Part-Time",posted: "5 days ago", category: "Digital Marketing" },
+  { title: "Social Media Marketing Mentor", type: "Remote", posted: "3 days ago", category: "Digital Marketing" },
 ];
 
 // Build categories dynamically

@@ -1,19 +1,16 @@
 import { useState } from "react";
-import { User, Mail, MessageSquare, PhoneCall, Clock } from "lucide-react";
+import { User, MessageSquare, PhoneCall, Clock } from "lucide-react";
 
-// ✅ Simple Card Component (no animations)
-// ✅ Simple Glass Card Component
 function Card({ children, className = "" }) {
   return (
     <div
-      className={`backdrop-blur-md border border-white/20 rounded-2xl shadow-xl transition-all duration-300 p-8 ${className}`}
+      className={`backdrop-blur-md border border-white/20 rounded-2xl shadow-xl transition-all duration-300 p-10 bg-black/70 w-full max-w-2xl ${className}`}
     >
       {children}
     </div>
   );
 }
 
-// ✅ Contact Form Component (no animations, pure black background)
 export default function ContactForm() {
   const [form, setForm] = useState({ name: "", email: "", message: "" });
 
@@ -28,33 +25,38 @@ export default function ContactForm() {
   };
 
   return (
-    <div className="relative min-h-screen flex flex-col justify-center items-center px-6 overflow-hidden bg-black text-white py-20">
-      {/* Grid Layout: Call Center Left, Form Right */}
-      <div className="container max-w-6xl mx-auto grid md:grid-cols-2 gap-12 items-center">
-        {/* Left: Call Center Details */}
-        <div className="flex flex-col items-center space-y-8">
-          <div className="bg-black border border-white/20 rounded-2xl shadow-xl p-8 w-full max-w-md">
-            <h2 className="text-3xl font-semibold mb-6 text-white text-center">
-           Talk with an Advisor
-            </h2>
-            <div className="flex items-center mb-4 justify-center">
+    <div
+      className="relative min-h-screen flex flex-col justify-center items-start px-6 overflow-hidden 
+                 bg-[url('https://storage-asset.msi.com/template/images/contact_us/kv-contact-us-xs.jpg')] 
+                 bg-cover bg-center text-white py-20"
+    >
+      {/* Overlay */}
+      <div className="absolute inset-0 bg-black/50" />
+
+      {/* Single Combined Box */}
+      <div className="container relative z-10 mx-auto">
+        <Card>
+          {/* Advisor Details */}
+          <h2 className="text-3xl font-semibold mb-6 text-white text-center">
+            Talk with an Advisor
+          </h2>
+          <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-8">
+            <div className="flex items-center">
               <PhoneCall className="text-[#81007f] mr-3" size={28} />
               <a
-                href="tel:+1234567890"
+                href="tel:+916384942259"
                 className="text-white hover:underline text-xl font-medium"
               >
                 +91 63849 42259
               </a>
             </div>
-            <div className="flex items-center justify-center">
+            <div className="flex items-center">
               <Clock className="text-[#81007f] mr-3" size={24} />
-              <p className="text-gray-300 text-lg">deeplearneracademy@gmail.com</p>
+              <p className="text-gray-300 text-lg">Mon - Sat (9AM - 6PM)</p>
             </div>
           </div>
-        </div>
 
-        {/* Right: Contact Form */}
-        <Card className="p-10 max-w-xl w-full mx-auto">
+          {/* Contact Form */}
           <h1 className="text-4xl font-bold mb-3">Get in Touch</h1>
           <p className="text-gray-300 mb-8">
             We’d love to hear from you! Fill out the form below.
@@ -77,15 +79,14 @@ export default function ContactForm() {
               />
             </div>
 
-            {/* Email Field */}
+            {/* Time Field */}
             <div className="flex items-center bg-black border border-white/20 rounded-lg px-4 py-3 focus-within:ring-2 focus-within:ring-[#81007f] transition">
-              <Mail className="text-[#81007f] mr-3" size={20} />
+              <Clock className="text-[#81007f] mr-3" size={20} />
               <input
-                type="email"
+                type="text"
                 name="email"
-                placeholder="Your Email"
-                autoComplete="email"
-                aria-label="Email"
+                placeholder="Preferred Time"
+                aria-label="Time"
                 className="bg-transparent text-white placeholder-gray-400 outline-none w-full"
                 value={form.email}
                 onChange={handleChange}

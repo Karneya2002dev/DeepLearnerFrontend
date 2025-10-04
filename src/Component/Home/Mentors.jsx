@@ -21,7 +21,7 @@ export default function Mentors() {
   // Fetch mentors
   useEffect(() => {
     axios
-      .get("https://deeplearner-production.up.railway.app/api/mentors")
+      .get("https://deeplearnerbackend-production.up.railway.app/api/mentors")
       .then((res) => {
         setMentors(res.data);
         setFilteredMentors(res.data);
@@ -116,18 +116,23 @@ export default function Mentors() {
   )}
 
   {/* Image */}
+  {/* Image Wrapper */}
+<div className="relative w-full h-74">
   <img
     src={mentor.image || "/placeholder.png"}
     alt={mentor.name}
-    className="w-full h-64 object-cover bg-white"
+    className="w-full h-full object-cover bg-white rounded-t-2xl"
   />
 
-  {/* Divider */}
-  <img
-    src={divider}
-    alt="divider"
-    className="w-full h-15"
-  />
+  {/* Divider pasted on image (bottom overlay) */}
+ <img
+  src={divider}
+  alt="divider"
+  className="absolute -bottom-6.5 left-0 w-full"
+/>
+
+</div>
+
 
   {/* Info */}
   <div className="p-4 flex items-center justify-between w-full -mt-2">

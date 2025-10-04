@@ -28,7 +28,7 @@ const CourseDetailsPage = () => {
     const fetchCourse = async () => {
       try {
         const res = await fetch(
-          `https://deeplearner-production.up.railway.app/api/courses/${id}`
+          `https://deeplearnerbackend-production.up.railway.app/api/courses/${id}`
         );
         const data = await res.json();
         if (!res.ok || data.error) {
@@ -91,7 +91,7 @@ const CourseDetailsPage = () => {
       };
 
       const res = await fetch(
-        "https://deeplearner-production.up.railway.app/api/enroll",
+        "https://deeplearnerbackend-production.up.railway.app/api/enroll",
         {
           method: "POST",
           headers: { "Content-Type": "application/json" },
@@ -163,7 +163,7 @@ const CourseDetailsPage = () => {
       {/* Course Header */}
       <div className="max-w-4xl mx-auto px-6 mt-10 text-center">
         <motion.h1
-          className="text-4xl md:text-6xl font-bold mb-4 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent"
+          className="text-4xl md:text-6xl font-bold mb-5 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent"
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
           transition={{ duration: 0.8 }}
@@ -181,39 +181,54 @@ const CourseDetailsPage = () => {
       </div>
 
       {/* Course Info */}
-      <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 px-6 mt-12">
-        {[
-          { icon: <Users size={28} />, text: `Trusted by Students` },
-          { icon: <Clock size={28} />, text: course.duration },
-          { icon: <Star size={28} />, text: `${course.rating} Rating` },
-          { icon: <BookOpen size={28} />, text: course.category },
-        ].map((item, idx) => (
-          <motion.div
-            key={idx}
-            className="bg-gradient-to-b from-zinc-900 to-black p-6 rounded-2xl shadow-lg text-center border border-white/10 hover:border-[#81007f] hover:shadow-[#81007f]/40 transition"
-            whileHover={{ scale: 1.05 }}
-          >
-            <div className="text-[#81007f] flex justify-center">{item.icon}</div>
-            <p className="mt-3 font-medium">{item.text}</p>
-          </motion.div>
-        ))}
+{/* Course Info */}
+<div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 px-6 mt-12">
+  {[
+    { icon: <Users size={28} />, text: `Trusted by Students` },
+    { icon: <Clock size={28} />, text: course.duration },
+    { icon: <Star size={28} />, text: `${course.rating} Rating` },
+    { icon: <BookOpen size={28} />, text: course.category },
+  ].map((item, idx) => (
+    <motion.div
+      key={idx}
+      className="relative p-6 rounded-2xl shadow-lg text-center 
+                 border border-white/0 bg-white/5 backdrop-blur-xl 
+                 hover:border-[#81007f] hover:shadow-[#81007f]/20 
+                 transition overflow-hidden"
+      whileHover={{ scale: 1.05 }}
+    >
+      {/* Light glass reflection sweep */}
+      <div className="absolute inset-0 bg-gradient-to-tr from-white/30 via-transparent to-transparent opacity-20 pointer-events-none" />
+
+      <div className="text-[#81007f] flex justify-center relative z-10">
+        {item.icon}
       </div>
+      <p className="mt-3 font-medium text-white relative z-10">{item.text}</p>
+    </motion.div>
+  ))}
+</div>
+
+
+
+
 
       {/* Overview Section */}
-      <section className="max-w-5xl mx-auto px-6 mt-20">
-        <h2 className="text-4xl font-extrabold text-center mb-8 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
-          Overview
-        </h2>
-        <motion.p
-          className="text-gray-300 text-lg leading-relaxed text-center"
-          initial={{ opacity: 0, y: 40 }}
-          whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
-        >
-          {course.overview ||
-            "This course provides a comprehensive learning path, starting from foundational concepts and moving towards advanced applications. You’ll gain practical skills, work on real projects, and finish with the confidence to apply your knowledge in real-world scenarios."}
-        </motion.p>
-      </section>
+      {/* Overview Section */}
+<section className="max-w-5xl mx-auto px-6 mt-20">
+  <h2 className="text-4xl font-extrabold text-center mb-8 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
+    Overview
+  </h2>
+  <motion.p
+    className="text-gray-300 text-lg leading-relaxed text-justify md:text-left"
+    initial={{ opacity: 0, y: 40 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.8 }}
+  >
+    {course.overview ||
+      "This course provides a comprehensive learning path, starting from foundational concepts and moving towards advanced applications. You’ll gain practical skills, work on real projects, and finish with the confidence to apply your knowledge in real-world scenarios."}
+  </motion.p>
+</section>
+
 
       {/* Syllabus Timeline */}
       <section ref={syllabusRef} className="mt-20 max-w-5xl mx-auto px-6">
@@ -252,6 +267,72 @@ const CourseDetailsPage = () => {
           </div>
         </div>
       </section>
+      <section className="mt-20 max-w-6xl mx-auto px-6">
+        <h2 className="text-4xl font-extrabold text-center mb-12 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
+          Why Choose This Course?
+        </h2>
+
+        <div className="grid gap-8 sm:grid-cols-2 lg:grid-cols-3">
+          {/* Course Certificate */}
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            className="bg-zinc-900/80 p-6 rounded-2xl border border-white/10 shadow-lg hover:border-[#81007f] hover:shadow-[#81007f]/40 transition"
+          >
+            <h3 className="text-xl font-bold text-white mb-3">Course Certificate</h3>
+            <p className="text-gray-400 text-sm">
+              Earn an industry-recognized certificate upon successful completion of your course.
+            </p>
+          </motion.div>
+
+          {/* Internship Certificate + Stipend */}
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            className="bg-zinc-900/80 p-6 rounded-2xl border border-white/10 shadow-lg hover:border-[#81007f] hover:shadow-[#81007f]/40 transition"
+          >
+            <h3 className="text-xl font-bold text-white mb-3">Internship Certificate + Stipend</h3>
+            <p className="text-gray-400 text-sm">
+              Gain real-world experience during your internship, earn a certificate, and receive a{" "}
+              <span className="text-[#81007f] font-semibold">stipend based on your tasks</span>.
+            </p>
+          </motion.div>
+
+          {/* Live Projects at Marqwon Dynamics */}
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            className="bg-zinc-900/80 p-6 rounded-2xl border border-white/10 shadow-lg hover:border-[#81007f] hover:shadow-[#81007f]/40 transition"
+          >
+            <h3 className="text-xl font-bold text-white mb-3">Live Project Experience</h3>
+            <p className="text-gray-400 text-sm">
+              Contribute to{" "}
+              <span className="text-[#81007f] font-semibold">MarqWon Dynamics</span> product-based
+              projects and sharpen your skills with live industry challenges.
+            </p>
+          </motion.div>
+
+          {/* Job Assistance */}
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            className="bg-zinc-900/80 p-6 rounded-2xl border border-white/10 shadow-lg hover:border-[#81007f] hover:shadow-[#81007f]/40 transition"
+          >
+            <h3 className="text-xl font-bold text-white mb-3">Job Assistance</h3>
+            <p className="text-gray-400 text-sm">
+              Receive career support, placement guidance, and connections with top recruiters.
+            </p>
+          </motion.div>
+
+          {/* Interview Preparation */}
+          <motion.div
+            whileHover={{ scale: 1.05 }}
+            className="bg-zinc-900/80 p-6 rounded-2xl border border-white/10 shadow-lg hover:border-[#81007f] hover:shadow-[#81007f]/40 transition"
+          >
+            <h3 className="text-xl font-bold text-white mb-3">Interview Preparation</h3>
+            <p className="text-gray-400 text-sm">
+              Practice with mock interviews, resume reviews, and personalized tips to crack your dream job.
+            </p>
+          </motion.div>
+        </div>
+      </section>
+
 
       {/* CTA & Modal */}
       <div className="mt-20 text-center">

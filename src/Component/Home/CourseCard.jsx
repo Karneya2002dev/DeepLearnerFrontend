@@ -137,7 +137,7 @@ const CoursesSection = () => {
   const [selectedCourse, setSelectedCourse] = useState(null);
 
   useEffect(() => {
-    fetch("https://deeplearner-production.up.railway.app/api/courses")
+    fetch("https://deeplearnerbackend-production.up.railway.app/api/courses")
       .then((res) => res.json())
       .then((data) => setCourses(data))
       .catch((err) => console.error("❌ Error fetching courses:", err))

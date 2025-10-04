@@ -127,7 +127,7 @@ const CourseDetails = () => {
     const fetchCourses = async () => {
       try {
         const res = await axios.get(
-          "https://deeplearner-production.up.railway.app/api/courses"
+          "https://deeplearnerbackend-production.up.railway.app/api/courses"
         );
         setCourses(res.data);
       } catch (err) {

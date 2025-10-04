@@ -30,7 +30,7 @@ const AuthPage = () => {
     setSuccess("");
 
     try {
-      const res = await axios.post("https://deeplearner-production.up.railway.app/api/signup", signupData);
+      const res = await axios.post("https://deeplearnerbackend-production.up.railway.app/api/signup", signupData);
       setSuccess(res.data.message);
       setSignupData({ name: "", email: "", password: "" });
       setIsLogin(true);
@@ -48,7 +48,7 @@ const AuthPage = () => {
     setSuccess("");
 
     try {
-      const res = await axios.post("https://deeplearner-production.up.railway.app/api/login", loginData);
+      const res = await axios.post("https://deeplearnerbackend-production.up.railway.app/api/login", loginData);
       setSuccess(res.data.message);
       setEmailForOtp(loginData.email);
       setOtpSent(true); // show OTP modal
@@ -66,7 +66,7 @@ const AuthPage = () => {
     setSuccess("");
 
     try {
-      const res = await axios.post("https://deeplearner-production.up.railway.app/api/verify-otp", { email: emailForOtp, otp });
+      const res = await axios.post("https://deeplearnerbackend-production.up.railway.app/api/verify-otp", { email: emailForOtp, otp });
       setSuccess(res.data.message);
       localStorage.setItem("authToken", res.data.token);
       localStorage.setItem("user", JSON.stringify(res.data.user));

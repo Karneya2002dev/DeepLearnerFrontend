@@ -31,7 +31,7 @@ export default function Footer() {
               <Facebook size={18} />
             </a> */}
             <a
-              href="https://www.instagram.com/deeplearner_academy?igsh=MWsxZ2gxZ3N5eGIwaQ=="
+              href="https://www.instagram.com/deeplearner.academy?igsh=MWsxZ2gxZ3N5eGIwaQ=="
               target="_blank"
               rel="noopener noreferrer"
               className="bg-gray-900 p-2 rounded-md hover:bg-pink-600 transition"
@@ -39,7 +39,7 @@ export default function Footer() {
               <Instagram size={18} />
             </a>
             <a
-              href="https://linkedin.com"
+              href="https://www.linkedin.com/showcase/deep-learner-dla/"
               target="_blank"
               rel="noopener noreferrer"
               className="bg-gray-900 p-2 rounded-md hover:bg-pink-600 transition"

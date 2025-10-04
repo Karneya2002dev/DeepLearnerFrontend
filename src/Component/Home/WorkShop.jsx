@@ -54,7 +54,7 @@ const Workshops = () => {
 
   // Fetch workshops from backend
   useEffect(() => {
-    fetch("https://deeplearner-production.up.railway.app/api/workshops")
+    fetch("https://deeplearnerbackend-production.up.railway.app/api/workshops")
       .then((res) => res.json())
       .then((data) => {
         if (data.success) setWorkshops(data.workshops);
@@ -120,7 +120,7 @@ const Workshops = () => {
     setIsLoading(true);
 
     try {
-      const res = await fetch("https://deeplearner-production.up.railway.app/api/register", {
+      const res = await fetch("https://deeplearnerbackend-production.up.railway.app/api/register", {
         method: "POST",
         headers: { "Content-Type": "application/json" },
         body: JSON.stringify({
