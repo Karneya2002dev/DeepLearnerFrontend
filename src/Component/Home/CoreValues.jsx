@@ -56,15 +56,14 @@ export default function CoreValues() {
               transition={{ duration: 0.8, ease: "easeInOut" }}
               className="flex-1 max-w-[120px] sm:max-w-xs border-t border-gray-700 origin-right"
             />
-            <motion.div
-              animate={{ scale: [1, 1.3, 1], rotate: [0, 15, -15, 0] }}
-              transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-            > <img 
-    src={logo} // 👉 import logo from your assets
+            <div>
+  <img 
+    src={logo} // 👉 ensure this is correctly imported
     alt="Logo" 
     className="mx-2 sm:mx-3 h-6 sm:h-8 w-auto object-contain"
   />
-            </motion.div>
+</div>
+
             <motion.div
               initial={{ scaleX: 0 }}
               whileInView={{ scaleX: 1 }}

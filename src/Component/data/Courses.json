@@ -74,19 +74,40 @@
     "createdAt": "2025-08-28T17:33:09.000Z",
     "overview": "Digital Marketing is the practice of promoting products, services, or brands using online platforms and digital technologies. It includes strategies like SEO (Search Engine Optimization), SEM (Search Engine Marketing), social media marketing, content marketing, and email campaigns. Tools such as Google Analytics, Google Ads, Facebook Ads, and HubSpot help track and optimize performance. Digital marketing focuses on targeting specific audiences, driving traffic, and boosting conversions. It plays a key role in brand building, customer engagement, and business growth in today’s digital-first world. With its wide reach and measurable results, digital marketing has become essential for businesses of all sizes."
   },
-  {
-    "id": 7,
-    "title": "Cybersecurity Essentials",
-    "description": "Learn how to protect systems and data from modern cyber threats.",
-    "students": 950,
-    "duration": "4 Months",
-    "rating": "4.9",
-    "category": "Cybersecurity",
-    "image": "https://www.bitlyft.com/hubfs/Cybersecurity-solutions.jpeg",
-    "comingSoon": null,
-    "video": null,
-    "syllabus": "[{\"title\": \"Introduction to Cybersecurity\", \"description\": \"Understanding cyber threats, vulnerabilities, and attacks\" }, {\"title\": \"Networking Fundamentals\", \"description\": \"Basics of networks, protocols, and security layers\" }, {\"title\": \"Cryptography\", \"description\": \"Encryption, hashing, and secure communication\" }, {\"title\": \"Ethical Hacking & Penetration Testing\", \"description\": \"Identifying system weaknesses ethically\" }, {\"title\": \"Malware Analysis\", \"description\": \"Understanding viruses, ransomware, and spyware\" }, {\"title\": \"Incident Response & Risk Management\", \"description\": \"Responding to breaches and mitigating risks\" }, {\"title\": \"Security Tools & Frameworks\", \"description\": \"Using Wireshark, Metasploit, Nmap, and cybersecurity standards\" }]",
-    "createdAt": "2025-08-28T01:03:09.000Z",
-    "overview": "Cybersecurity Essentials focuses on understanding and implementing security measures to protect digital systems, networks, and data from cyber threats. Students learn about ethical hacking, encryption, firewalls, malware analysis, and best practices for safeguarding personal and organizational assets. The course also covers cybersecurity frameworks, incident response, and risk assessment techniques. In an era of increasing cyberattacks, this course prepares learners to identify vulnerabilities, prevent breaches, and strengthen digital defense strategies. Graduates will gain practical skills to pursue careers in network security, penetration testing, and cybersecurity analysis."
-  }
+ {
+  "id": 7,
+  "title": "Cybersecurity Essentials",
+  "description": "Learn how to protect systems and data from modern cyber threats.",
+  "students": 950,
+  "duration": "4 Months",
+  "rating": "4.9",
+  "category": "Cybersecurity",
+  "image": "https://www.bitlyft.com/hubfs/Cybersecurity-solutions.jpeg",
+  "comingSoon": null,
+  "video": null,
+  "syllabus": [
+    { "title": "Introduction to Cybersecurity", "description": "Principles, concepts, and fundamentals of cybersecurity" },
+    { "title": "Cyber Threats and Types of Attacks", "description": "Exploring malware, phishing, DDoS, ransomware, and advanced persistent threats" },
+    { "title": "Reconnaissance", "description": "Information gathering techniques about targets" },
+    { "title": "Enumeration", "description": "Identifying network resources and users" },
+    { "title": "Scanning and Vulnerability Assessment", "description": "Techniques to find and assess vulnerabilities in systems" },
+    { "title": "Exploitation", "description": "Using discovered vulnerabilities for ethical testing" },
+    { "title": "Security Policies and Risk Management", "description": "Creating and managing security strategies and policies" },
+    { "title": "Incident Response", "description": "Detecting, responding, and handling security breaches" },
+    { "title": "Cryptography Fundamentals", "description": "Encryption, decryption, keys, and data protection mechanisms" },
+    { "title": "Access Controls and Identity Management", "description": "Managing authentication, authorization, and access systems" },
+    { "title": "Malware and Social Engineering Attacks", "description": "Identifying and preventing malicious software and human-based attacks" },
+    { "title": "Logging, Monitoring, and Forensics", "description": "Tracking system activity and performing digital investigations" },
+    { "title": "System and Network Hardening", "description": "Securing servers, workstations, and network devices" },
+    { "title": "Data Security and Integrity", "description": "Ensuring confidentiality, availability, and accuracy of data" },
+    { "title": "Security Compliance and Standards", "description": "Overview of frameworks like ISO 27001, NIST, and GDPR" }
+  ],
+  "createdAt": "2025-08-28T01:03:09.000Z",
+  "overview": "Cybersecurity Essentials focuses on understanding and implementing security measures to protect digital systems, networks, and data from cyber threats. Students learn about ethical hacking, encryption, firewalls, malware analysis, and best practices for safeguarding personal and organizational assets. The course also covers cybersecurity frameworks, incident response, and risk assessment techniques. In an era of increasing cyberattacks, this course prepares learners to identify vulnerabilities, prevent breaches, and strengthen digital defense strategies. Graduates will gain practical skills to pursue careers in network security, penetration testing, and cybersecurity analysis."
+},
+{
+  
+}
+
+
 ]

@@ -23,7 +23,7 @@ export default function WallOfLove() {
   // Fetch testimonials
   useEffect(() => {
     axios
-      .get("https://deeplearnerbackend-production.up.railway.app/api/testimonials")
+      .get("https://deeplearnerbackend-production-9217.up.railway.app/api/testimonials")
       .then((res) => setTestimonials(res.data))
       .catch((err) => console.error("Error fetching testimonials:", err));
   }, []);
@@ -94,30 +94,20 @@ export default function WallOfLove() {
             </p>
 
             {/*  Divider */}
-           <div className="flex items-center justify-center mt-6">
-                       <motion.div
-                         initial={{ scaleX: 0 }}
-                         whileInView={{ scaleX: 1 }}
-                         transition={{ duration: 0.8, ease: "easeInOut" }}
-                         className="flex-1 max-w-[120px] sm:max-w-xs border-t border-gray-700 origin-right"
-                       />
-                       <motion.div
-                         animate={{ scale: [1, 1.3, 1], rotate: [0, 15, -15, 0] }}
-                         transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}
-                       > <img 
-               src={logo} // 👉 import logo from your assets
-               alt="Logo" 
-               className="mx-2 sm:mx-3 h-6 sm:h-8 w-auto object-contain"
-             />
-                       </motion.div>
-                       <motion.div
-                         initial={{ scaleX: 0 }}
-                         whileInView={{ scaleX: 1 }}
-                         transition={{ duration: 0.8, ease: "easeInOut", delay: 0.2 }}
-                         className="flex-1 max-w-[120px] sm:max-w-xs border-t border-gray-700 origin-left"
-                       />
-                     </div>
-                     </div>
+          <div className="flex items-center justify-center mt-6">
+  <div className="flex-1 max-w-[120px] sm:max-w-xs border-t border-gray-700" />
+  
+  <div>
+    <img 
+      src={logo} // 👉 make sure logo is imported correctly
+      alt="Logo" 
+      className="mx-2 sm:mx-3 h-6 sm:h-8 w-auto object-contain"
+    />
+  </div>
+  
+  <div className="flex-1 max-w-[120px] sm:max-w-xs border-t border-gray-700" />
+</div>
+</div>
 
           {/* Testimonials Grid */}
           <div className="grid md:grid-cols-3 gap-6">

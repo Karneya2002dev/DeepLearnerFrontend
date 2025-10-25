@@ -5,16 +5,16 @@ import { motion, AnimatePresence } from "framer-motion";
 // Mentor Jobs Data
 const jobs = [
   { title: "React Mentor", type: "Part-Time", posted: "1 week ago", category: "Web Development" },
-  { title: "Frontend Mentor (HTML/CSS/JS)", type: "Remote", posted: "4 days ago", category: "Web Development" },
+  // { title: "Frontend Mentor (HTML/CSS/JS)", type: "Remote", posted: "4 days ago", category: "Web Development" },
   { title: "MERN Stack Mentor", type: "Remote", posted: "2 weeks ago", category: "Full Stack" },
-  { title: "Node.js & Express Mentor", type: "Part-Time",posted: "5 days ago", category: "Full Stack" },
+  // { title: "Node.js & Express Mentor", type: "Part-Time",posted: "5 days ago", category: "Full Stack" },
   { title: "UI/UX Mentor", type: "Contract", posted: "3 weeks ago", category: "UI/UX" },
   { title: "Figma & Prototyping Mentor", type: "Remote", posted: "6 days ago", category: "UI/UX" },
   { title: "Design Thinking Mentor", type: "Part-Time", posted: "1 day ago", category: "UI/UX" },
   { title: "Data Analysis Mentor", type: "Temporary", posted: "1 month ago", category: "Data Analysis" },
   { title: "Python for Data Mentor", type: "Remote", posted: "3 days ago", category: "Data Analysis" },
   { title: "React Native Mentor", type: "Contract", posted: "1 week ago", category: "Mobile App (React Native)" },
-  { title: "Expo & Navigation Mentor", type: "Remote",posted: "2 weeks ago", category: "Mobile App (React Native)" },
+  // { title: "Expo & Navigation Mentor", type: "Remote",posted: "2 weeks ago", category: "Mobile App (React Native)" },
   { title: "SEO Mentor", type: "Part-Time",posted: "5 days ago", category: "Digital Marketing" },
   { title: "Social Media Marketing Mentor", type: "Remote", posted: "3 days ago", category: "Digital Marketing" },
 ];
@@ -46,13 +46,37 @@ export default function Dashboard() {
     else setForm({ ...form, [name]: value });
   };
 
-  const handleFormSubmit = (e) => {
-    e.preventDefault();
-    console.log("Applied for job:", selectedJob, form);
-    alert(`Application submitted for ${selectedJob.title}!`);
-    setForm({ name: "", email: "", experience: "", resume: null });
-    setShowForm(false);
-  };
+  const handleFormSubmit = async (e) => {
+  e.preventDefault();
+
+  if (!selectedJob) return;
+
+  const formData = new FormData();
+  formData.append("name", form.name);
+  formData.append("email", form.email);
+  formData.append("experience", form.experience);
+  formData.append("resume", form.resume);
+  formData.append("job_title", selectedJob.title);
+
+  try {
+    const res = await fetch("https://deeplearnerbackend-production-9217.up.railway.app/api/mentor-apply", {
+      method: "POST",
+      body: formData,
+    });
+
+    const data = await res.json();
+    if (res.ok) {
+      alert(`Application submitted successfully for ${selectedJob.title}!`);
+      setForm({ name: "", email: "", experience: "", resume: null });
+      setShowForm(false);
+    } else {
+      alert(`Error: ${data.message || "Failed to submit application"}`);
+    }
+  } catch (err) {
+    console.error(err);
+    alert("Server error, please try again later");
+  }
+};
 
   return (
     <div className="min-h-screen bg-black text-white flex flex-col md:flex-row p-4 md:p-20 gap-10 ">

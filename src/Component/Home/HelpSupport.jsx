@@ -1,5 +1,11 @@
 import { useState } from "react";
-import { User, MessageSquare, PhoneCall, Clock } from "lucide-react";
+import {
+  User,
+  MessageSquare,
+  PhoneCall,
+  Clock,
+  Mail,
+} from "lucide-react";
 
 function Card({ children, className = "" }) {
   return (
@@ -40,25 +46,31 @@ export default function ContactForm() {
           <h2 className="text-3xl font-semibold mb-6 text-white text-center">
             Talk with an Advisor
           </h2>
+
           <div className="flex flex-col md:flex-row md:items-center md:justify-between gap-6 mb-8">
             <div className="flex items-center">
-              <PhoneCall className="text-[#81007f] mr-3" size={28} />
+              <PhoneCall className="text-[#81007f] mr-3" size={24} />
               <a
                 href="tel:+916384942259"
-                className="text-white hover:underline text-xl font-medium"
+                className="text-white hover:underline text-lg font-medium"
               >
                 +91 63849 42259
               </a>
             </div>
             <div className="flex items-center">
-              <Clock className="text-[#81007f] mr-3" size={24} />
-              <p className="text-gray-300 text-lg">Mon - Sat (9AM - 6PM)</p>
+              <Mail className="text-[#81007f] mr-3" size={24} />
+              <a
+                href="mailto:deeplearneracademy@gmail.com"
+                className="text-white hover:underline text-lg font-medium"
+              >
+                deeplearneracademy@gmail.com
+              </a>
             </div>
           </div>
 
           {/* Contact Form */}
-          <h1 className="text-4xl font-bold mb-3">Get in Touch</h1>
-          <p className="text-gray-300 mb-8">
+          <h1 className="text-4xl font-bold mb-3 text-center">Get in Touch</h1>
+          <p className="text-gray-300 mb-8 text-center">
             We’d love to hear from you! Fill out the form below.
           </p>
 

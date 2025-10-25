@@ -21,7 +21,7 @@ export default function Mentors() {
   // Fetch mentors
   useEffect(() => {
     axios
-      .get("https://deeplearnerbackend-production.up.railway.app/api/mentors")
+      .get("https://deeplearnerbackend-production-9217.up.railway.app/api/mentors")
       .then((res) => {
         setMentors(res.data);
         setFilteredMentors(res.data);

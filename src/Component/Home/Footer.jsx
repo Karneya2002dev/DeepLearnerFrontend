@@ -1,18 +1,17 @@
-// Footer.jsx
-import { Facebook, Instagram, Linkedin, Youtube } from "lucide-react";
-import { Link } from "react-router-dom"; // ✅ Import Link for internal navigation
+import { Facebook, Instagram, Linkedin, Youtube, Phone, Mail } from "lucide-react";
+import { Link } from "react-router-dom";
 import logo from '../../assets/loogoo1.png'
 
 export default function Footer() {
   return (
     <footer className="bg-black text-gray-300 pt-16 pb-8 relative">
-      <div className="container mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-10">
+      <div className="container mx-auto px-6 grid grid-cols-1 sm:grid-cols-2 md:grid-cols-5 gap-10">
         {/* Left Branding */}
         <div className="text-center sm:text-left">
           <p className="text-sm text-gray-400">
             <span className="font-semibold text-white">Deep Learner Academy</span>{" "}
             (DLA), a Product of{" "}
-            <span className="font-semibold text-white">MarqWon Dynamics Pvt. Ltd. </span>
+            <span className="font-semibold text-white">MarqWon Dynamics Pvt. Ltd.</span>
           </p>
 
           <div className="mt-6">
@@ -22,14 +21,6 @@ export default function Footer() {
 
           {/* Social Icons */}
           <div className="flex justify-center sm:justify-start space-x-3 mt-5">
-            {/* <a
-              href="https://facebook.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-gray-900 p-2 rounded-md hover:bg-pink-600 transition"
-            >
-              <Facebook size={18} />
-            </a> */}
             <a
               href="https://www.instagram.com/deeplearner.academy?igsh=MWsxZ2gxZ3N5eGIwaQ=="
               target="_blank"
@@ -46,14 +37,6 @@ export default function Footer() {
             >
               <Linkedin size={18} />
             </a>
-            {/* <a
-              href="https://youtube.com"
-              target="_blank"
-              rel="noopener noreferrer"
-              className="bg-gray-900 p-2 rounded-md hover:bg-pink-600 transition"
-            >
-              <Youtube size={18} />
-            </a> */}
           </div>
         </div>
 
@@ -64,10 +47,9 @@ export default function Footer() {
             <li><Link to="/courses/3">Data Analysis</Link></li>
             <li><Link to="/courses/2">Mern Stack Development</Link></li>
             <li><Link to="/courses/1">Python Full Stack</Link></li>
-
             <li><Link to="/courses/4">Graphic Design</Link></li>
             <li><Link to="/courses/9">Software Development</Link></li>
-            <li><Link to="/courses/8">Python Game Developement</Link></li>
+            <li><Link to="/courses/8">Python Game Development</Link></li>
           </ul>
         </div>
 
@@ -77,10 +59,7 @@ export default function Footer() {
           <ul className="space-y-2 text-sm">
             <li><Link to="/workshops/">Data Analysis</Link></li>
             <li><Link to="/workshops/">Mobile App Development with React Native (Android)</Link></li>
-            <li><Link to="/workshops/">UI/UX Design</Link></li>
-            {/* <li><Link to="/workshops/ai">Game Development using Python</Link></li>
-            <li><Link to="/workshops/content-marketing">Java Programming</Link></li>
-            <li><Link to="/workshops/meta-ads">Python Programming</Link></li> */}
+            <li><Link to="/workshops/">UI/UX Design</Link></li>
           </ul>
         </div>
 
@@ -94,26 +73,33 @@ export default function Footer() {
             <li><Link to="/verify">Verify Certificate</Link></li>
           </ul>
         </div>
+
+        {/* Contact Info */}
+        <div className="text-center sm:text-left">
+          <h3 className="text-white font-semibold mb-4">CONTACT US</h3>
+          <ul className="space-y-3 text-sm">
+            <li className="flex items-center justify-center sm:justify-start space-x-2">
+              <Phone size={16} className="text-pink-500" />
+              <a href="tel:+916384942259" className="hover:underline">+91 63849 42259</a>
+            </li>
+            <li className="flex items-center justify-center sm:justify-start space-x-2">
+              <Mail size={16} className="text-pink-500" />
+              <a href="mailto:deeplearneracademy@gmail.com" className="hover:underline">deeplearneracademy@gmail.com</a>
+            </li>
+          </ul>
+        </div>
       </div>
 
       {/* Divider */}
-     <div className="flex items-center justify-center mt-12">
-  <div className="flex-1 border-t border-gray-800"></div>
-  
-  {/* Logo instead of dot */}
-  <img
-    src={logo}
-    alt="Logo"
-    className="mx-3 w-8 h-8 object-contain"
-  />
-
-  <div className="flex-1 border-t border-gray-800"></div>
-</div>
-
+      <div className="flex items-center justify-center mt-12">
+        <div className="flex-1 border-t border-gray-800"></div>
+        <img src={logo} alt="Logo" className="mx-3 w-8 h-8 object-contain" />
+        <div className="flex-1 border-t border-gray-800"></div>
+      </div>
 
       {/* Bottom Copyright */}
       <div className="text-center text-gray-500 text-sm mt-6 px-4">
-        {/* Copyright © Deep Learner Academy (DLA) Pvt. Ltd. All rights reserved. */}
+        {/* © {new Date().getFullYear()} Deep Learner Academy (DLA). All rights reserved. */}
       </div>
     </footer>
   );
