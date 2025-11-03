@@ -5,7 +5,7 @@ import { X } from "lucide-react";
 const BrochureRequest = ({ isOpen, onClose, course }) => {
   const [formData, setFormData] = useState({
     name: "",
-    dob: "",
+    
     gender: "",
     status: "",
     college: "",
@@ -25,7 +25,7 @@ const BrochureRequest = ({ isOpen, onClose, course }) => {
     const message = `Requesting For the Brochure
 Course: ${course ? course.title : ""}
 Name: ${formData.name}
-DOB: ${formData.dob}
+
 Gender: ${formData.gender}
 Status: ${formData.status}
 College/Institute: ${formData.college}
@@ -96,7 +96,7 @@ Email: ${formData.email}`;
                 className="w-full p-3 border rounded-lg"
                 required
               />
-
+{/* 
               <input
                 type="date"
                 name="dob"
@@ -104,7 +104,7 @@ Email: ${formData.email}`;
                 onChange={handleChange}
                 className="w-full p-3 border rounded-lg"
                 required
-              />
+              /> */}
 
               <select
                 name="gender"

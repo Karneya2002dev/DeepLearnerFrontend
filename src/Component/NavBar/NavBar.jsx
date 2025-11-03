@@ -34,18 +34,54 @@ const Navbar = () => {
     setCallbackForm({ ...callbackForm, [name]: value });
   };
 
-  const handleCallbackSubmit = (e) => {
-    e.preventDefault();
-    setIsLoading(true);
+const handleCallbackSubmit = (e) => {
+  e.preventDefault();
+
+  // Validation
+  if (
+    !callbackForm.name ||
+    !callbackForm.email ||
+    !callbackForm.phone ||
+    !callbackForm.status ||
+    !callbackForm.course
+  ) {
+    alert("Please fill in all required fields.");
+    return;
+  }
+
+  setIsLoading(true);
+
+  // Simulate async submit
+  setTimeout(() => {
+    setIsLoading(false);
+    setIsSuccess(true);
+
+    // ✅ WhatsApp message
+    const message = `Hello! 👋\n\nI just submitted a *Request for a Callback* on Deep Learner.\n\nHere are my details:\n\n🧑 Name: ${callbackForm.name}\n📧 Email: ${callbackForm.email}\n📞 Phone: ${callbackForm.phone}\n🎓 Status: ${callbackForm.status}\n📘 Interested Course: ${callbackForm.course}\n💬 Message: ${callbackForm.message || "N/A"}\n\nPlease get back to me soon.`;
+
+    // ✅ Redirect to WhatsApp after short delay (show success animation first)
     setTimeout(() => {
-      setIsLoading(false);
-      setIsSuccess(true);
-      setTimeout(() => {
-        setIsSuccess(false);
-        setIsCallbackOpen(false);
-      }, 2000);
-    }, 1500);
-  };
+      const phoneNumber = "916384942259"; // Replace with your WhatsApp number
+      const url = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
+        message
+      )}`;
+      window.open(url, "_blank");
+
+      // Reset form + modal
+      setCallbackForm({
+        name: "",
+        email: "",
+        phone: "",
+        status: "",
+        course: "",
+        message: "",
+      });
+      setIsCallbackOpen(false);
+      setIsSuccess(false);
+    }, 1800);
+  }, 1500);
+};
+
 
   const navLinks = [
     { name: "Courses", path: "/courses" },

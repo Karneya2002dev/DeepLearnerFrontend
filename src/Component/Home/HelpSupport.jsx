@@ -18,7 +18,7 @@ function Card({ children, className = "" }) {
 }
 
 export default function ContactForm() {
-  const [form, setForm] = useState({ name: "", email: "", message: "" });
+  const [form, setForm] = useState({ name: "", time: "", message: "" });
 
   const handleChange = (e) => {
     setForm({ ...form, [e.target.name]: e.target.value });
@@ -26,8 +26,30 @@ export default function ContactForm() {
 
   const handleSubmit = (e) => {
     e.preventDefault();
-    console.log("Form submitted:", form);
-    alert("Message sent!");
+
+    // ⛔ Validate dropdown selection
+    if (!form.time) {
+      alert("Please select a preferred time.");
+      return;
+    }
+
+    // ✅ Create WhatsApp message text
+    const whatsappMessage = `
+👋 *New Inquiry from Deep Learner Academy Website*
+----------------------------------------
+👤 *Name:* ${form.name}
+🕒 *Preferred Time:* ${form.time}
+💬 *Message:* ${form.message}
+----------------------------------------
+📞 Please reach out to me soon!`;
+
+    const phoneNumber = "916384942259"; // Your WhatsApp number
+
+    const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
+      whatsappMessage
+    )}`;
+
+    window.open(whatsappURL, "_blank");
   };
 
   return (
@@ -82,8 +104,6 @@ export default function ContactForm() {
                 type="text"
                 name="name"
                 placeholder="Your Name"
-                autoComplete="name"
-                aria-label="Name"
                 className="bg-transparent text-white placeholder-gray-400 outline-none w-full"
                 value={form.name}
                 onChange={handleChange}
@@ -91,20 +111,31 @@ export default function ContactForm() {
               />
             </div>
 
-            {/* Time Field */}
+            {/* Time Dropdown */}
             <div className="flex items-center bg-black border border-white/20 rounded-lg px-4 py-3 focus-within:ring-2 focus-within:ring-[#81007f] transition">
-              <Clock className="text-[#81007f] mr-3" size={20} />
-              <input
-                type="text"
-                name="email"
-                placeholder="Preferred Time"
-                aria-label="Time"
-                className="bg-transparent text-white placeholder-gray-400 outline-none w-full"
-                value={form.email}
-                onChange={handleChange}
-                required
-              />
-            </div>
+  <Clock className="text-[#81007f] mr-3" size={20} />
+  <select
+    name="time"
+    value={form.time}
+    onChange={handleChange}
+    className="bg-black text-white outline-none w-full rounded-lg px-2 py-2 focus:ring-0 border-none"
+    required
+  >
+    <option value="" disabled className="bg-black text-gray-400">
+      Select Preferred Time
+    </option>
+    <option value="10:00 AM - 12:00 PM" className="bg-black text-white">
+      10:00 AM - 12:00 PM
+    </option>
+    <option value="1:00 PM - 3:00 PM" className="bg-black text-white">
+      1:00 PM - 3:00 PM
+    </option>
+    <option value="5:00 PM - 7:00 PM" className="bg-black text-white">
+      5:00 PM - 7:00 PM
+    </option>
+  </select>
+</div>
+
 
             {/* Message Field */}
             <div className="flex items-start bg-black border border-white/20 rounded-lg px-4 py-3 focus-within:ring-2 focus-within:ring-[#81007f] transition">
@@ -113,7 +144,6 @@ export default function ContactForm() {
                 name="message"
                 rows="4"
                 placeholder="Your Message"
-                aria-label="Message"
                 className="bg-transparent text-white placeholder-gray-400 outline-none w-full resize-none"
                 value={form.message}
                 onChange={handleChange}
@@ -124,9 +154,9 @@ export default function ContactForm() {
             {/* Submit Button */}
             <button
               type="submit"
-              className="w-full bg-gradient-to-r from-[#81007f] to-[#81007f] hover:opacity-90 text-white py-3 rounded-lg font-semibold shadow-lg transition duration-300"
+              className="w-full bg-gradient-to-r from-[#81007f] to-[#a300a3] hover:opacity-90 text-white py-3 rounded-lg font-semibold shadow-lg transition duration-300"
             >
-              Send Message
+              Send via WhatsApp
             </button>
           </form>
         </Card>
