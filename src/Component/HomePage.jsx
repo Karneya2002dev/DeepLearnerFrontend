@@ -21,7 +21,7 @@ const HomePage = () => {
         <WorkShop />
         <FallOfWall />
         {/* <StatsSection /> */}
-        <Mentors />
+        {/* <Mentors /> */}
        
         
 
