@@ -463,7 +463,7 @@
 import React, { useState, useEffect, useRef } from "react";
 import { useParams } from "react-router-dom";
 import { useSelector } from "react-redux";
-import { Star, Users, Clock, X, BookOpen } from "lucide-react";
+import { Star, Users, Clock, X, BookOpen, Wrench, BadgeCheck, Wallet } from "lucide-react";
 import { motion } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
@@ -472,7 +472,7 @@ gsap.registerPlugin(ScrollTrigger);
 
 const CourseDetailsPage = () => {
   const { id } = useParams();
-  const { courses } = useSelector((state) => state.courses); // ✅ Get courses from Redux
+  const { courses } = useSelector((state) => state.courses);
   const [course, setCourse] = useState(null);
   const [formData, setFormData] = useState({
     name: "",
@@ -485,13 +485,11 @@ const CourseDetailsPage = () => {
   const [submitting, setSubmitting] = useState(false);
   const syllabusRef = useRef(null);
 
-  // ✅ Fetch course from Redux store instead of backend
   useEffect(() => {
     const selected = courses.find((c) => String(c.id) === String(id));
     setCourse(selected || null);
   }, [courses, id]);
 
-  // Animate syllabus when available
   useEffect(() => {
     if (course && syllabusRef.current) {
       const cards = syllabusRef.current.querySelectorAll(".syllabus-card");
@@ -512,12 +510,10 @@ const CourseDetailsPage = () => {
     }
   }, [course]);
 
-  // Handle form change
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
 
-  // Handle form submit
-  const handleSubmit = async (e) => {
+  const handleSubmit = (e) => {
     e.preventDefault();
     if (!formData.name || !formData.email || !formData.phone || !formData.currentStatus) {
       alert("Please fill all fields.");
@@ -525,11 +521,24 @@ const CourseDetailsPage = () => {
     }
 
     setSubmitting(true);
+
     setTimeout(() => {
       setSubmitted(true);
       setFormData({ name: "", email: "", phone: "", currentStatus: "" });
       setIsModalOpen(false);
       setSubmitting(false);
+
+      const message = `
+Hi! I just enrolled in the ${course.title} course.
+
+*Enrollment Details*:
+Name: ${formData.name}
+Email: ${formData.email}
+Phone: ${formData.phone}
+Status: ${formData.currentStatus}
+`;
+
+      window.open(`https://wa.me/916384942259?text=${encodeURIComponent(message)}`, "_blank");
     }, 1000);
   };
 
@@ -541,12 +550,18 @@ const CourseDetailsPage = () => {
     );
   }
 
-  // Dynamic syllabus
   const syllabusTopics = course.syllabus || [
     { title: "Introduction & Basics", description: "Explore essential concepts in Introduction & Basics." },
     { title: "Advanced Topics", description: "Dive deep into Advanced Topics with practical exercises." },
     { title: "Hands-on Projects", description: "Build real projects to strengthen your skills." },
     { title: "Capstone Project", description: "Showcase your mastery by completing a capstone project." },
+  ];
+
+  const infoItems = [
+    { icon: <Users size={28} />, text: "Trusted by Students" },
+    { icon: <Clock size={28} />, text: course.duration },
+    { icon: <Star size={28} />, text: `${course.rating} Rating` },
+    { icon: <BookOpen size={28} />, text: course.category },
   ];
 
   return (
@@ -568,13 +583,12 @@ const CourseDetailsPage = () => {
         />
       </div>
 
-      {/* Course Header */}
+      {/* Title + Description */}
       <div className="max-w-4xl mx-auto px-6 mt-10 text-center">
         <motion.h1
           className="text-4xl md:text-6xl font-bold mb-5 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent"
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 0.8 }}
         >
           {course.title}
         </motion.h1>
@@ -582,59 +596,168 @@ const CourseDetailsPage = () => {
           className="text-gray-300 text-lg md:text-xl"
           initial={{ y: 30, opacity: 0 }}
           animate={{ y: 0, opacity: 1 }}
-          transition={{ duration: 1, delay: 0.2 }}
+          transition={{ delay: 0.2 }}
         >
           {course.description}
         </motion.p>
       </div>
 
-      {/* Course Info */}
+      {/* Info Cards */}
       <div className="max-w-6xl mx-auto grid grid-cols-2 md:grid-cols-4 gap-6 px-6 mt-12">
-        {[
-          { icon: <Users size={28} />, text: `Trusted by Students` },
-          { icon: <Clock size={28} />, text: course.duration },
-          { icon: <Star size={28} />, text: `${course.rating} Rating` },
-          { icon: <BookOpen size={28} />, text: course.category },
-        ].map((item, idx) => (
+        {infoItems.map((item, idx) => (
           <motion.div
             key={idx}
-            className="relative p-6 rounded-2xl shadow-lg text-center 
-                   border border-white/0 bg-white/5 backdrop-blur-xl 
-                   hover:border-[#81007f] hover:shadow-[#81007f]/20 
-                   transition overflow-hidden"
+            className="relative p-6 rounded-2xl shadow-lg text-center border border-white/0 bg-white/5 backdrop-blur-xl hover:border-[#81007f] hover:shadow-[#81007f]/20 transition overflow-hidden"
             whileHover={{ scale: 1.05 }}
           >
-            <div className="absolute inset-0 bg-gradient-to-tr from-white/30 via-transparent to-transparent opacity-20 pointer-events-none" />
-            <div className="text-[#81007f] flex justify-center relative z-10">
-              {item.icon}
-            </div>
-            <p className="mt-3 font-medium text-white relative z-10">{item.text}</p>
+            <div className="text-[#81007f] flex justify-center">{item.icon}</div>
+            <p className="mt-3 font-medium text-white">{item.text}</p>
           </motion.div>
         ))}
       </div>
 
       {/* Overview */}
       <section className="max-w-5xl mx-auto px-6 mt-20">
-        <h2 className="text-4xl font-extrabold text-center mb-8 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
+        
+        <h2 className="text-4xl font-extrabold text-center mb-8 bg-[#81007f] bg-clip-text text-transparent">
           Overview
         </h2>
         <motion.p
           className="text-gray-300 text-lg leading-relaxed text-justify md:text-left"
           initial={{ opacity: 0, y: 40 }}
           whileInView={{ opacity: 1, y: 0 }}
-          transition={{ duration: 0.8 }}
         >
           {course.overview ||
             "This course provides a comprehensive learning path from basics to advanced topics with real projects."}
         </motion.p>
       </section>
 
+      {/* Tools, Roles & Salary */}
+      <section className="relative max-w-6xl mx-auto px-6 mt-24">
+  {/* Animated gradient background lines */}
+  <div className="absolute inset-0 -z-10 overflow-hidden">
+    <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 via-pink-500/5 to-purple-500/10 blur-3xl animate-pulse" />
+    <div className="absolute top-1/2 left-0 w-full h-[1px] bg-gradient-to-r from-transparent via-purple-400/30 to-transparent animate-[shimmer_8s_linear_infinite]" />
+  </div>
+
+  <motion.h2
+    initial={{ opacity: 0, y: 30 }}
+    whileInView={{ opacity: 1, y: 0 }}
+    transition={{ duration: 0.7 }}
+    className="text-center text-4xl md:text-5xl font-extrabold mb-16 text-white tracking-tight"
+  >
+    <span className="bg-[#81007f] bg-clip-text text-transparent">
+      Career Boost
+    </span>{" "}
+    Highlights
+  </motion.h2>
+
+  <div className="grid md:grid-cols-3 gap-10">
+    {/* Tools */}
+    {course.tools && (
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8 }}
+        whileHover={{ y: -6, scale: 1.02 }}
+        className="group p-8 rounded-3xl bg-white/10 border border-white/20 backdrop-blur-2xl shadow-[0_0_20px_rgba(129,0,127,0.2)] hover:shadow-[0_0_30px_rgba(129,0,127,0.4)] transition-all duration-500"
+      >
+        <div className="flex items-center gap-3 mb-4">
+          <motion.div
+            whileHover={{ rotate: 360 }}
+            transition={{ duration: 1.2 }}
+          >
+            <Wrench className="text-[#c63eff]" size={30} />
+          </motion.div>
+          <h3 className="text-2xl font-semibold text-white">Tools You’ll Master</h3>
+        </div>
+        <div className="flex flex-wrap gap-3">
+          {course.tools.map((tool, i) => (
+            <span
+              key={i}
+              className="px-4 py-2 bg-gradient-to-r from-purple-500/30 to-pink-500/30 border border-purple-500/50 rounded-full text-sm text-white shadow-inner"
+            >
+              {tool}
+            </span>
+          ))}
+        </div>
+      </motion.div>
+    )}
+
+    {/* Roles */}
+    {course.roles && (
+      <motion.div
+        initial={{ opacity: 0, y: 40 }}
+        whileInView={{ opacity: 1, y: 0 }}
+        transition={{ duration: 0.8, delay: 0.1 }}
+        whileHover={{ y: -6, scale: 1.02 }}
+        className="group p-8 rounded-3xl bg-white/10 border border-white/20 backdrop-blur-2xl shadow-[0_0_20px_rgba(129,0,127,0.2)] hover:shadow-[0_0_30px_rgba(129,0,127,0.4)] transition-all duration-500"
+      >
+        <div className="flex items-center gap-3 mb-4">
+          <motion.div whileHover={{ rotate: 15 }} transition={{ type: "spring" }}>
+            <BadgeCheck className="text-[#ff6edb]" size={30} />
+          </motion.div>
+          <h3 className="text-2xl font-semibold text-white">Career Roles</h3>
+        </div>
+        <ul className="space-y-2 text-gray-200">
+          {course.roles.map((role, i) => (
+            <li
+              key={i}
+              className="flex items-center gap-2 text-base group-hover:text-white transition-colors"
+            >
+              <span className="text-purple-400">▹</span> {role}
+            </li>
+          ))}
+        </ul>
+      </motion.div>
+    )}
+
+    {/* Salary */}
+    <motion.div
+      initial={{ opacity: 0, y: 40 }}
+      whileInView={{ opacity: 1, y: 0 }}
+      transition={{ duration: 0.8, delay: 0.2 }}
+      whileHover={{ y: -6, scale: 1.02 }}
+      className="group p-8 rounded-3xl bg-white/10 border border-white/20 backdrop-blur-2xl shadow-[0_0_20px_rgba(129,0,127,0.2)] hover:shadow-[0_0_30px_rgba(129,0,127,0.4)] transition-all duration-500"
+    >
+      <div className="flex items-center gap-3 mb-4">
+        <motion.div
+          animate={{ scale: [1, 1.2, 1] }}
+          transition={{ repeat: Infinity, duration: 2 }}
+        >
+          <Wallet className="text-[#ff81f8]" size={30} />
+        </motion.div>
+        <h3 className="text-2xl font-semibold text-white">Expected Salary Range</h3>
+      </div>
+
+      <p className="text-gray-200 text-lg leading-relaxed">
+        💰{" "}
+        {typeof course.salary === "string"
+          ? course.salary
+          : course.salary?.min && course.salary?.max
+          ? `Average Salary: ₹${course.salary.min} – ₹${course.salary.max} LPA`
+          : "Average Salary: ₹4.5 – ₹12 LPA (based on experience)"}
+      </p>
+    </motion.div>
+  </div>
+</section>
+
+
+      {/* Certification */}
+      {course.certification && (
+        <section className="max-w-5xl mx-auto px-6 mt-20 text-center">
+          <h2 className="text-3xl font-extrabold mb-6 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
+            Certification
+          </h2>
+          <p className="text-gray-300 text-lg">🎓 {course.certification}</p>
+        </section>
+      )}
+
       {/* Syllabus */}
       <section ref={syllabusRef} className="mt-20 max-w-5xl mx-auto px-6">
         <h2 className="text-4xl font-extrabold text-center mb-12 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
           Course Syllabus
         </h2>
-
         <div className="relative">
           <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-[#81007f] to-transparent"></div>
           <div className="space-y-12">
@@ -643,7 +766,7 @@ const CourseDetailsPage = () => {
                 {index % 2 === 0 ? (
                   <>
                     <div className="w-5/12 bg-zinc-900/80 p-6 rounded-2xl border border-white/10">
-                      <h3 className="text-xl font-semibold text-white">{topic.title}</h3>
+                      <h3 className="text-xl font-semibold">{topic.title}</h3>
                       <p className="text-gray-400 mt-2">{topic.description}</p>
                     </div>
                     <div className="absolute left-1/2 -translate-x-1/2 bg-[#81007f] w-6 h-6 rounded-full border-4 border-black"></div>
@@ -654,7 +777,7 @@ const CourseDetailsPage = () => {
                     <div className="w-5/12"></div>
                     <div className="absolute left-1/2 -translate-x-1/2 bg-[#81007f] w-6 h-6 rounded-full border-4 border-black"></div>
                     <div className="w-5/12 bg-zinc-900/80 p-6 rounded-2xl border border-white/10">
-                      <h3 className="text-xl font-semibold text-white">{topic.title}</h3>
+                      <h3 className="text-xl font-semibold">{topic.title}</h3>
                       <p className="text-gray-400 mt-2">{topic.description}</p>
                     </div>
                   </>

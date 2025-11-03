@@ -6,6 +6,7 @@ import FallOfWall from './Home/FallOfWall'
 import StatsSection from './Home/StatsSection'
 import Mentors from './Home/Mentors'
 
+
 const HomePage = () => {
   return (
     <>
@@ -20,7 +21,8 @@ const HomePage = () => {
         <WorkShop />
         <FallOfWall />
         {/* <StatsSection /> */}
-        {/* <Mentors /> */}
+        <Mentors />
+       
         
 
     </>
