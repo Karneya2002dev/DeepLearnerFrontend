@@ -207,7 +207,31 @@ const initialState = {
       { title: "Version Control & Deployment", description: "Git, CI/CD, and application deployment" },
     ],
     createdAt: "2025-08-27T14:03:09.000Z",
-  },
+  },{
+  id: 10,
+  title: "AutoCAD Design & Drafting",
+  description: "Become a professional CAD designer and create precise technical drawings.",
+  overview:
+    "The AutoCAD Design & Drafting course equips you with industry-standard CAD skills to create detailed 2D drawings and 3D models. You will learn drafting fundamentals, design standards, dimensioning techniques, layers, blocks, and annotations. The course also covers real-world project workflows such as architectural floor plans, mechanical designs, and civil layouts. By the end, you'll be able to work confidently on engineering and architectural projects using AutoCAD.",
+  students: 950,
+  duration: "3 Months",
+  rating: "4.7",
+  category: "Design & CADD",
+  salary: "₹4–10 LPA",
+  tools: ["AutoCAD", "Revit (Basics)", "SketchUp", "Blueprint Standards"],
+  roles: ["CAD Designer", "Draftsman", "Civil CAD Engineer", "Architectural Designer"],
+  image: "https://blog.coohom.com/wp-content/uploads/2023/01/autocad-2016-1.jpg",
+  syllabus: [
+    { title: "Introduction to AutoCAD", description: "Interface, commands, and drawing setup" },
+    { title: "2D Drafting", description: "Lines, shapes, layers, blocks, and annotations" },
+    { title: "Dimensioning & Standards", description: "Measurements, symbols, and technical standards" },
+    { title: "Architectural Drafting", description: "Floor plans, layouts, elevations, and sections" },
+    { title: "Mechanical Drafting", description: "Component drawings and assembly drafting basics" },
+    { title: "3D Modeling Basics", description: "3D features, modifying models, and visualization" }
+  ],
+  createdAt: "2025-08-27T14:03:09.000Z",
+}
+
 ],
 
    workshops: [

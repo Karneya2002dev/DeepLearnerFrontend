@@ -1,11 +1,6 @@
 import { useState } from "react";
-import {
-  User,
-  MessageSquare,
-  PhoneCall,
-  Clock,
-  Mail,
-} from "lucide-react";
+import support from "../../assets/support.jpg";
+import { User, MessageSquare, PhoneCall, Clock, Mail } from "lucide-react";
 
 function Card({ children, className = "" }) {
   return (
@@ -27,13 +22,11 @@ export default function ContactForm() {
   const handleSubmit = (e) => {
     e.preventDefault();
 
-    // ⛔ Validate dropdown selection
     if (!form.time) {
       alert("Please select a preferred time.");
       return;
     }
 
-    // ✅ Create WhatsApp message text
     const whatsappMessage = `
 👋 *New Inquiry from Deep Learner Academy Website*
 ----------------------------------------
@@ -43,25 +36,26 @@ export default function ContactForm() {
 ----------------------------------------
 📞 Please reach out to me soon!`;
 
-    const phoneNumber = "916384942259"; // Your WhatsApp number
-
+    const phoneNumber = "916384942259";
     const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(
       whatsappMessage
     )}`;
-
     window.open(whatsappURL, "_blank");
   };
 
   return (
     <div
-      className="relative min-h-screen flex flex-col justify-center items-start px-6 overflow-hidden 
-                 bg-[url('https://storage-asset.msi.com/template/images/contact_us/kv-contact-us-xs.jpg')] 
-                 bg-cover bg-center text-white py-20"
+      className="relative min-h-screen flex flex-col justify-center items-start px-6 overflow-hidden text-white py-20"
+      style={{
+        backgroundImage: `url(${support})`,
+        backgroundSize: "cover",
+        backgroundPosition: "center",
+      }}
     >
       {/* Overlay */}
       <div className="absolute inset-0 bg-black/50" />
 
-      {/* Single Combined Box */}
+      {/* Container */}
       <div className="container relative z-10 mx-auto">
         <Card>
           {/* Advisor Details */}
@@ -97,7 +91,7 @@ export default function ContactForm() {
           </p>
 
           <form onSubmit={handleSubmit} className="space-y-6">
-            {/* Name Field */}
+            {/* Name */}
             <div className="flex items-center bg-black border border-white/20 rounded-lg px-4 py-3 focus-within:ring-2 focus-within:ring-[#81007f] transition">
               <User className="text-[#81007f] mr-3" size={20} />
               <input
@@ -113,31 +107,30 @@ export default function ContactForm() {
 
             {/* Time Dropdown */}
             <div className="flex items-center bg-black border border-white/20 rounded-lg px-4 py-3 focus-within:ring-2 focus-within:ring-[#81007f] transition">
-  <Clock className="text-[#81007f] mr-3" size={20} />
-  <select
-    name="time"
-    value={form.time}
-    onChange={handleChange}
-    className="bg-black text-white outline-none w-full rounded-lg px-2 py-2 focus:ring-0 border-none"
-    required
-  >
-    <option value="" disabled className="bg-black text-gray-400">
-      Select Preferred Time
-    </option>
-    <option value="10:00 AM - 12:00 PM" className="bg-black text-white">
-      10:00 AM - 12:00 PM
-    </option>
-    <option value="1:00 PM - 3:00 PM" className="bg-black text-white">
-      1:00 PM - 3:00 PM
-    </option>
-    <option value="5:00 PM - 7:00 PM" className="bg-black text-white">
-      5:00 PM - 7:00 PM
-    </option>
-  </select>
-</div>
+              <Clock className="text-[#81007f] mr-3" size={20} />
+              <select
+                name="time"
+                value={form.time}
+                onChange={handleChange}
+                className="bg-black text-white outline-none w-full rounded-lg px-2 py-2 focus:ring-0 border-none"
+                required
+              >
+                <option value="" disabled className="bg-black text-gray-400">
+                  Select Preferred Time
+                </option>
+                <option value="10:00 AM - 12:00 PM" className="bg-black text-white">
+                  10:00 AM - 12:00 PM
+                </option>
+                <option value="1:00 PM - 3:00 PM" className="bg-black text-white">
+                  1:00 PM - 3:00 PM
+                </option>
+                <option value="5:00 PM - 7:00 PM" className="bg-black text-white">
+                  5:00 PM - 7:00 PM
+                </option>
+              </select>
+            </div>
 
-
-            {/* Message Field */}
+            {/* Message */}
             <div className="flex items-start bg-black border border-white/20 rounded-lg px-4 py-3 focus-within:ring-2 focus-within:ring-[#81007f] transition">
               <MessageSquare className="text-[#81007f] mr-3 mt-1" size={20} />
               <textarea
@@ -151,7 +144,7 @@ export default function ContactForm() {
               />
             </div>
 
-            {/* Submit Button */}
+            {/* Submit */}
             <button
               type="submit"
               className="w-full bg-gradient-to-r from-[#81007f] to-[#a300a3] hover:opacity-90 text-white py-3 rounded-lg font-semibold shadow-lg transition duration-300"

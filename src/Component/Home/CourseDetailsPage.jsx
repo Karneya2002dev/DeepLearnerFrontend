@@ -566,13 +566,13 @@ Status: ${formData.currentStatus}
 
   return (
     <motion.div
-      className="min-h-screen bg-gradient-to-b from-black via-zinc-900 to-black text-white pb-20"
+      className="min-h-screen bg-gradient-to-b from-black via-zinc-900 to-black text-white pb-20  "
       initial={{ opacity: 0 }}
       animate={{ opacity: 1 }}
       transition={{ duration: 1 }}
     >
       {/* Banner */}
-      <div className="relative w-full h-[400px] md:h-[500px] overflow-hidden">
+      <div className="relative w-full h-[400px] md:h-[500px] overflow-hidden ">
         <motion.img
           src={course.image}
           alt={course.title}

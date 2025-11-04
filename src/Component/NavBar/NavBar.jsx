@@ -422,7 +422,7 @@ I submitted a *Callback Request* on Deep Learner.
       <nav
         className={`fixed top-0 left-0 right-0 z-50 flex items-center justify-between px-6 md:px-10 transition-all duration-500 ${
           scrolled
-            ? "bg-black/80 backdrop-blur-md shadow-md py-3"
+            ? "bg-black/80 backdrop-blur-md top-3 shadow-md py-3"
             : "bg-transparent py-4"
         }`}
         style={{ fontFamily: "EB Garamond" }}

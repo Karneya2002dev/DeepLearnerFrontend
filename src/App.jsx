@@ -17,6 +17,8 @@ import HelpSupport from './Component/Home/HelpSupport'
 import AuthPage from './Component/Home/AuthPage'
 import Mentors1 from './Component/Mentors1'
 import BrochureRequest from './Component/Home/BrochureRequest'
+import AdminWorkshops from './Component/Home/AdminPage'
+import FormToExcel from '../Admin/FormToExcel'
 
 const App = () => {
   return (
@@ -37,6 +39,9 @@ const App = () => {
       <Route path='/support' element={<HelpSupport /> } />
       <Route path='/community' element={<AuthPage /> } />
       <Route path='/bro' element={<BrochureRequest /> } />
+      {/* <Route path='/admin' element={<AdminWorkshops /> } />
+      <Route path='/form-to-excel' element={<FormToExcel /> } /> */}
+
     
    
     </Routes>
