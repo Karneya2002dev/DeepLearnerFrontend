@@ -45,7 +45,7 @@ export default function Footer() {
           <h3 className="text-white font-semibold mb-4">COURSES</h3>
           <ul className="space-y-2 text-sm">
             <li><Link to="/courses/3">Data Analysis</Link></li>
-            <li><Link to="/courses/2">Mern Stack Development</Link></li>
+            <li><Link to="/courses/2">MERN Stack Development</Link></li>
             <li><Link to="/courses/1">Python Full Stack</Link></li>
             <li><Link to="/courses/4">Graphic Design</Link></li>
             <li><Link to="/courses/9">Software Development</Link></li>
@@ -79,11 +79,11 @@ export default function Footer() {
           <h3 className="text-white font-semibold mb-4">CONTACT US</h3>
           <ul className="space-y-3 text-sm">
             <li className="flex items-center justify-center sm:justify-start space-x-2">
-              <Phone size={16} className="text-pink-500" />
+              <Phone size={16} className="text-[#81007f]" />
               <a href="tel:+916384942259" className="hover:underline">+91 63849 42259</a>
             </li>
             <li className="flex items-center justify-center sm:justify-start space-x-2">
-              <Mail size={16} className="text-pink-500" />
+              <Mail size={16} className="text-[#81007f]" />
               <a href="mailto:deeplearneracademy@gmail.com" className="hover:underline">deeplearneracademy@gmail.com</a>
             </li>
           </ul>

@@ -43,7 +43,7 @@ const initialState = {
     salary: "₹6–12 LPA",
     tools: ["MongoDB", "Express.js", "React.js", "Node.js", "Redux", "Postman", "Git", "Vercel"],
     roles: ["MERN Stack Developer", "Frontend Developer", "Backend Developer", "Web Application Engineer"],
-    image: "https://i.pinimg.com/736x/45/53/86/455386f21c9a82ccb91ec78dacd9d8a9.jpg",
+    image: "https://images.prismic.io/loco-blogs/79328284-f97b-489f-924c-eb3b17e34b56_image2.png?auto=compress%2Cformat&rect=0%2C0%2C1999%2C1124&w=1920&h=1080&ar=1.91%3A1",
     comingSoon: null,
     video: null,
     syllabus: [
@@ -172,7 +172,7 @@ const initialState = {
     salary: "₹4–8 LPA",
     tools: ["Python", "Pygame", "Blender", "Unity (basics)", "Git"],
     roles: ["Game Developer", "Python Developer", "Indie Game Creator", "Gameplay Programmer"],
-    image: "https://www.nexsoftsys.com/articles/images/gaming-industry-python.jpg",
+    image: "https://t4.ftcdn.net/jpg/03/53/67/99/360_F_353679927_RaLUr71JJfKlGCbbchpuSYc402OxP3hg.jpg",
     syllabus: [
       { title: "Introduction to Game Development", description: "Understanding game design principles" },
       { title: "Python Fundamentals for Gaming", description: "Learn Python syntax and logic for games" },
@@ -197,7 +197,7 @@ const initialState = {
     salary: "₹6–12 LPA",
     tools: ["Python", "Java", "Git", "MySQL", "VS Code", "Docker", "Postman"],
     roles: ["Software Developer", "Application Developer", "Backend Engineer", "Junior Software Engineer"],
-    image: "https://www.nexsoftsys.com/articles/images/gaming-industry-python.jpg",
+    image: "https://initialcommit.com/img/initialcommit/how-to-be-a-software-developer.jpg",
     syllabus: [
       { title: "Programming Fundamentals", description: "Core programming concepts and logic building" },
       { title: "Software Design", description: "OOPs, design patterns, and best practices" },
@@ -237,7 +237,7 @@ const initialState = {
       id: 3,
       title: "UI/UX Design",
       description: "Master the fundamentals of UI/UX and create stunning interfaces.",
-      image: "https://media.licdn.com/dms/image/v2/C5112AQEB47HyGLwzTQ/article-cover_image-shrink_600_2000/article-cover_image-shrink_600_2000/0/1524156589545?e=2147483647&v=beta&t=BFzMt7ECghNGBQHdecc0QtG-Y_auqGd8HTbiSrZdOFc",
+      image: "https://www.almondsolutions.com/images/blog-ui-ux-150223.jpg",
       registered: "70K+ Registered",
       rating: "4.7",
       price: "99.00",
@@ -275,7 +275,7 @@ const initialState = {
       title: "UI/UX Design",
       description: "Master the fundamentals of UI/UX and create stunning interfaces.",
       image:
-        "https://media.licdn.com/dms/image/v2/C5112AQEB47HyGLwzTQ/article-cover_image-shrink_600_2000/0/1524156589545?e=2147483647&v=beta&t=BFzMt7ECghNGBQHdecc0QtG-Y_auqGd8HTbiSrZdOFc",
+        "https://www.almondsolutions.com/images/blog-ui-ux-150223.jpg",
       registered: "70K+ Registered",
       rating: "4.7",
       price: "99.00",
