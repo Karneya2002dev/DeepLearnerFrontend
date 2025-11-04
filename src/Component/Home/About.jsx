@@ -7,7 +7,7 @@ const timeline = [
   {
     year: "2018",
     title: "Our Beginning",
-    desc: "We started as a small group of passionate mentors with one mission: making learning practical and industry-focused.",
+    desc: "Deep Learner Academy started as a small group of passionate mentors with one mission: making learning practical and industry-focused.",
     icon: <Rocket className="w-6 h-6 text-purple-400" />,
   },
   {
@@ -31,7 +31,7 @@ const timeline = [
 ];
 
 const team = [
-  { name: "Meghana", role: "Developer", img: "https://randomuser.me/api/portraits/women/44.jpg" },
+  { name: "Meghana", role: "Lead Developer", img: "https://randomuser.me/api/portraits/women/44.jpg" },
   { name: "Anjali", role: "Data Scientist", img: "https://randomuser.me/api/portraits/women/65.jpg" },
   { name: "Sruthi Selvam", role: "Data Architect", img: "https://randomuser.me/api/portraits/women/32.jpg" },
   { name: "Kumaran", role: "Full Stack Developer", img: "https://randomuser.me/api/portraits/men/41.jpg" },
@@ -42,6 +42,7 @@ const AboutUs = () => {
 
   return (
     <div className="min-h-screen bg-gradient-to-r from-black via-gray-900 to-black text-white flex flex-col">
+      
       {/* Hero Section */}
       <div className="text-center py-16 px-6">
         <motion.h1
@@ -50,11 +51,10 @@ const AboutUs = () => {
           transition={{ duration: 0.8 }}
           className="text-5xl font-bold mb-6 bg-gradient-to-r from-purple-500 via-purple-600 to-purple-700 bg-clip-text text-transparent"
         >
-          Our Story
+          About Deep Learner Academy
         </motion.h1>
         <p className="text-gray-300 max-w-3xl mx-auto text-lg">
-          We believe in transforming careers by bridging the gap between <span className="text-purple-400">learning and industry</span>. 
-          Our journey is built on passion, innovation, and real-world experience.
+          At <span className="text-purple-400 font-semibold">Deep Learner Academy</span>, we bridge the gap between <span className="text-purple-400">learning and industry</span>, empowering students with practical skills, live courses, and expert guidance.
         </p>
       </div>
 
@@ -72,7 +72,7 @@ const AboutUs = () => {
               <div className="absolute -left-10 flex items-center justify-center w-10 h-10 rounded-full bg-gray-800 border border-purple-500">
                 {item.icon}
               </div>
-              <h3 className="text-xl font-semibold">{item.year} - {item.title}</h3>
+              <h3 className="text-xl font-semibold text-purple-400">{item.year} - {item.title}</h3>
               <p className="text-gray-400">{item.desc}</p>
             </motion.div>
           ))}
@@ -81,7 +81,7 @@ const AboutUs = () => {
 
       {/* Team Section */}
       <div className="bg-gray-900 py-16 px-6 flex-1">
-        <h2 className="text-center text-3xl font-bold mb-10">Meet Our Team</h2>
+        <h2 className="text-center text-3xl font-bold mb-10 text-purple-400">Meet Our Team</h2>
         <div className="grid grid-cols-1 sm:grid-cols-2 md:grid-cols-4 gap-8 max-w-6xl mx-auto">
           {team.map((member, i) => (
             <motion.div
@@ -112,16 +112,9 @@ const AboutUs = () => {
           Ready to Start Your Journey?
         </motion.h2>
         <p className="text-gray-200 mb-8 max-w-2xl mx-auto">
-          Join thousands of learners who are building successful careers with the guidance of top industry mentors.
+          Join thousands of learners who are building successful careers with the guidance of top industry mentors at <span className="font-semibold text-white">Deep Learner Academy</span>.
         </p>
         <div className="flex justify-center gap-4">
-          {/* <motion.button
-            whileHover={{ scale: 1.05 }}
-            onClick={() => navigate("/register")}
-            className="px-6 py-3 rounded-full font-semibold text-white bg-black border border-white hover:bg-white hover:text-black transition duration-300"
-          >
-            Join Us Today
-          </motion.button> */}
           <motion.button
             whileHover={{ scale: 1.05 }}
             onClick={() => navigate("/courses")}

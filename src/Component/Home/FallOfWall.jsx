@@ -1,45 +1,40 @@
-import { useState, useEffect, useRef } from "react";
+import { useState, useRef, useEffect } from "react";
 import { motion } from "framer-motion";
-import { Star, CheckCircle2, ChevronDown, ChevronUp, Heart } from "lucide-react";
+import { Star, CheckCircle2, ChevronDown, ChevronUp } from "lucide-react";
 import gsap from "gsap";
-import { ScrollTrigger } from "gsap/ScrollTrigger";
-import axios from "axios";
-import logo from '../../assets/loogoo1.png'
-
+import logo from '../../assets/loogoo1.png';
 import CoreValues from "./CoreValues";
 
-gsap.registerPlugin(ScrollTrigger);
-
 export default function WallOfLove() {
-  const [testimonials, setTestimonials] = useState([]);
   const [showAll, setShowAll] = useState(false);
-
-  const heartRef = useRef(null);
   const cardRefs = useRef([]);
   const videoRef = useRef(null);
 
-  const visibleTestimonials = showAll ? testimonials : testimonials.slice(0, 3);
+  const testimonials = [
+    {
+      review:
+        "The Software course at Deep Learner Academy (DLA) helped me gain strong programming skills and confidence to work on live projects. The practical sessions and support were excellent.",
+      name: "Meena K",
+      role: "Student",
+    },
+    {
+      review:
+        "The Python Full Stack course at Deep Learner Academy (DLA) was detailed and focused on real-world projects. The mentors were always available for guidance, and the placement support was invaluable.",
+      name: "Prabakaran",
+      role: "Student",
+    },
+    {
+      review:
+        "The Deep Learner Academy (DLA) MERN Stack course was comprehensive and well-structured. The mentors guided me throughout, and the job assistance was extremely helpful. Highly recommended!",
+      name: "Sruthi Selvam",
+      role: "Student",
+    },
+  ];
 
-  // Fetch testimonials
-  useEffect(() => {
-    axios
-      .get("https://deeplearnerbackend-production-9217.up.railway.app/api/testimonials")
-      .then((res) => setTestimonials(res.data))
-      .catch((err) => console.error("Error fetching testimonials:", err));
-  }, []);
+  const visibleTestimonials = showAll ? testimonials : testimonials.slice(0, 3);
 
   // Animations
   useEffect(() => {
-    if (heartRef.current) {
-      gsap.to(heartRef.current, {
-        scale: 1.3,
-        duration: 0.8,
-        repeat: -1,
-        yoyo: true,
-        ease: "power1.inOut",
-      });
-    }
-
     cardRefs.current.forEach((card, i) => {
       if (card) {
         gsap.to(card, {
@@ -62,7 +57,7 @@ export default function WallOfLove() {
         ease: "sine.inOut",
       });
     }
-  }, [testimonials]);
+  }, []);
 
   return (
     <>
@@ -77,7 +72,6 @@ export default function WallOfLove() {
             playsInline
             className="w-full h-full object-cover opacity-30 rounded-3xl"
           >
-            {/* <source src={bgVideo} type="video/mp4" /> */}
             Your browser does not support the video tag.
           </video>
         </div>
@@ -86,34 +80,31 @@ export default function WallOfLove() {
           {/* Title */}
           <div className="text-center mb-12">
             <h2 className="text-4xl font-extrabold">
-              Stories of{" "}
-              <span className="text-[#81007f]">Satisfaction</span>
+              Stories of <span className="text-[#81007f]">Satisfaction</span>
             </h2>
             <p className="text-gray-400 mt-2">
               Meet our students & hear their success stories.
             </p>
 
-            {/*  Divider */}
-          <div className="flex items-center justify-center mt-6">
-  <div className="flex-1 max-w-[120px] sm:max-w-xs border-t border-gray-700" />
-  
-  <div>
-    <img 
-      src={logo} // 👉 make sure logo is imported correctly
-      alt="Logo" 
-      className="mx-2 sm:mx-3 h-6 sm:h-8 w-auto object-contain"
-    />
-  </div>
-  
-  <div className="flex-1 max-w-[120px] sm:max-w-xs border-t border-gray-700" />
-</div>
-</div>
+            {/* Divider */}
+            <div className="flex items-center justify-center mt-6">
+              <div className="flex-1 max-w-[120px] sm:max-w-xs border-t border-gray-700" />
+              <div>
+                <img
+                  src={logo}
+                  alt="Logo"
+                  className="mx-2 sm:mx-3 h-6 sm:h-8 w-auto object-contain"
+                />
+              </div>
+              <div className="flex-1 max-w-[120px] sm:max-w-xs border-t border-gray-700" />
+            </div>
+          </div>
 
           {/* Testimonials Grid */}
           <div className="grid md:grid-cols-3 gap-6">
             {visibleTestimonials.map((t, index) => (
               <div
-                key={t.id || t.name + index}
+                key={t.name + index}
                 ref={(el) => (cardRefs.current[index] = el)}
                 className="bg-zinc-900 p-6 rounded-2xl shadow-lg border border-zinc-800"
               >

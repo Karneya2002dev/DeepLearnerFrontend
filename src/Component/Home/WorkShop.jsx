@@ -391,22 +391,42 @@ const Workshops = () => {
   }, [isModalOpen]);
 
   const handleSubmit = (e) => {
-    e.preventDefault();
-    setIsLoading(true);
-    setErrorMsg("");
+  e.preventDefault();
+  setIsLoading(true);
+  setErrorMsg("");
 
-    // Simulate API call
-    setTimeout(() => {
-      if (form.name && form.email && form.phone && form.currentStatus) {
-        setIsSuccess(true);
-        setForm({ name: "", email: "", phone: "", currentStatus: "" });
-        setTimeout(() => { setIsSuccess(false); setIsModalOpen(false); }, 1500);
-      } else {
-        setErrorMsg("Please fill all fields correctly.");
-      }
-      setIsLoading(false);
-    }, 1200);
-  };
+  // Simulate API call
+  setTimeout(() => {
+    if (form.name && form.email && form.phone && form.currentStatus) {
+      setIsSuccess(true);
+
+      // Construct WhatsApp message
+      const phoneNumber = "916384942259"; // your WhatsApp number
+      const message = `Hello! I want to register for the workshop "${selectedWorkshop?.title}". 
+Name: ${form.name} 
+Email: ${form.email} 
+Phone: ${form.phone} 
+Current Status: ${form.currentStatus}`;
+
+      const encodedMessage = encodeURIComponent(message);
+      const waUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+
+      // Reset form
+      setForm({ name: "", email: "", phone: "", currentStatus: "" });
+
+      // Redirect after a short delay (optional)
+      setTimeout(() => {
+        setIsSuccess(false);
+        setIsModalOpen(false);
+        window.open(waUrl, "_blank"); // open WhatsApp in new tab
+      }, 1500);
+
+    } else {
+      setErrorMsg("Please fill all fields correctly.");
+    }
+    setIsLoading(false);
+  }, 1200);
+};
 
   return (
     <section className="py-26 bg-black text-white">
