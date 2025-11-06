@@ -16,7 +16,8 @@ const initialState = {
     salary: "₹5–10 LPA",
     tools: ["Python", "Django", "SQLite", "HTML", "CSS", "JavaScript", "React", "Git"],
     roles: ["Full Stack Developer", "Backend Developer", "Web Developer", "Software Engineer"],
-    image: "https://qicon.in/wp-content/uploads/2023/04/WhatsApp-Image-2023-04-05-at-6.11.42-PM.jpeg",
+    // ////////////
+    image: "https://i.pinimg.com/1200x/17/3e/e0/173ee0eb290de65a6797e654d3040586.jpg",
     comingSoon: null,
     video: null,
     syllabus: [
@@ -43,7 +44,9 @@ const initialState = {
     salary: "₹6–12 LPA",
     tools: ["MongoDB", "Express.js", "React.js", "Node.js", "Redux", "Postman", "Git", "Vercel"],
     roles: ["MERN Stack Developer", "Frontend Developer", "Backend Developer", "Web Application Engineer"],
-    image: "https://images.prismic.io/loco-blogs/79328284-f97b-489f-924c-eb3b17e34b56_image2.png?auto=compress%2Cformat&rect=0%2C0%2C1999%2C1124&w=1920&h=1080&ar=1.91%3A1",
+
+    // /////////////
+    image: "https://i.pinimg.com/736x/92/40/8e/92408e6e22f4d02cf2344287814ee257.jpg",
     comingSoon: null,
     video: null,
     syllabus: [
@@ -70,7 +73,8 @@ const initialState = {
     salary: "₹4–9 LPA",
     tools: ["Python", "Pandas", "NumPy", "Matplotlib", "Power BI", "Excel", "Jupyter", "SQL"],
     roles: ["Data Analyst", "Business Analyst", "Reporting Analyst", "Junior Data Scientist"],
-    image: "https://wallpaperaccess.com/full/3457552.jpg",
+    // ////////////
+    image: "https://i.pinimg.com/1200x/b2/ac/d2/b2acd28d6bb47ab01eb664d52b6ad2d8.jpg",
     syllabus: [
       { title: "Introduction to Data Analysis", description: "Understanding data, types, and sources" },
       { title: "Data Cleaning", description: "Handling missing values, duplicates, and outliers" },
@@ -82,7 +86,7 @@ const initialState = {
     ],
     createdAt: "2025-08-27T14:03:09.000Z",
   },
-  {
+  { 
     id: 4,
     title: "Graphic Designing",
     description: "UI/UX design, Adobe tools, and modern design trends.",
@@ -95,7 +99,8 @@ const initialState = {
     salary: "₹3–8 LPA",
     tools: ["Adobe Photoshop", "Illustrator", "Canva", "Figma", "InDesign", "XD"],
     roles: ["Graphic Designer", "UI Designer", "Visual Artist", "Brand Identity Designer"],
-    image: "https://clipart-library.com/images/rTjrn5Lkc.jpg",
+    // ///////////
+    image: "https://i.pinimg.com/736x/a6/32/0c/a6320c04acdbc04e768fcc146ac1e403.jpg",
     syllabus: [
       { title: "Introduction to Graphic Design", description: "Understanding design principles, elements, and tools" },
       { title: "Typography", description: "Fonts, hierarchy, readability, and design with text" },
@@ -120,8 +125,9 @@ const initialState = {
     salary: "₹4–9 LPA",
     tools: ["Google Ads", "Canva", "Meta Business Suite", "Google Analytics", "Ahrefs", "Mailchimp"],
     roles: ["Digital Marketer", "SEO Specialist", "Content Strategist", "Social Media Manager"],
+    // /////////////
     image:
-      "https://img.freepik.com/free-photo/digital-marketing-with-icons-business-people_53876-94833.jpg?semt=ais_hybrid&w=740&q=80",
+      "https://i.pinimg.com/736x/7c/3d/76/7c3d76ca778c3c07f08930d9407df547.jpg",
     syllabus: [
       { title: "Introduction to Digital Marketing", description: "Introduction to Digital Marketing – ecosystem, trends, and strategy" },
       { title: "Traditional vs. Digital Marketing", description: "Understanding the evolution of marketing" },
@@ -148,7 +154,8 @@ const initialState = {
     salary: "₹6–14 LPA",
     tools: ["Wireshark", "Kali Linux", "Metasploit", "Burp Suite", "Nmap", "Splunk"],
     roles: ["Cybersecurity Analyst", "Ethical Hacker", "Network Security Engineer", "SOC Analyst"],
-    image: "https://www.bitlyft.com/hubfs/Cybersecurity-solutions.jpeg",
+    // /////////////////////
+    image: "https://i.pinimg.com/1200x/44/d0/31/44d031d450d26ceb468aa57fdd0222ba.jpg",
     syllabus: [
       { title: "Introduction to Cybersecurity", description: "Principles and core concepts of cybersecurity" },
       { title: "Cyber Threats and Attack Types", description: "Understanding malware, phishing, ransomware" },
@@ -172,7 +179,8 @@ const initialState = {
     salary: "₹4–8 LPA",
     tools: ["Python", "Pygame", "Blender", "Unity (basics)", "Git"],
     roles: ["Game Developer", "Python Developer", "Indie Game Creator", "Gameplay Programmer"],
-    image: "https://t4.ftcdn.net/jpg/03/53/67/99/360_F_353679927_RaLUr71JJfKlGCbbchpuSYc402OxP3hg.jpg",
+    // /////////////////////////////////////////
+    image: "https://i.pinimg.com/736x/3a/b9/d6/3ab9d65eeb5e558bda390a9fd998a700.jpg",
     syllabus: [
       { title: "Introduction to Game Development", description: "Understanding game design principles" },
       { title: "Python Fundamentals for Gaming", description: "Learn Python syntax and logic for games" },
@@ -197,7 +205,8 @@ const initialState = {
     salary: "₹6–12 LPA",
     tools: ["Python", "Java", "Git", "MySQL", "VS Code", "Docker", "Postman"],
     roles: ["Software Developer", "Application Developer", "Backend Engineer", "Junior Software Engineer"],
-    image: "https://initialcommit.com/img/initialcommit/how-to-be-a-software-developer.jpg",
+    //////////////////////
+    image: "https://i.pinimg.com/736x/49/40/6f/49406f1fb7bf3769cb322f3ba2692732.jpg",
     syllabus: [
       { title: "Programming Fundamentals", description: "Core programming concepts and logic building" },
       { title: "Software Design", description: "OOPs, design patterns, and best practices" },
@@ -220,7 +229,8 @@ const initialState = {
   salary: "₹4–10 LPA",
   tools: ["AutoCAD", "Revit (Basics)", "SketchUp", "Blueprint Standards"],
   roles: ["CAD Designer", "Draftsman", "Civil CAD Engineer", "Architectural Designer"],
-  image: "https://blog.coohom.com/wp-content/uploads/2023/01/autocad-2016-1.jpg",
+  ////////////////////////
+  image: "https://i.pinimg.com/736x/67/4d/2e/674d2e2dab1467c6b473abac456f9a22.jpg",
   syllabus: [
     { title: "Introduction to AutoCAD", description: "Interface, commands, and drawing setup" },
     { title: "2D Drafting", description: "Lines, shapes, layers, blocks, and annotations" },
@@ -397,4 +407,3 @@ const courseSlice = createSlice({
 
 export const { addCourse, addWorkshop } = courseSlice.actions;
 export default courseSlice.reducer;
-

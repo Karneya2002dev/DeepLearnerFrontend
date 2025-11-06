@@ -671,7 +671,42 @@ Status: ${formData.currentStatus}
         </motion.p>
       </section>
 
-      {/* Tools, Roles & Salary */}
+
+      {/* Syllabus */}
+      <section ref={syllabusRef} className="mt-20 max-w-5xl mx-auto px-6">
+        <h2 className="text-4xl font-extrabold text-center mb-12 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
+          Course Syllabus
+        </h2>
+        <div className="relative">
+          <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-[#81007f] to-transparent"></div>
+          <div className="space-y-12">
+            {syllabusTopics.map((topic, index) => (
+              <motion.div key={index} className="syllabus-card relative flex items-center justify-between w-full">
+                {index % 2 === 0 ? (
+                  <>
+                    <div className="w-5/12 bg-zinc-900/80 p-6 rounded-2xl border border-white/10">
+                      <h3 className="text-xl font-semibold">{topic.title}</h3>
+                      <p className="text-gray-400 mt-2">{topic.description}</p>
+                    </div>
+                    <div className="absolute left-1/2 -translate-x-1/2 bg-[#81007f] w-6 h-6 rounded-full border-4 border-black"></div>
+                    <div className="w-5/12"></div>
+                  </>
+                ) : (
+                  <>
+                    <div className="w-5/12"></div>
+                    <div className="absolute left-1/2 -translate-x-1/2 bg-[#81007f] w-6 h-6 rounded-full border-4 border-black"></div>
+                    <div className="w-5/12 bg-zinc-900/80 p-6 rounded-2xl border border-white/10">
+                      <h3 className="text-xl font-semibold">{topic.title}</h3>
+                      <p className="text-gray-400 mt-2">{topic.description}</p>
+                    </div>
+                  </>
+                )}
+              </motion.div>
+            ))}
+          </div>
+        </div>
+      </section>
+            {/* Tools, Roles & Salary */}
       <div className="relative max-w-6xl mx-auto px-6 mt-24">
   {/* Animated gradient background lines */}
   <div className="absolute inset-0 -z-10 overflow-hidden">
@@ -793,40 +828,6 @@ Status: ${formData.currentStatus}
         </section>
       )}
 
-      {/* Syllabus */}
-      <section ref={syllabusRef} className="mt-20 max-w-5xl mx-auto px-6">
-        <h2 className="text-4xl font-extrabold text-center mb-12 bg-gradient-to-r from-purple-400 to-pink-500 bg-clip-text text-transparent">
-          Course Syllabus
-        </h2>
-        <div className="relative">
-          <div className="absolute left-1/2 transform -translate-x-1/2 h-full w-1 bg-gradient-to-b from-[#81007f] to-transparent"></div>
-          <div className="space-y-12">
-            {syllabusTopics.map((topic, index) => (
-              <motion.div key={index} className="syllabus-card relative flex items-center justify-between w-full">
-                {index % 2 === 0 ? (
-                  <>
-                    <div className="w-5/12 bg-zinc-900/80 p-6 rounded-2xl border border-white/10">
-                      <h3 className="text-xl font-semibold">{topic.title}</h3>
-                      <p className="text-gray-400 mt-2">{topic.description}</p>
-                    </div>
-                    <div className="absolute left-1/2 -translate-x-1/2 bg-[#81007f] w-6 h-6 rounded-full border-4 border-black"></div>
-                    <div className="w-5/12"></div>
-                  </>
-                ) : (
-                  <>
-                    <div className="w-5/12"></div>
-                    <div className="absolute left-1/2 -translate-x-1/2 bg-[#81007f] w-6 h-6 rounded-full border-4 border-black"></div>
-                    <div className="w-5/12 bg-zinc-900/80 p-6 rounded-2xl border border-white/10">
-                      <h3 className="text-xl font-semibold">{topic.title}</h3>
-                      <p className="text-gray-400 mt-2">{topic.description}</p>
-                    </div>
-                  </>
-                )}
-              </motion.div>
-            ))}
-          </div>
-        </div>
-      </section>
 
       {/* CTA */}
       <div className="mt-20 text-center">
