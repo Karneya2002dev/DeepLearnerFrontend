@@ -1,5 +1,5 @@
 import { useState } from "react";
-import support from "../../assets/support.jpg";
+import support from "../../assets/Support.jpg";
 import { User, MessageSquare, PhoneCall, Clock, Mail } from "lucide-react";
 
 function Card({ children, className = "" }) {
