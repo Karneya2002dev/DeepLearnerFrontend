@@ -467,10 +467,48 @@ import { Star, Users, Clock, X, BookOpen, Wrench, BadgeCheck, Wallet } from "luc
 import { motion } from "framer-motion";
 import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
+import * as XLSX from "xlsx";
+import { saveAs } from "file-saver";
+
 
 gsap.registerPlugin(ScrollTrigger);
 
 const CourseDetailsPage = () => {
+//   const saveToExcel = (data) => {
+//   let fileName = "course_enrollments.xlsx";
+//   let workbook;
+//   let worksheet;
+
+//   try {
+//     // Try reading existing Excel file if opened in browser memory
+//     const file = localStorage.getItem("excelData");
+//     if (file) {
+//       workbook = XLSX.read(file, { type: "base64" });
+//       worksheet = workbook.Sheets[workbook.SheetNames[0]];
+//       XLSX.utils.sheet_add_json(worksheet, [data], { skipHeader: true, origin: -1 });
+//     } else {
+//       // Create new workbook first time
+//       workbook = XLSX.utils.book_new();
+//       worksheet = XLSX.utils.json_to_sheet([data]);
+//       XLSX.utils.book_append_sheet(workbook, worksheet, "Enrollments");
+//     }
+//   } catch {
+//     workbook = XLSX.utils.book_new();
+//     worksheet = XLSX.utils.json_to_sheet([data]);
+//     XLSX.utils.book_append_sheet(workbook, worksheet, "Enrollments");
+//   }
+
+//   const excelBuffer = XLSX.write(workbook, { bookType: "xlsx", type: "array" });
+
+//   // Save to browser memory (so next form adds new row)
+//   const base64Data = XLSX.write(workbook, { bookType: "xlsx", type: "base64" });
+//   localStorage.setItem("excelData", base64Data);
+
+//   // Download file
+//   const fileBlob = new Blob([excelBuffer], { type: "application/octet-stream" });
+//   saveAs(fileBlob, fileName);
+// };
+
   const { id } = useParams();
   const { courses } = useSelector((state) => state.courses);
   const [course, setCourse] = useState(null);
@@ -512,24 +550,18 @@ const CourseDetailsPage = () => {
 
   const handleChange = (e) =>
     setFormData({ ...formData, [e.target.name]: e.target.value });
+const handleSubmit = (e) => {
+  e.preventDefault();
 
-  const handleSubmit = (e) => {
-    e.preventDefault();
-    if (!formData.name || !formData.email || !formData.phone || !formData.currentStatus) {
-      alert("Please fill all fields.");
-      return;
-    }
+  if (!formData.name || !formData.email || !formData.phone || !formData.currentStatus) {
+    alert("Please fill all fields.");
+    return;
+  }
 
-    setSubmitting(true);
+  setSubmitting(true);
 
-    setTimeout(() => {
-      setSubmitted(true);
-      setFormData({ name: "", email: "", phone: "", currentStatus: "" });
-      setIsModalOpen(false);
-      setSubmitting(false);
-
-      const message = `
-Hi! I just enrolled in the ${course.title} course.
+  const message = `
+Hi! I want to enroll in the ${course.title} course.
 
 *Enrollment Details*:
 Name: ${formData.name}
@@ -538,9 +570,16 @@ Phone: ${formData.phone}
 Status: ${formData.currentStatus}
 `;
 
-      window.open(`https://wa.me/916384942259?text=${encodeURIComponent(message)}`, "_blank");
-    }, 1000);
-  };
+  // Redirect to WhatsApp
+  window.open(`https://wa.me/916384942259?text=${encodeURIComponent(message)}`, "_blank");
+
+  setTimeout(() => {
+    setSubmitted(true);
+    setFormData({ name: "", email: "", phone: "", currentStatus: "" });
+    setIsModalOpen(false);
+    setSubmitting(false);
+  }, 1000);
+};
 
   if (!course) {
     return (
@@ -633,7 +672,7 @@ Status: ${formData.currentStatus}
       </section>
 
       {/* Tools, Roles & Salary */}
-      <section className="relative max-w-6xl mx-auto px-6 mt-24">
+      <div className="relative max-w-6xl mx-auto px-6 mt-24">
   {/* Animated gradient background lines */}
   <div className="absolute inset-0 -z-10 overflow-hidden">
     <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 via-pink-500/5 to-purple-500/10 blur-3xl animate-pulse" />
@@ -652,6 +691,14 @@ Status: ${formData.currentStatus}
     Highlights
   </motion.h2>
 
+<section className="relative max-w-6xl mx-auto px-6 mt-24">
+  {/* Background gradient lines */}
+  <div className="absolute inset-0 -z-10 overflow-hidden">
+    <div className="absolute inset-0 bg-gradient-to-r from-purple-500/10 via-pink-500/5 to-purple-500/10 blur-3xl animate-pulse" />
+  </div>
+
+  
+
   <div className="grid md:grid-cols-3 gap-10">
     {/* Tools */}
     {course.tools && (
@@ -659,15 +706,12 @@ Status: ${formData.currentStatus}
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8 }}
-        whileHover={{ y: -6, scale: 1.02 }}
-        className="group p-8 rounded-3xl bg-white/10 border border-white/20 backdrop-blur-2xl shadow-[0_0_20px_rgba(129,0,127,0.2)] hover:shadow-[0_0_30px_rgba(129,0,127,0.4)] transition-all duration-500"
+        whileHover={{ y: -6, scale: 1.03 }}
+        className="group p-8 rounded-3xl bg-gradient-to-tr from-purple-800/20 to-pink-800/20 border border-purple-600/30 backdrop-blur-xl shadow-lg hover:shadow-[0_0_25px_rgba(198,62,255,0.4)] transition-all duration-500"
       >
-        <div className="flex items-center gap-3 mb-4">
-          <motion.div
-            whileHover={{ rotate: 360 }}
-            transition={{ duration: 1.2 }}
-          >
-            <Wrench className="text-[#c63eff]" size={30} />
+        <div className="flex items-center gap-3 mb-6">
+          <motion.div whileHover={{ rotate: 360 }} transition={{ duration: 1.2 }}>
+            <Wrench className="text-purple-300" size={30} />
           </motion.div>
           <h3 className="text-2xl font-semibold text-white">Tools You’ll Master</h3>
         </div>
@@ -675,7 +719,7 @@ Status: ${formData.currentStatus}
           {course.tools.map((tool, i) => (
             <span
               key={i}
-              className="px-4 py-2 bg-gradient-to-r from-purple-500/30 to-pink-500/30 border border-purple-500/50 rounded-full text-sm text-white shadow-inner"
+              className="px-4 py-2 bg-gradient-to-r from-purple-500/40 to-pink-500/40 border border-purple-500/50 rounded-full text-sm text-white shadow-inner"
             >
               {tool}
             </span>
@@ -690,12 +734,12 @@ Status: ${formData.currentStatus}
         initial={{ opacity: 0, y: 40 }}
         whileInView={{ opacity: 1, y: 0 }}
         transition={{ duration: 0.8, delay: 0.1 }}
-        whileHover={{ y: -6, scale: 1.02 }}
-        className="group p-8 rounded-3xl bg-white/10 border border-white/20 backdrop-blur-2xl shadow-[0_0_20px_rgba(129,0,127,0.2)] hover:shadow-[0_0_30px_rgba(129,0,127,0.4)] transition-all duration-500"
+        whileHover={{ y: -6, scale: 1.03 }}
+        className="group p-8 rounded-3xl bg-gradient-to-tr from-indigo-800/20 to-blue-800/20 border border-indigo-600/30 backdrop-blur-xl shadow-lg hover:shadow-[0_0_25px_rgba(99,110,255,0.4)] transition-all duration-500"
       >
-        <div className="flex items-center gap-3 mb-4">
+        <div className="flex items-center gap-3 mb-6">
           <motion.div whileHover={{ rotate: 15 }} transition={{ type: "spring" }}>
-            <BadgeCheck className="text-[#ff6edb]" size={30} />
+            <BadgeCheck className="text-blue-300" size={30} />
           </motion.div>
           <h3 className="text-2xl font-semibold text-white">Career Roles</h3>
         </div>
@@ -705,7 +749,7 @@ Status: ${formData.currentStatus}
               key={i}
               className="flex items-center gap-2 text-base group-hover:text-white transition-colors"
             >
-              <span className="text-purple-400">▹</span> {role}
+              <span className="text-blue-400">▹</span> {role}
             </li>
           ))}
         </ul>
@@ -717,31 +761,27 @@ Status: ${formData.currentStatus}
       initial={{ opacity: 0, y: 40 }}
       whileInView={{ opacity: 1, y: 0 }}
       transition={{ duration: 0.8, delay: 0.2 }}
-      whileHover={{ y: -6, scale: 1.02 }}
-      className="group p-8 rounded-3xl bg-white/10 border border-white/20 backdrop-blur-2xl shadow-[0_0_20px_rgba(129,0,127,0.2)] hover:shadow-[0_0_30px_rgba(129,0,127,0.4)] transition-all duration-500"
+      whileHover={{ y: -6, scale: 1.03 }}
+      className="group p-8 rounded-3xl bg-gradient-to-tr from-pink-800/20 to-red-800/20 border border-pink-600/30 backdrop-blur-xl shadow-lg hover:shadow-[0_0_25px_rgba(255,129,248,0.4)] transition-all duration-500"
     >
-      <div className="flex items-center gap-3 mb-4">
-        <motion.div
-          animate={{ scale: [1, 1.2, 1] }}
-          transition={{ repeat: Infinity, duration: 2 }}
-        >
-          <Wallet className="text-[#ff81f8]" size={30} />
+      <div className="flex items-center gap-3 mb-6">
+        <motion.div animate={{ scale: [1, 1.2, 1] }} transition={{ repeat: Infinity, duration: 2 }}>
+          <Wallet className="text-pink-300" size={30} />
         </motion.div>
         <h3 className="text-2xl font-semibold text-white">Expected Salary Range</h3>
       </div>
-
       <p className="text-gray-200 text-lg leading-relaxed">
         💰{" "}
         {typeof course.salary === "string"
           ? course.salary
           : course.salary?.min && course.salary?.max
-          ? `Average Salary: ₹${course.salary.min} – ₹${course.salary.max} LPA`
-          : "Average Salary: ₹4.5 – ₹12 LPA (based on experience)"}
+          ? `₹${course.salary.min} – ₹${course.salary.max} LPA`
+          : "₹4.5 – ₹12 LPA (based on experience)"}
       </p>
     </motion.div>
   </div>
 </section>
-
+      </div>
 
       {/* Certification */}
       {course.certification && (

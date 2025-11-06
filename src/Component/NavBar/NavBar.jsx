@@ -501,93 +501,96 @@ I submitted a *Callback Request* on Deep Learner.
       )}
 
       {/* Callback Modal */}
-      {isCallbackOpen && (
-        <div className="fixed inset-0 bg-black/60 flex items-center justify-center z-50">
-          <div className="bg-white p-8 rounded-xl w-full max-w-md relative">
-            <button
-              onClick={() => setIsCallbackOpen(false)}
-              className="absolute right-4 top-3"
-            >
-              ✖
-            </button>
+      {/* Callback Modal */}
+{isCallbackOpen && (
+  <div className="fixed inset-0 bg-black/70 backdrop-blur-lg flex items-center justify-center z-50">
+    <div className="bg-black/90 text-white p-8 rounded-2xl w-full max-w-md relative shadow-2xl border border-white/20">
+      {/* Close Button */}
+      <button
+        onClick={() => setIsCallbackOpen(false)}
+        className="absolute right-4 top-3 text-gray-300 hover:text-red-500"
+      >
+        ✖
+      </button>
 
-            <h3 className="text-lg font-bold text-center mb-4">
-              Request a Free Demo Class
-            </h3>
+      <h3 className="text-2xl font-bold text-center mb-6">
+        Request a Free Demo Class
+      </h3>
 
-            {isLoading ? (
-              <p className="text-center py-6 text-gray-600">Submitting...</p>
-            ) : isSuccess ? (
-              <div className="text-center py-6">
-                <CheckCircle2 size={40} className="text-green-500 mx-auto" />
-                <p className="mt-2 font-semibold">Request Submitted 🎉</p>
-              </div>
-            ) : (
-              <form onSubmit={handleCallbackSubmit} className="space-y-4">
-                <input
-                  name="name"
-                  value={callbackForm.name}
-                  onChange={handleCallbackChange}
-                  className="p-3 border rounded w-full"
-                  placeholder="Full Name"
-                  required
-                />
-                <input
-                  name="email"
-                  value={callbackForm.email}
-                  onChange={handleCallbackChange}
-                  className="p-3 border rounded w-full"
-                  placeholder="Email"
-                  required
-                />
-                <input
-                  name="phone"
-                  value={callbackForm.phone}
-                  onChange={handleCallbackChange}
-                  className="p-3 border rounded w-full"
-                  placeholder="Phone Number"
-                  required
-                />
-                <select
-                  name="status"
-                  value={callbackForm.status}
-                  onChange={handleCallbackChange}
-                  className="p-3 border rounded w-full"
-                  required
-                >
-                  <option value="">Select Status</option>
-                  <option>Student</option>
-                  <option>Working Professional</option>
-                  <option>Freelancer</option>
-                </select>
-                <select
-                  name="course"
-                  value={callbackForm.course}
-                  onChange={handleCallbackChange}
-                  className="p-3 border rounded w-full"
-                  required
-                >
-                  <option value="">Select Course</option>
-                  {courseOptions.map((c) => (
-                    <option key={c}>{c}</option>
-                  ))}
-                </select>
-                <textarea
-                  name="message"
-                  value={callbackForm.message}
-                  onChange={handleCallbackChange}
-                  className="p-3 border rounded w-full"
-                  rows="3"
-                  placeholder="Message (optional)"
-                />
-                <button className="w-full py-3 bg-[#81007f] text-white rounded-lg">
-                  Submit
-                </button>
-              </form>
-            )}
-          </div>
+      {isLoading ? (
+        <p className="text-center py-6 text-gray-400">Submitting...</p>
+      ) : isSuccess ? (
+        <div className="text-center py-6">
+          <CheckCircle2 size={40} className="text-green-500 mx-auto" />
+          <p className="mt-2 font-semibold">Request Submitted 🎉</p>
         </div>
+      ) : (
+        <form onSubmit={handleCallbackSubmit} className="space-y-4">
+          <input
+            name="name"
+            value={callbackForm.name}
+            onChange={handleCallbackChange}
+            className="p-3 border border-gray-600 rounded w-full bg-black text-white placeholder-gray-400 focus:ring-2 focus:ring-[#81007f]"
+            placeholder="Full Name"
+            required
+          />
+          <input
+            name="email"
+            value={callbackForm.email}
+            onChange={handleCallbackChange}
+            className="p-3 border border-gray-600 rounded w-full bg-black text-white placeholder-gray-400 focus:ring-2 focus:ring-[#81007f]"
+            placeholder="Email"
+            required
+          />
+          <input
+            name="phone"
+            value={callbackForm.phone}
+            onChange={handleCallbackChange}
+            className="p-3 border border-gray-600 rounded w-full bg-black text-white placeholder-gray-400 focus:ring-2 focus:ring-[#81007f]"
+            placeholder="Phone Number"
+            required
+          />
+          <select
+            name="status"
+            value={callbackForm.status}
+            onChange={handleCallbackChange}
+            className="p-3 border border-gray-600 rounded w-full bg-black text-white placeholder-gray-400 focus:ring-2 focus:ring-[#81007f]"
+            required
+          >
+            <option value="" className="text-gray-400">Select Status</option>
+            <option>Student</option>
+            <option>Working Professional</option>
+            <option>Freelancer</option>
+          </select>
+          <select
+            name="course"
+            value={callbackForm.course}
+            onChange={handleCallbackChange}
+            className="p-3 border border-gray-600 rounded w-full bg-black text-white placeholder-gray-400 focus:ring-2 focus:ring-[#81007f]"
+            required
+          >
+            <option value="" className="text-gray-400">Select Course</option>
+            {courseOptions.map((c) => (
+              <option key={c}>{c}</option>
+            ))}
+          </select>
+          <textarea
+            name="message"
+            value={callbackForm.message}
+            onChange={handleCallbackChange}
+            className="p-3 border border-gray-600 rounded w-full bg-black text-white placeholder-gray-400 focus:ring-2 focus:ring-[#81007f]"
+            rows="3"
+            placeholder="Message (optional)"
+          />
+          <button className="w-full py-3 bg-gradient-to-r from-[#81007f] to-[#c400d1] rounded-lg hover:scale-105 transition transform">
+            Submit
+          </button>
+        </form>
       )}
+    </div>
+  </div>
+)}
+
     </>
   );
 };

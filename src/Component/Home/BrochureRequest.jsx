@@ -58,120 +58,92 @@ Email: ${formData.email}`;
 
   return (
     <AnimatePresence>
-      {isOpen && (
-        <motion.div
-          className="fixed inset-0 bg-black/70 flex items-center justify-center z-50"
-          initial={{ opacity: 0 }}
-          animate={{ opacity: 1 }}
-          exit={{ opacity: 0 }}
+  {isOpen && (
+    <motion.div
+      className="fixed inset-0 bg-black/70 backdrop-blur-lg flex items-center justify-center z-50"
+      initial={{ opacity: 0 }}
+      animate={{ opacity: 1 }}
+      exit={{ opacity: 0 }}
+    >
+      {/* Modal */}
+      <motion.div
+        className="bg-black/80 text-white rounded-3xl p-8 max-w-lg w-full relative shadow-2xl backdrop-blur-xl border border-white/20"
+        initial={{ scale: 0.8, opacity: 0, y: 50 }}
+        animate={{ scale: 1, opacity: 1, y: 0 }}
+        exit={{ scale: 0.8, opacity: 0, y: 50 }}
+        transition={{ duration: 0.3 }}
+        whileHover={{ scale: 1.02 }}
+      >
+        {/* Close Button */}
+        <button
+          className="absolute top-4 right-4 text-gray-300 hover:text-red-500"
+          onClick={onClose}
         >
-          {/* Modal */}
-          <motion.div
-            className="bg-white text-black rounded-2xl p-6 max-w-lg w-full relative shadow-xl"
-            initial={{ scale: 0.8, opacity: 0, y: 50 }}
-            animate={{ scale: 1, opacity: 1, y: 0 }}
-            exit={{ scale: 0.8, opacity: 0, y: 50 }}
-            transition={{ duration: 0.3 }}
-          >
-            {/* Close Button */}
-            <button
-              className="absolute top-4 right-4 text-gray-500 hover:text-red-500"
-              onClick={onClose}
+          <X size={24} />
+        </button>
+
+        <h2 className="text-3xl font-extrabold mb-6 text-white text-center">
+          Request Brochure
+          <span className="text-[#81007f]">{course ? ` - ${course.title}` : ""}</span>
+        </h2>
+
+        {/* Form */}
+        <form onSubmit={handleSubmit} className="space-y-5">
+          {["name", "college", "phone", "email"].map((field) => (
+            <input
+              key={field}
+              type={field === "email" ? "email" : field === "phone" ? "tel" : "text"}
+              name={field}
+              placeholder={field === "name" ? "Full Name" :
+                           field === "college" ? "College/Institute Name" :
+                           field === "phone" ? "Phone Number" : "Email Address"}
+              value={formData[field]}
+              onChange={handleChange}
+              className="w-full p-4 border border-gray-600 rounded-xl bg-black/70 text-white placeholder-gray-400 focus:outline-none focus:border-[#81007f] focus:ring-2 focus:ring-[#81007f]/30 transition"
+              required={field !== "college"}
+            />
+          ))}
+
+          {["gender", "status"].map((field) => (
+            <select
+              key={field}
+              name={field}
+              value={formData[field]}
+              onChange={handleChange}
+              className="w-full p-4 border border-gray-600 rounded-xl bg-black/70 text-white placeholder-gray-400 focus:outline-none focus:border-[#81007f] focus:ring-2 focus:ring-[#81007f]/30 transition"
+              required
             >
-              <X size={24} />
-            </button>
+              <option value="" className="text-gray-400">
+                {field === "gender" ? "Select Gender" : "Current Status"}
+              </option>
+              {field === "gender" ? (
+                <>
+                  <option value="Male">Male</option>
+                  <option value="Female">Female</option>
+                  <option value="Other">Other</option>
+                </>
+              ) : (
+                <>
+                  <option value="Student">Student</option>
+                  <option value="Working Professional">Working Professional</option>
+                  <option value="Other">Other</option>
+                </>
+              )}
+            </select>
+          ))}
 
-            <h2 className="text-2xl font-bold mb-4">
-              Request Brochure {course ? `- ${course.title}` : ""}
-            </h2>
+          <button
+            type="submit"
+            className="w-full bg-gradient-to-r from-[#81007f] to-[#c400d1] text-white py-3 rounded-xl hover:scale-105 hover:shadow-lg transition transform"
+          >
+            Submit Request
+          </button>
+        </form>
+      </motion.div>
+    </motion.div>
+  )}
+</AnimatePresence>
 
-            {/* Form */}
-            <form onSubmit={handleSubmit} className="space-y-4">
-              <input
-                type="text"
-                name="name"
-                placeholder="Full Name"
-                value={formData.name}
-                onChange={handleChange}
-                className="w-full p-3 border rounded-lg"
-                required
-              />
-{/* 
-              <input
-                type="date"
-                name="dob"
-                value={formData.dob}
-                onChange={handleChange}
-                className="w-full p-3 border rounded-lg"
-                required
-              /> */}
-
-              <select
-                name="gender"
-                value={formData.gender}
-                onChange={handleChange}
-                className="w-full p-3 border rounded-lg"
-                required
-              >
-                <option value="">Select Gender</option>
-                <option value="Male">Male</option>
-                <option value="Female">Female</option>
-                <option value="Other">Other</option>
-              </select>
-
-              <select
-                name="status"
-                value={formData.status}
-                onChange={handleChange}
-                className="w-full p-3 border rounded-lg"
-                required
-              >
-                <option value="">Current Status</option>
-                <option value="Student">Student</option>
-                <option value="Working Professional">Working Professional</option>
-                <option value="Other">Other</option>
-              </select>
-
-              <input
-                type="text"
-                name="college"
-                placeholder="College/Institute Name"
-                value={formData.college}
-                onChange={handleChange}
-                className="w-full p-3 border rounded-lg"
-              />
-
-              <input
-                type="tel"
-                name="phone"
-                placeholder="Phone Number"
-                value={formData.phone}
-                onChange={handleChange}
-                className="w-full p-3 border rounded-lg"
-                required
-              />
-
-              <input
-                type="email"
-                name="email"
-                placeholder="Email Address"
-                value={formData.email}
-                onChange={handleChange}
-                className="w-full p-3 border rounded-lg"
-                required
-              />
-
-              <button
-                type="submit"
-                className="w-full bg-[#81007f] text-white py-3 rounded-lg hover:bg-[#6a0067] transition"
-              >
-                Submit Request
-              </button>
-            </form>
-          </motion.div>
-        </motion.div>
-      )}
-    </AnimatePresence>
   );
 };
 
