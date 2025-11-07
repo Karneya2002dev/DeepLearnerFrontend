@@ -14,19 +14,19 @@ export default function WallOfLove() {
     {
       review:
         "The Software course at Deep Learner Academy (DLA) helped me gain strong programming skills and confidence to work on live projects. The practical sessions and support were excellent.",
-      name: "Meena K",
+      name: "Harini",
       role: "Student",
     },
     {
       review:
         "The Python Full Stack course at Deep Learner Academy (DLA) was detailed and focused on real-world projects. The mentors were always available for guidance, and the placement support was invaluable.",
-      name: "Prabakaran",
+      name: "Gayathri",
       role: "Student",
     },
     {
       review:
         "The Deep Learner Academy (DLA) MERN Stack course was comprehensive and well-structured. The mentors guided me throughout, and the job assistance was extremely helpful. Highly recommended!",
-      name: "Sruthi Selvam",
+      name: "Hariharan",
       role: "Student",
     },
   ];

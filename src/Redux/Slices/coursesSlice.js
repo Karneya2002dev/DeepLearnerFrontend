@@ -121,7 +121,7 @@ const initialState = {
     students: 950,
     duration: "3 Months",
     rating: "4.7",
-    category: "Marketing",
+    category: "Digital Marketing",
     salary: "₹4–9 LPA",
     tools: ["Google Ads", "Canva", "Meta Business Suite", "Google Analytics", "Ahrefs", "Mailchimp"],
     roles: ["Digital Marketer", "SEO Specialist", "Content Strategist", "Social Media Manager"],
@@ -154,7 +154,6 @@ const initialState = {
     salary: "₹6–14 LPA",
     tools: ["Wireshark", "Kali Linux", "Metasploit", "Burp Suite", "Nmap", "Splunk"],
     roles: ["Cybersecurity Analyst", "Ethical Hacker", "Network Security Engineer", "SOC Analyst"],
-    // /////////////////////
     image: "https://i.pinimg.com/1200x/44/d0/31/44d031d450d26ceb468aa57fdd0222ba.jpg",
     syllabus: [
       { title: "Introduction to Cybersecurity", description: "Principles and core concepts of cybersecurity" },
@@ -179,7 +178,6 @@ const initialState = {
     salary: "₹4–8 LPA",
     tools: ["Python", "Pygame", "Blender", "Unity (basics)", "Git"],
     roles: ["Game Developer", "Python Developer", "Indie Game Creator", "Gameplay Programmer"],
-    // /////////////////////////////////////////
     image: "https://i.pinimg.com/736x/3a/b9/d6/3ab9d65eeb5e558bda390a9fd998a700.jpg",
     syllabus: [
       { title: "Introduction to Game Development", description: "Understanding game design principles" },
@@ -218,18 +216,18 @@ const initialState = {
     createdAt: "2025-08-27T14:03:09.000Z",
   },{
   id: 10,
-  title: "AutoCAD Design & Drafting",
+  title: "AutoCAD ",
   description: "Become a professional CAD designer and create precise technical drawings.",
   overview:
     "The AutoCAD Design & Drafting course equips you with industry-standard CAD skills to create detailed 2D drawings and 3D models. You will learn drafting fundamentals, design standards, dimensioning techniques, layers, blocks, and annotations. The course also covers real-world project workflows such as architectural floor plans, mechanical designs, and civil layouts. By the end, you'll be able to work confidently on engineering and architectural projects using AutoCAD.",
   students: 950,
   duration: "3 Months",
   rating: "4.7",
-  category: "Design & CADD",
+  category: "CADD",
   salary: "₹4–10 LPA",
   tools: ["AutoCAD", "Revit (Basics)", "SketchUp", "Blueprint Standards"],
   roles: ["CAD Designer", "Draftsman", "Civil CAD Engineer", "Architectural Designer"],
-  ////////////////////////
+  
   image: "https://i.pinimg.com/736x/67/4d/2e/674d2e2dab1467c6b473abac456f9a22.jpg",
   syllabus: [
     { title: "Introduction to AutoCAD", description: "Interface, commands, and drawing setup" },
@@ -240,7 +238,69 @@ const initialState = {
     { title: "3D Modeling Basics", description: "3D features, modifying models, and visualization" }
   ],
   createdAt: "2025-08-27T14:03:09.000Z",
+},
+{
+  id: 11,
+  title: "Java Full Stack Development",
+  description: "Master backend with Java & Spring Boot and frontend with React to build enterprise applications.",
+  overview:
+    "This course provides full-stack development expertise using Java, Spring Boot, MySQL, and React.js. You will learn OOP, REST API development, authentication, deployment, and industry-standard backend architecture. On the frontend, you'll build interactive UI using React, Redux, and Tailwind. Real-time projects include e-commerce systems, admin dashboards, and authentication modules. By the end, you'll be job-ready for enterprise-level full-stack roles.",
+  students: 1200,
+  duration: "6 Months",
+  rating: "4.8",
+  category: "Web Development",
+  salary: "₹6–15 LPA",
+  tools: ["Java", "Spring Boot", "Hibernate", "MySQL", "React.js", "Git", "Postman", "Docker (Basics)"],
+  roles: [
+    "Java Full-Stack Developer",
+    "Backend Developer (Java)",
+    "Software Engineer",
+    "Web Application Developer"
+  ],
+  
+  image: "https://i.pinimg.com/736x/db/92/3e/db923e9725b3dd425d45173f2131e864.jpg",
+  syllabus: [
+    { title: "Core Java & OOP", description: "Java basics, OOP concepts, collections, exception handling" },
+    { title: "Spring Boot & API Development", description: "REST APIs, MVC, JPA, security & JWT authentication" },
+    { title: "Database & ORM", description: "MySQL, Hibernate, schema design, queries & joins" },
+    { title: "React Frontend Development", description: "Components, hooks, routing, Redux & UI development" },
+    { title: "Full Stack Integration", description: "Connecting React frontend with Spring Boot backend" },
+    { title: "Deployment & DevOps Basics", description: "Git, CI/CD basics, Docker introduction & hosting" }
+  ],
+  createdAt: "2025-08-27T14:03:09.000Z",
+},
+{
+  id: 12,
+  title: "Mobile App Development with React Native",
+  description: "Build Android & iOS apps using JavaScript, React Native, and modern backend APIs.",
+  overview:
+    "This course trains you to become a professional mobile developer using React Native, Firebase, and Node.js. You will learn UI components, navigation, state management, API integration, authentication, push notifications, and app publishing. The course includes real-world app projects like e-commerce, learning app, and real estate app. By the end, you will confidently build and deploy apps to Play Store & App Store.",
+  students: 1050,
+  duration: "5 Months",
+  rating: "4.9",
+  category: "Mobile App Development",
+  salary: "₹5–14 LPA",
+  tools: ["React Native", "CLI", "Redux", "Node.js", "Firebase", "MySQL", "Git", "Figma"],
+  roles: [
+    "React Native Developer",
+    "Mobile App Developer",
+    "Frontend Engineer",
+    "Cross-Platform App Developer"
+  ],
+  
+  image: "https://i.pinimg.com/736x/dc/2b/a9/dc2ba98a94158ab62705c4a927ad1876.jpg",
+  syllabus: [
+    { title: "React & JavaScript Essentials", description: "JS fundamentals, ES6, React basics" },
+    { title: "React Native UI & Navigation", description: "UI components, styling, navigation stack/tabs" },
+    { title: "Backend & API Integration", description: "REST API, Axios, Node.js basics, MySQL CRUD" },
+    { title: "Authentication & Firebase", description: "JWT login, OTP, Firebase Auth & Firebase DB" },
+    { title: "Advanced App Features", description: "Push notifications, maps, camera, storage, animations" },
+    { title: "App Deployment", description: "Play Store & App Store deployment, versioning, OTA updates" }
+  ],
+  createdAt: "2025-08-27T14:03:09.000Z",
 }
+
+
 
 ],
 

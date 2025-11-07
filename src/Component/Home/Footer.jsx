@@ -30,14 +30,18 @@ export default function Footer() {
         <div className="text-center sm:text-left">
           <h3 className="text-white font-semibold mb-4">COURSES</h3>
           <ul className="space-y-2 text-sm">
-            <li><Link to="/courses/3" className="hover:text-purple-400 transition">Data Analysis</Link></li>
-            <li><Link to="/courses/2" className="hover:text-purple-400 transition">MERN Stack Development</Link></li>
-            <li><Link to="/courses/1" className="hover:text-purple-400 transition">Python Full Stack</Link></li>
-            <li><Link to="/courses/4" className="hover:text-purple-400 transition">Graphic Design</Link></li>
-            <li><Link to="/courses/9" className="hover:text-purple-400 transition">Software Development</Link></li>
-            <li><Link to="/courses/8" className="hover:text-purple-400 transition">Python Game Development</Link></li>
-          </ul>
+  <li><Link to="/courses/1" className="hover:text-purple-400 transition">Python Full Stack</Link></li>
+  <li><Link to="/courses/2" className="hover:text-purple-400 transition">MERN Stack Development</Link></li>
+  <li><Link to="/courses/3" className="hover:text-purple-400 transition">Data Analysis</Link></li>
+  <li><Link to="/courses/4" className="hover:text-purple-400 transition">Graphic Design</Link></li>
+  <li><Link to="/courses/8" className="hover:text-purple-400 transition">Python Game Development</Link></li>
+  <li><Link to="/courses/9" className="hover:text-purple-400 transition">Software Development</Link></li>
+  <li><Link to="/courses/10" className="hover:text-purple-400 transition">AutoCAD Design & Drafting</Link></li>
+  <li><Link to="/courses/11" className="hover:text-purple-400 transition">Java Full Stack Development</Link></li>
+  <li><Link to="/courses/12" className="hover:text-purple-400 transition">Mobile App Development (React Native)</Link></li>
+</ul>
         </div>
+
 
         {/* Workshops */}
         <div className="text-center sm:text-left">
