@@ -20,7 +20,7 @@ const HomePage = () => {
    
         <CoursesSection />
         <WorkShop />
-        <CompaniesHiring />
+        {/* <CompaniesHiring /> */}
         <FallOfWall />
         {/* <StatsSection /> */}
         {/* <Mentors />
