@@ -383,12 +383,12 @@ const CoursesSection = () => {
     "All Courses",
     "Web Development",
     "Data Analysis",
-    "UI/UX",
-    "Marketing",
+    "Designing",
+    "Digital Marketing",
     "Cyber",
     "Game Development",
     "Mobile App Development",
-    "CADD"
+    "CAD"
   ];
 
   const filteredCourses =

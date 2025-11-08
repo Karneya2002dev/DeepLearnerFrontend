@@ -5,6 +5,7 @@ import WorkShop from './Home/WorkShop'
 import FallOfWall from './Home/FallOfWall'
 import StatsSection from './Home/StatsSection'
 import Mentors from './Home/Mentors'
+import CompaniesHiring from './Home/CompnieesHiring'
 
 
 const HomePage = () => {
@@ -19,6 +20,7 @@ const HomePage = () => {
    
         <CoursesSection />
         <WorkShop />
+        <CompaniesHiring />
         <FallOfWall />
         {/* <StatsSection /> */}
         {/* <Mentors />

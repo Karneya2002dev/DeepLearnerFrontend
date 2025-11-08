@@ -16,8 +16,8 @@ const initialState = {
     salary: "₹5–10 LPA",
     tools: ["Python", "Django", "SQLite", "HTML", "CSS", "JavaScript", "React", "Git"],
     roles: ["Full Stack Developer", "Backend Developer", "Web Developer", "Software Engineer"],
-    // ////////////
-    image: "https://i.pinimg.com/1200x/17/3e/e0/173ee0eb290de65a6797e654d3040586.jpg",
+  
+    image: "https://digitalwinacademics.com/wp-content/uploads/2024/06/python-2-768x431.jpg",
     comingSoon: null,
     video: null,
     syllabus: [
@@ -44,8 +44,6 @@ const initialState = {
     salary: "₹6–12 LPA",
     tools: ["MongoDB", "Express.js", "React.js", "Node.js", "Redux", "Postman", "Git", "Vercel"],
     roles: ["MERN Stack Developer", "Frontend Developer", "Backend Developer", "Web Application Engineer"],
-
-    // /////////////
     image: "https://i.pinimg.com/736x/92/40/8e/92408e6e22f4d02cf2344287814ee257.jpg",
     comingSoon: null,
     video: null,
@@ -61,7 +59,37 @@ const initialState = {
     createdAt: "2025-08-27T14:03:09.000Z",
   },
   {
-    id: 3,
+  id: 3,
+  title: "Java Full Stack Development",
+  description: "Master backend with Java & Spring Boot and frontend with React to build enterprise applications.",
+  overview:
+    "This course provides full-stack development expertise using Java, Spring Boot, MySQL, and React.js. You will learn OOP, REST API development, authentication, deployment, and industry-standard backend architecture. On the frontend, you'll build interactive UI using React, Redux, and Tailwind. Real-time projects include e-commerce systems, admin dashboards, and authentication modules. By the end, you'll be job-ready for enterprise-level full-stack roles.",
+  students: 1200,
+  duration: "6 Months",
+  rating: "4.8",
+  category: "Web Development",
+  salary: "₹6–15 LPA",
+  tools: ["Java", "Spring Boot", "Hibernate", "MySQL", "React.js", "Git", "Postman", "Docker (Basics)"],
+  roles: [
+    "Java Full-Stack Developer",
+    "Backend Developer (Java)",
+    "Software Engineer",
+    "Web Application Developer"
+  ],
+  
+  image: "https://i.pinimg.com/1200x/48/27/12/4827123b437699a9ba8e8feb1537e255.jpg",
+  syllabus: [
+    { title: "Core Java & OOP", description: "Java basics, OOP concepts, collections, exception handling" },
+    { title: "Spring Boot & API Development", description: "REST APIs, MVC, JPA, security & JWT authentication" },
+    { title: "Database & ORM", description: "MySQL, Hibernate, schema design, queries & joins" },
+    { title: "React Frontend Development", description: "Components, hooks, routing, Redux & UI development" },
+    { title: "Full Stack Integration", description: "Connecting React frontend with Spring Boot backend" },
+    { title: "Deployment & DevOps Basics", description: "Git, CI/CD basics, Docker introduction & hosting" }
+  ],
+  createdAt: "2025-08-27T14:03:09.000Z",
+},
+{
+    id: 4,
     title: "Data Analysis",
     description: "Learn data wrangling, visualization, and ML basics.",
     overview:
@@ -73,7 +101,6 @@ const initialState = {
     salary: "₹4–9 LPA",
     tools: ["Python", "Pandas", "NumPy", "Matplotlib", "Power BI", "Excel", "Jupyter", "SQL"],
     roles: ["Data Analyst", "Business Analyst", "Reporting Analyst", "Junior Data Scientist"],
-    // ////////////
     image: "https://i.pinimg.com/1200x/b2/ac/d2/b2acd28d6bb47ab01eb664d52b6ad2d8.jpg",
     syllabus: [
       { title: "Introduction to Data Analysis", description: "Understanding data, types, and sources" },
@@ -87,7 +114,7 @@ const initialState = {
     createdAt: "2025-08-27T14:03:09.000Z",
   },
   { 
-    id: 4,
+    id: 5,
     title: "Graphic Designing",
     description: "UI/UX design, Adobe tools, and modern design trends.",
     overview:
@@ -95,12 +122,11 @@ const initialState = {
     students: 800,
     duration: "3 Months",
     rating: "4.5",
-    category: "UI/UX",
+    category: "Designing",
     salary: "₹3–8 LPA",
     tools: ["Adobe Photoshop", "Illustrator", "Canva", "Figma", "InDesign", "XD"],
     roles: ["Graphic Designer", "UI Designer", "Visual Artist", "Brand Identity Designer"],
-    // ///////////
-    image: "https://i.pinimg.com/736x/a6/32/0c/a6320c04acdbc04e768fcc146ac1e403.jpg",
+    image: "https://i.pinimg.com/736x/09/4a/4c/094a4c0e4819a8a359c900027cce633e.jpg",
     syllabus: [
       { title: "Introduction to Graphic Design", description: "Understanding design principles, elements, and tools" },
       { title: "Typography", description: "Fonts, hierarchy, readability, and design with text" },
@@ -113,7 +139,7 @@ const initialState = {
     createdAt: "2025-08-27T14:03:09.000Z",
   },
   {
-    id: 6,
+    id:6 ,
     title: "Digital Marketing",
     description: "Master Digital Marketing from fundamentals to advanced strategies.",
     overview:
@@ -125,9 +151,8 @@ const initialState = {
     salary: "₹4–9 LPA",
     tools: ["Google Ads", "Canva", "Meta Business Suite", "Google Analytics", "Ahrefs", "Mailchimp"],
     roles: ["Digital Marketer", "SEO Specialist", "Content Strategist", "Social Media Manager"],
-    // /////////////
     image:
-      "https://i.pinimg.com/736x/7c/3d/76/7c3d76ca778c3c07f08930d9407df547.jpg",
+      "https://i.pinimg.com/736x/10/53/a2/1053a2c88fc1c0dd85905a18b3e580da.jpg",
     syllabus: [
       { title: "Introduction to Digital Marketing", description: "Introduction to Digital Marketing – ecosystem, trends, and strategy" },
       { title: "Traditional vs. Digital Marketing", description: "Understanding the evolution of marketing" },
@@ -203,7 +228,7 @@ const initialState = {
     salary: "₹6–12 LPA",
     tools: ["Python", "Java", "Git", "MySQL", "VS Code", "Docker", "Postman"],
     roles: ["Software Developer", "Application Developer", "Backend Engineer", "Junior Software Engineer"],
-    //////////////////////
+
     image: "https://i.pinimg.com/736x/49/40/6f/49406f1fb7bf3769cb322f3ba2692732.jpg",
     syllabus: [
       { title: "Programming Fundamentals", description: "Core programming concepts and logic building" },
@@ -214,63 +239,34 @@ const initialState = {
       { title: "Version Control & Deployment", description: "Git, CI/CD, and application deployment" },
     ],
     createdAt: "2025-08-27T14:03:09.000Z",
-  },{
+  },
+  {
   id: 10,
-  title: "AutoCAD ",
-  description: "Become a professional CAD designer and create precise technical drawings.",
+  title: "Civil AutoCAD",
+  description: "Master Civil AutoCAD to design and draft precise civil engineering plans and infrastructure layouts.",
   overview:
-    "The AutoCAD Design & Drafting course equips you with industry-standard CAD skills to create detailed 2D drawings and 3D models. You will learn drafting fundamentals, design standards, dimensioning techniques, layers, blocks, and annotations. The course also covers real-world project workflows such as architectural floor plans, mechanical designs, and civil layouts. By the end, you'll be able to work confidently on engineering and architectural projects using AutoCAD.",
+    "The Civil AutoCAD Design & Drafting course is tailored for civil engineers, architects, and designers who want to create professional 2D drawings and 3D models for civil projects. You’ll learn survey data interpretation, contour mapping, road alignment, drainage design, and structural detailing. The course also covers drafting standards used in real-world civil projects, including site plans, road layouts, and structural blueprints. By the end, you’ll be proficient in creating accurate civil engineering drawings for residential, commercial, and infrastructure developments.",
   students: 950,
   duration: "3 Months",
   rating: "4.7",
-  category: "CADD",
-  salary: "₹4–10 LPA",
-  tools: ["AutoCAD", "Revit (Basics)", "SketchUp", "Blueprint Standards"],
-  roles: ["CAD Designer", "Draftsman", "Civil CAD Engineer", "Architectural Designer"],
+  category: "CAD",
+  salary: "₹4–12 LPA",
+  tools: ["AutoCAD Civil 3D", "Revit (Basics)", "SketchUp", "InfraWorks"],
+  roles: ["Civil CAD Engineer", "Structural Draftsman", "Site Design Engineer", "Infrastructure Planner"],
   
   image: "https://i.pinimg.com/736x/67/4d/2e/674d2e2dab1467c6b473abac456f9a22.jpg",
   syllabus: [
-    { title: "Introduction to AutoCAD", description: "Interface, commands, and drawing setup" },
-    { title: "2D Drafting", description: "Lines, shapes, layers, blocks, and annotations" },
-    { title: "Dimensioning & Standards", description: "Measurements, symbols, and technical standards" },
-    { title: "Architectural Drafting", description: "Floor plans, layouts, elevations, and sections" },
-    { title: "Mechanical Drafting", description: "Component drawings and assembly drafting basics" },
-    { title: "3D Modeling Basics", description: "3D features, modifying models, and visualization" }
+    { title: "Introduction to Civil AutoCAD", description: "Understanding interface, drawing setup, and templates for civil design" },
+    { title: "Survey & Site Drafting", description: "Working with survey data, coordinates, and topographical mapping" },
+    { title: "Road & Drainage Layouts", description: "Designing roads, pavements, and drainage networks" },
+    { title: "Structural Drafting", description: "Creating foundation, column, beam, and slab drawings" },
+    { title: "Contour & Grading Plans", description: "Generating contours, grading, and slope analysis" },
+    { title: "3D Terrain Modeling", description: "Building 3D surfaces, sections, and civil visualization" }
   ],
   createdAt: "2025-08-27T14:03:09.000Z",
 },
 {
   id: 11,
-  title: "Java Full Stack Development",
-  description: "Master backend with Java & Spring Boot and frontend with React to build enterprise applications.",
-  overview:
-    "This course provides full-stack development expertise using Java, Spring Boot, MySQL, and React.js. You will learn OOP, REST API development, authentication, deployment, and industry-standard backend architecture. On the frontend, you'll build interactive UI using React, Redux, and Tailwind. Real-time projects include e-commerce systems, admin dashboards, and authentication modules. By the end, you'll be job-ready for enterprise-level full-stack roles.",
-  students: 1200,
-  duration: "6 Months",
-  rating: "4.8",
-  category: "Web Development",
-  salary: "₹6–15 LPA",
-  tools: ["Java", "Spring Boot", "Hibernate", "MySQL", "React.js", "Git", "Postman", "Docker (Basics)"],
-  roles: [
-    "Java Full-Stack Developer",
-    "Backend Developer (Java)",
-    "Software Engineer",
-    "Web Application Developer"
-  ],
-  
-  image: "https://i.pinimg.com/736x/db/92/3e/db923e9725b3dd425d45173f2131e864.jpg",
-  syllabus: [
-    { title: "Core Java & OOP", description: "Java basics, OOP concepts, collections, exception handling" },
-    { title: "Spring Boot & API Development", description: "REST APIs, MVC, JPA, security & JWT authentication" },
-    { title: "Database & ORM", description: "MySQL, Hibernate, schema design, queries & joins" },
-    { title: "React Frontend Development", description: "Components, hooks, routing, Redux & UI development" },
-    { title: "Full Stack Integration", description: "Connecting React frontend with Spring Boot backend" },
-    { title: "Deployment & DevOps Basics", description: "Git, CI/CD basics, Docker introduction & hosting" }
-  ],
-  createdAt: "2025-08-27T14:03:09.000Z",
-},
-{
-  id: 12,
   title: "Mobile App Development with React Native",
   description: "Build Android & iOS apps using JavaScript, React Native, and modern backend APIs.",
   overview:
@@ -288,7 +284,7 @@ const initialState = {
     "Cross-Platform App Developer"
   ],
   
-  image: "https://i.pinimg.com/736x/dc/2b/a9/dc2ba98a94158ab62705c4a927ad1876.jpg",
+  image: "https://i.pinimg.com/736x/2a/c2/df/2ac2df926a0c8b64beb9f5d38c957e3e.jpg",
   syllabus: [
     { title: "React & JavaScript Essentials", description: "JS fundamentals, ES6, React basics" },
     { title: "React Native UI & Navigation", description: "UI components, styling, navigation stack/tabs" },
@@ -298,18 +294,39 @@ const initialState = {
     { title: "App Deployment", description: "Play Store & App Store deployment, versioning, OTA updates" }
   ],
   createdAt: "2025-08-27T14:03:09.000Z",
-}
-
-
-
-],
+},
+{
+  id: 13,
+  title: "UI/UX Design",
+  description: "Master UI/UX Design to create user-centered, visually engaging, and seamless digital experiences for web and mobile apps.",
+  overview:
+    "The UI/UX Design course is crafted for aspiring designers, developers, and creatives who want to build professional interfaces and intuitive user experiences. You’ll learn the fundamentals of user research, wireframing, prototyping, usability testing, and visual design principles. The course covers modern tools like Figma and Adobe XD, real-world project workflows, and portfolio development. By the end, you’ll be able to design responsive, accessible, and aesthetically appealing interfaces for digital products.",
+  students: 1020,
+  duration: "4 Months",
+  rating: "4.8",
+  category: "Designing",
+  salary: "₹5–15 LPA",
+  tools: ["Figma", "Adobe XD", "Miro", "Notion", "Photoshop", "Illustrator"],
+  roles: ["UI/UX Designer", "Product Designer", "Interaction Designer", "Visual Designer", "UX Researcher"],
+  
+  image: "https://i.pinimg.com/736x/04/02/83/040283c30bc220c5816e89dbce1d5869.jpg",
+  syllabus: [
+    { title: "Introduction to UI/UX Design", description: "Understanding design thinking, user experience principles, and workflows" },
+    { title: "User Research & Personas", description: "Conducting interviews, surveys, and creating user personas & empathy maps" },
+    { title: "Wireframing & Prototyping", description: "Building low-fidelity wireframes and interactive prototypes using Figma" },
+    { title: "Visual Design & Components", description: "Typography, color theory, grids, icons, and creating consistent UI systems" },
+    { title: "Usability Testing & Feedback", description: "Testing prototypes with users and refining designs based on insights" },
+    { title: "Portfolio & Case Studies", description: "Documenting projects, building a portfolio, and preparing for UI/UX interviews" }
+  ],
+  createdAt: "2025-08-27T14:03:09.000Z",
+}],
 
    workshops: [
     {
       id: 1,
-      title: "Data Science",
+      title: "Data Analysis",
       description: "Your Fast Track to a High-Demand Career!",
-      image: "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_7zWRQPxwM5OcZbrb-JKgqmBZUshShzt17A&s",
+      image: "https://i.pinimg.com/736x/95/fe/7a/95fe7a6efd8ed2054a5552dda2d78731.jpg",
       registered: "80K+ Registered",
       rating: "4.5",
       price: "99.00",
@@ -320,7 +337,7 @@ const initialState = {
       id: 2,
       title: "React Native Mobile App",
       description: "Learn to build cross-platform mobile apps with React Native.",
-      image: "https://images.ctfassets.net/aq13lwl6616q/2gqVi4hhjq9vgvdh63UoKZ/0366c66ecd9f9e928745231d061dbb56/react_native_zero_to_mastery.png",
+      image: "https://i.pinimg.com/1200x/67/1d/a9/671da94427384c7167652c8b5c306c46.jpg",
       registered: "50K+ Registered",
       rating: "4.8",
       price: "99.00",
@@ -339,44 +356,7 @@ const initialState = {
       button_text: "Register Now",
     },
   ],
-  workshops: [
-    {
-      id: 1,
-      title: "Data Science",
-      description: "Your Fast Track to a High-Demand Career!",
-      image:
-        "https://encrypted-tbn0.gstatic.com/images?q=tbn:ANd9GcR_7zWRQPxwM5OcZbrb-JKgqmBZUshShzt17A&s",
-      registered: "80K+ Registered",
-      rating: "4.5",
-      price: "99.00",
-      old_price: "299.00",
-      button_text: "Register Now",
-    },
-    {
-      id: 2,
-      title: "React Native Mobile App",
-      description: "Learn to build cross-platform mobile apps with React Native.",
-      image:
-        "https://images.ctfassets.net/aq13lwl6616q/2gqVi4hhjq9vgvdh63UoKZ/0366c66ecd9f9e928745231d061dbb56/react_native_zero_to_mastery.png",
-      registered: "50K+ Registered",
-      rating: "4.8",
-      price: "99.00",
-      old_price: "299.00",
-      button_text: "Register Now",
-    },
-    {
-      id: 3,
-      title: "UI/UX Design",
-      description: "Master the fundamentals of UI/UX and create stunning interfaces.",
-      image:
-        "https://www.almondsolutions.com/images/blog-ui-ux-150223.jpg",
-      registered: "70K+ Registered",
-      rating: "4.7",
-      price: "99.00",
-      old_price: "299.00",
-      button_text: "Register Now",
-    },
-  ],
+  
 
   mentors: [
     {
