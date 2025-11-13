@@ -87,11 +87,11 @@ export default function Footer() {
           <ul className="space-y-3 text-sm">
             <li className="flex items-center justify-center sm:justify-start space-x-2">
               <Phone size={16} />
-              <span>+91 98765 43210</span>
+              <span>+91 63849 42259</span>
             </li>
             <li className="flex items-center justify-center sm:justify-start space-x-2">
               <Mail size={16} />
-              <span>info@deeplearneracademy.com</span>
+              <span>deeplearneracademy@gmail.com</span>
             </li>
           </ul>
         </div>

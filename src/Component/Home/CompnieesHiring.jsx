@@ -1,61 +1,84 @@
+import React from "react";
 import { motion } from "framer-motion";
-import AccentureLogo from "../../assets/accenture.webp"; // update paths
-import PaytmLogo from "../../assets/paytm.png";
-// import SwiggyLogo from "../../assets/swiggy.png";
-import DeloitteLogo from "../../assets/d1.png";
-// import ZomatoLogo from "../../assets/zomato.png";
-import IBMLogo from "../../assets/ibm.png";
-import MarqWon from "../../assets/marqwon.jpg";
-// import WiproLogo from ".../../assets/wipro.png";
 
-export default function HiringCompanies() {
-const companies = [
-{ img: AccentureLogo, name: "Accenture" },
-{ img: PaytmLogo, name: "Paytm" },
-// { img: SwiggyLogo, name: "Swiggy" },
-{ img: DeloitteLogo, name: "Deloitte" },
-// { img: ZomatoLogo, name: "Zomato" },
-{ img: IBMLogo, name: "IBM" },
-{ img: MarqWon, name: "MarqWon Dynamics" },
-// { img: WiproLogo, name: "Wipro" },
-];
+import paytm from "../../assets/com/paytm.png";
+import hp from "../../assets/com/hp.png";
+import Accenture from "../../assets/com/accen.png";
+import Zomato from "../../assets/com/Zomato.png";
+import Wipro from "../../assets/com/wipro.png";
+import HCL from "../../assets/com/hcl.png";
+import Marq from "../../assets/com/black.png";
+
+const CompaniesHiring = () => {
+  const companies = [
+    { name: "Accenture", img: Accenture },
+    { name: "Paytm", img: paytm },
+    { name: "Zomato", img: Zomato },
+    { name: "Wipro", img: Wipro },
+    { name: "HP", img: hp },
+    { name: "HCL", img: HCL },
+    { name: "MarqWon", img: Marq },
+  ];
+
+  // Duplicate for continuous scroll
+  const duplicated = [...companies, ...companies];
+
+  return (
+    <section className="relative bg-black py-20 overflow-hidden">
+      <div className="relative max-w-6xl mx-auto px-6 text-center">
+        {/* Heading */}
+       <h2 className="text-3xl md:text-4xl font-extrabold text-white mb-16">
+  <span className="bg-[#81007f] bg-clip-text text-transparent">
+    Top Companies
+  </span>{" "}
+  Hiring Talent
+</h2>
 
 
-return (
-<div className="w-full py-16 px-6 flex flex-col items-center bg-black">
-<motion.h2
-initial={{ opacity: 0, y: 20 }}
-whileInView={{ opacity: 1, y: 0 }}
-transition={{ duration: 0.6 }}
-className="text-xl md:text-3xl font-semibold mb-8 text-white/90"
->
-<span className="text-blue-500">Companies hiring</span> skilled professionals
-</motion.h2>
+        {/* Scrolling Logos */}
+        <div className="relative w-full overflow-hidden rounded-3xl">
+          {/* Gradient Glow */}
+          <div className="absolute inset-0 bg-gradient-to-r from-blue-500/10 via-purple-500/10 to-pink-500/10 blur-3xl"></div>
 
+          {/* Glass Effect Background */}
+          <div className="relative bg-white/10 backdrop-blur-xl border border-white/20 rounded-3xl shadow-xl py-8 overflow-hidden">
+            {/* Continuous Scroll Track */}
+            <motion.div
+              className="flex items-center gap-24 w-max px-10"
+              animate={{ x: ["0%", "-50%"] }}
+              transition={{
+                x: {
+                  repeat: Infinity,
+                  repeatType: "loop",
+                  ease: "linear",
+                  duration: 35,
+                },
+              }}
+            >
+              {duplicated.map((company, index) => (
+                <div
+                  key={index}
+                  className="flex flex-col items-center justify-center"
+                >
+                  <img
+                    src={company.img}
+                    alt={company.name}
+                    className="h-16 md:h-20 object-contain opacity-90 hover:opacity-100 hover:scale-110 transition-transform duration-300"
+                  />
+                  <p className="text-white/80 text-sm mt-2">{company.name}</p>
+                </div>
+              ))}
+            </motion.div>
+          </div>
+        </div>
 
-<motion.div
-initial={{ opacity: 0, scale: 0.95 }}
-whileInView={{ opacity: 1, scale: 1 }}
-transition={{ duration: 0.6 }}
-className="bg-[#021733] w-full max-w-6xl rounded-3xl py-10 px-6 md:px-14 shadow-lg border border-blue-900/30"
->
-<div className="overflow-hidden w-full">
-<motion.div
-className="flex items-center gap-20 md:gap-32 whitespace-nowrap"
-animate={{ x: ["100%", "-100%"] }}
-transition={{ repeat: Infinity, duration: 18, ease: "linear" }}
->
-{companies.concat(companies).map((c, index) => (
-<img                                                                
-key={index}
-src={c.img}
-alt={c.name}
-className="h-8 md:h-12 opacity-90 hover:opacity-100 transition duration-200"
-/>
-))}
-</motion.div>
-</div>
-</motion.div>
-</div>
-);
-}
+        {/* Subtext */}
+        <p className="text-gray-400 mt-12 text-sm md:text-base">
+          Trusted by leading global organizations for top talent.
+        </p>
+      </div>
+    </section>
+  );
+};
+
+export default CompaniesHiring;

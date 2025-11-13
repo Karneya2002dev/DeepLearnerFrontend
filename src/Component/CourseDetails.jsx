@@ -6,6 +6,7 @@ import { motion } from "framer-motion";
 import { useNavigate } from "react-router-dom";
 import placeholderImage from "../assets/upcome.jpg";
 import BrochureRequest from "./Home/BrochureRequest"; // ✅ Import Brochure Modal
+import CompaniesHiring from "./Home/CompnieesHiring";
 
 // ----------------------
 // CourseCard Component
@@ -194,6 +195,7 @@ const CoursesSection = () => {
         onClose={() => setIsBrochureOpen(false)}
         course={selectedCourse}
       />
+      
     </section>
   );
 };

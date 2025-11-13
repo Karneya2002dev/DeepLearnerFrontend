@@ -469,6 +469,7 @@ import { gsap } from "gsap";
 import { ScrollTrigger } from "gsap/ScrollTrigger";
 import * as XLSX from "xlsx";
 import { saveAs } from "file-saver";
+import CompaniesHiring from "./CompnieesHiring";
 
 
 gsap.registerPlugin(ScrollTrigger);
@@ -944,6 +945,7 @@ Status: ${formData.currentStatus}
           </motion.div>
         </motion.div>
       )}
+      <CompaniesHiring />
     </motion.div>
   );
 };
