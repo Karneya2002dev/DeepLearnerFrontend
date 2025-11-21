@@ -67,63 +67,62 @@ const HeroSection = () => {
         </div>
 
         {/* ✅ Right Side Zig-Zag Course Cards */}
-       <div className="w-full lg:w-1/2 flex justify-center items-center pt-6 sm:pt-10 lg:pt-20">
-  <motion.div
-    className="flex gap-4 overflow-x-auto scrollbar-hide p-2 w-full justify-start"
-    initial={{ opacity: 0, y: 50 }}
-    animate={{ opacity: 1, y: 0 }}
-    transition={{ duration: 1, ease: "easeOut" }}
-  >
-    {courses.map((course, index) => {
-      const isExpanded =
-        hoveredCard === course.id || selectedCard === course.id;
-
-      return (
-        <div
-          key={course.id}
-          onClick={() => setSelectedCard(course.id)}
-          onMouseEnter={() => setHoveredCard(course.id)}
-          onMouseLeave={() => setHoveredCard(null)}
-          className={`
-            group relative transition-all duration-500 cursor-pointer flex-shrink-0 overflow-hidden rounded-2xl shadow-lg
-            ${isExpanded
-              ? "w-[150px] h-[210px] sm:w-56 sm:h-72 md:w-72 md:h-96"
-              : "w-[90px] h-[150px] sm:w-20 sm:h-72 md:w-24 md:h-96"
-            }
-            ${index % 2 === 0
-              ? "translate-y-1 sm:translate-y-4"
-              : "-translate-y-1 sm:-translate-y-4"
-            }
-          `}
-        >
-          <img
-            src={course.image}
-            alt={course.title}
-            className="w-full h-full object-cover"
-          />
-
-          {/* Title */}
-          <div
-            className={`
-              absolute bottom-3 left-3 text-white transition-all duration-500
-              ${isExpanded
-                ? "rotate-0 text-sm sm:text-lg"
-                : "-rotate-90 origin-bottom-left text-[10px]"
-              }
-            `}
+        <div className="w-full lg:w-1/2 flex justify-center items-center pt-6 sm:pt-10 lg:pt-20">
+          <motion.div
+            className="flex gap-3 sm:gap-6 flex-nowrap p-2 scrollbar-hide w-full justify-center pl-4"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            transition={{ duration: 1, ease: "easeOut" }}
           >
-            <h3 className="font-semibold whitespace-nowrap">{course.title}</h3>
-          </div>
+            {courses.map((course, index) => {
+              const isExpanded =
+                hoveredCard === course.id || selectedCard === course.id;
+
+              return (
+                <div
+                  key={course.id}
+                  onClick={() => setSelectedCard(course.id)}
+                  onMouseEnter={() => setHoveredCard(course.id)}
+                  onMouseLeave={() => setHoveredCard(null)}
+                  className={`group relative transition-all duration-500 cursor-pointer flex-shrink-0 overflow-hidden shadow-lg rounded-2xl
+                    ${
+                      isExpanded
+                        ? "w-35 h-50 sm:w-60 md:w-72 sm:h-72 md:h-96"
+                        : "w-20 h-44 sm:w-20 md:w-24 sm:h-72 md:h-96"
+                    }
+                    ${
+                      index % 2 === 0
+                        ? "translate-y-2 sm:translate-y-4"
+                        : "-translate-y-2 sm:-translate-y-4"
+                    }
+                  `}
+                >
+                  <img
+                    src={course.image}
+                    alt={course.title}
+                    className="w-full h-full object-cover"
+                  />
+
+                  {/* 🔹 Title */}
+                  <div
+                    className={`absolute bottom-3 left-4 text-white transition-all duration-500
+                      ${
+                        isExpanded
+                          ? "rotate-0 text-base sm:text-lg"
+                          : "-rotate-90 origin-bottom-left text-xs sm:text-sm"
+                      }`}
+                  >
+                    <h3 className="font-semibold whitespace-nowrap">
+                      {course.title}
+                    </h3>
+                    {course.topics && <p className="text-xs">{course.topics} Topics</p>}
+                  </div>
+                </div>
+              );
+            })}
+          </motion.div>
         </div>
-      );
-    })}
-  </motion.div>
-</div>
-
       </div>
-
-      {/* Bottom Gradient */}
-      <div className="absolute bottom-0 left-0 right-0 h-32 bg-gradient-to-t from-black to-transparent z-0"></div>
     </div>
   );
 };
