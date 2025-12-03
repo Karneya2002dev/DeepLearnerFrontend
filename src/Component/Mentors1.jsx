@@ -1,22 +1,22 @@
 import { useState } from "react";
 import { motion, AnimatePresence } from "framer-motion";
+import { Briefcase, Mail, User, Clock, FileText } from 'lucide-react';
 
 // ✅ Mentor Jobs Data
 const jobs = [
-  { title: "React Mentor", category: "Web Development" },
-  { title: "MERN Stack Mentor", category: "Full Stack" },
-  { title: "UI/UX Mentor", category: "UI/UX" },
-  { title: "Figma & Prototyping Mentor", category: "UI/UX" },
-  { title: "Design Thinking Mentor", category: "UI/UX" },
-  { title: "Data Analysis Mentor", category: "Data Analysis" },
-  { title: "Python for Data Mentor", category: "Data Analysis" },
-  { title: "React Native Mentor", category: "Mobile App (React Native)" },
-  { title: "SEO Mentor", category: "Digital Marketing" },
-  { title: "Social Media Marketing Mentor", category: "Digital Marketing" },
+  { title: "React Developer", category: "Web Development" },
+  { title: "MERN Stack Developer", category: "Full Stack" },
+  { title: "UI/UX Designer", category: "UI/UX" },
+  { title: "Game Development Mentor (Python)", category: "Game Development" },
+  { title: "Java Full Stack", category: "Full Stack" },
+  { title: "Python Developer", category: "Programming" },
+  { title: "Digital Marketing Specialist", category: "Digital Marketing" },
+  { title: "React Native Developer", category: "Mobile App (React Native)" },
 ];
 
 // ✅ Unique Categories
-const categories = Array.from(new Set(jobs.map((job) => job.category))).map((name) => ({ name }));
+const allCategories = Array.from(new Set(jobs.map((job) => job.category))).map((name) => ({ name }));
+const categories = [{ name: "All Roles" }, ...allCategories];
 
 export default function Dashboard() {
   const [selectedCategory, setSelectedCategory] = useState(categories[0]);
@@ -30,7 +30,9 @@ export default function Dashboard() {
     resume: null,
   });
 
-  const filteredJobs = jobs.filter((job) => job.category === selectedCategory.name);
+  const filteredJobs = jobs.filter((job) => 
+    selectedCategory.name === "All Roles" ? true : job.category === selectedCategory.name
+  );
 
   const handleFormChange = (e) => {
     const { name, value, files } = e.target;
@@ -41,29 +43,27 @@ export default function Dashboard() {
   const openForm = (jobTitle = "") => {
     setForm((prev) => ({ ...prev, jobTitle }));
     setShowForm(true);
-    window.scrollTo(0, 0);
+    document.getElementById("mentor-application-form")?.scrollIntoView({ behavior: 'smooth' });
   };
 
   const handleFormSubmit = (e) => {
     e.preventDefault();
 
-    // ✅ WhatsApp redirect
-    const phoneNumber = "916384942259"; // replace with your number
+    const phoneNumber = "919486827259"; // replace with your number
     const whatsappMessage = `
-👋 *New Mentor Application Received*
+*New Mentor Application Received*
 ----------------------------------------
-👤 *Name:* ${form.name}
-📧 *Email:* ${form.email}
-💼 *Experience:* ${form.experience} years
-🧑‍🏫 *Applied Role:* ${form.jobTitle || "Mentor"}
-🕒 *Preferred Type:* ${form.jobType}
+*Name:* ${form.name}
+*Email:* ${form.email}
+*Experience:* ${form.experience} years
+*Applied Role:* ${form.jobTitle || "Mentor"}
+*Preferred Type:* ${form.jobType}
 ----------------------------------------
 Attach your resume for more details.
     `;
     const whatsappURL = `https://wa.me/${phoneNumber}?text=${encodeURIComponent(whatsappMessage)}`;
     window.open(whatsappURL, "_blank");
 
-    // Reset form & close modal
     setForm({
       name: "",
       email: "",
@@ -75,185 +75,223 @@ Attach your resume for more details.
     setShowForm(false);
   };
 
+  const tabVariants = {
+    active: {
+      borderColor: '#8b1289',
+      color: '#8b1289',
+      transition: { type: "spring", stiffness: 500, damping: 30 }
+    },
+    inactive: {
+      borderColor: 'transparent',
+      color: '#9CA3AF', // text-gray-400
+    }
+  };
+
   return (
-    <div className="min-h-screen bg-black text-white flex flex-col md:flex-row p-4 md:p-20 gap-10">
-      {/* Sidebar */}
-      <div className="w-full md:w-1/4 bg-gray-900 rounded-xl shadow p-4 md:p-6 relative top-10">
-        <h2 className="text-lg md:text-xl font-bold mb-6">Mentor Categories</h2>
-        <ul className="space-y-3">
+    <div className="min-h-screen bg-black p-4 md:p-10 lg:p-16 text-white ">
+      
+      {/* Header */}
+      <header className="text-center py-10 bg-gray-900 rounded-xl shadow-lg mb-10 mt-20">
+        <h1 className="text-3xl md:text-5xl font-extrabold text-white mb-2">
+          Join Our <span className="text-[#8b1289]">Mentor Network</span> 
+        </h1>
+        <p className="text-lg text-gray-400 mb-6 max-w-2xl mx-auto">
+          Inspire the next generation. Explore our open mentor roles and apply today!
+        </p>
+        <button
+          onClick={() => openForm("General Mentor Application")}
+          className="px-8 py-3 bg-[#8b1289] hover:bg-[#a0229f] text-white font-bold rounded-full transition-all duration-300 shadow-lg shadow-[#8b1289]/40"
+        >
+          General Application
+        </button>
+      </header>
+
+      {/* Categories Tabs */}
+      <div className="mb-8 overflow-x-auto">
+        <div className="flex space-x-4 justify-start sm:justify-center border-b border-gray-700 pb-2">
           {categories.map((cat, i) => (
-            <li
+            <motion.button
               key={i}
               onClick={() => setSelectedCategory(cat)}
-              className={`border-b border-gray-700 pb-2 cursor-pointer transition-colors ${
-                selectedCategory.name === cat.name
-                  ? "text-[#8b1289] font-semibold"
-                  : "text-gray-300 hover:text-white"
-              }`}
+              variants={tabVariants}
+              animate={selectedCategory.name === cat.name ? "active" : "inactive"}
+              className="whitespace-nowrap px-4 py-2 font-medium text-sm rounded-lg cursor-pointer transition-colors border-b-2"
             >
               {cat.name}
-            </li>
-          ))}
-        </ul>
-
-        <button
-          onClick={() => openForm("")}
-          className="mt-6 w-full bg-[#8b1289] hover:bg-[#8b1289]/90 text-white py-2 rounded-lg font-semibold transition-all"
-        >
-          Apply as Mentor
-        </button>
-      </div>
-
-      {/* Jobs List */}
-      <div className="flex-1">
-        <h2 className="text-lg md:text-xl font-bold mb-4">
-          Available Mentor Roles in {selectedCategory.name}
-        </h2>
-        <div className="space-y-4">
-          {filteredJobs.length === 0 && (
-            <p className="text-gray-400">No jobs found in this category.</p>
-          )}
-          {filteredJobs.map((job, i) => (
-            <div
-              key={i}
-              className="bg-gray-900 p-4 md:p-6 rounded-xl shadow flex flex-col sm:flex-row justify-between items-start sm:items-center gap-4"
-            >
-              <h3 className="text-lg md:text-xl font-semibold">{job.title}</h3>
-              <button
-                onClick={() => openForm(job.title)}
-                className="px-4 py-2 bg-[#8b1289] hover:bg-[#8b1289]/90 text-white rounded-lg"
-              >
-                Apply Now
-              </button>
-            </div>
+            </motion.button>
           ))}
         </div>
       </div>
+      
+      {/* Job Cards */}
+      <h2 className="text-2xl md:text-3xl font-bold mb-6 text-center">
+        {selectedCategory.name === "All Roles" ? "All Available Roles" : `${selectedCategory.name} Roles`}
+      </h2>
+      
+      <div className="grid grid-cols-1 md:grid-cols-2 lg:grid-cols-3 gap-6 mb-16">
+        <AnimatePresence>
+          {filteredJobs.length === 0 && (
+            <motion.p 
+              initial={{ opacity: 0 }} 
+              animate={{ opacity: 1 }} 
+              exit={{ opacity: 0 }} 
+              className="text-gray-400 col-span-full text-center py-10"
+            >
+              No jobs found in this category.
+            </motion.p>
+          )}
+          {filteredJobs.map((job, i) => (
+            <motion.div
+              key={job.title}
+              initial={{ opacity: 0, y: 20 }}
+              animate={{ opacity: 1, y: 0 }}
+              exit={{ opacity: 0, y: -20 }}
+              transition={{ duration: 0.3, delay: i * 0.05 }}
+              className="bg-gray-900 p-6 rounded-xl shadow-lg border border-gray-700 flex flex-col justify-between hover:shadow-xl transition-shadow duration-300"
+            >
+              <div>
+                <Briefcase className="w-6 h-6 text-[#8b1289] mb-3" />
+                <h3 className="text-xl font-bold text-white mb-1">{job.title}</h3>
+                <p className="text-sm font-semibold text-[#8b1289] mb-4">{job.category}</p>
+              </div>
+              <button
+                onClick={() => openForm(job.title)}
+                className="mt-4 w-full px-4 py-2 bg-[#8b1289] hover:bg-[#a0229f] text-white font-semibold rounded-lg transition-colors duration-300"
+              >
+                Apply for this Role
+              </button>
+            </motion.div>
+          ))}
+        </AnimatePresence>
+      </div>
 
-      {/* Application Modal */}
+      {/* Application Form */}
       <AnimatePresence>
         {showForm && (
           <motion.div
-            initial={{ opacity: 0 }}
-            animate={{ opacity: 1 }}
-            exit={{ opacity: 0 }}
-            className="fixed inset-0 bg-black bg-opacity-70 flex justify-center items-center z-50 p-4"
+            id="mentor-application-form"
+            initial={{ opacity: 0, y: 50 }}
+            animate={{ opacity: 1, y: 0 }}
+            exit={{ opacity: 0, y: 50 }}
+            className="bg-gray-900 rounded-xl shadow-2xl p-6 md:p-10 max-w-4xl mx-auto border-t-4 border-[#8b1289]"
           >
-            <motion.div
-              initial={{ scale: 0.8 }}
-              animate={{ scale: 1 }}
-              exit={{ scale: 0.8 }}
-              className="bg-gray-900 rounded-xl shadow-xl p-4 md:p-8 max-w-md w-full text-white overflow-auto max-h-[90vh]"
-            >
-              <h2 className="text-xl md:text-2xl font-bold mb-4">Apply as Mentor</h2>
-              <form onSubmit={handleFormSubmit} className="space-y-4">
+            <div className="flex justify-between items-start mb-6">
+              <h2 className="text-2xl md:text-3xl font-bold text-white">
+                Application Form: 
+                <span className="block text-xl font-semibold text-[#8b1289] mt-1">
+                  {form.jobTitle}
+                </span>
+              </h2>
+              <button onClick={() => setShowForm(false)} className="text-gray-400 hover:text-white">
+                <svg xmlns="http://www.w3.org/2000/svg" fill="none" viewBox="0 0 24 24" strokeWidth={1.5} stroke="currentColor" className="w-6 h-6">
+                  <path strokeLinecap="round" strokeLinejoin="round" d="M6 18L18 6M6 6l12 12" />
+                </svg>
+              </button>
+            </div>
+            
+            <form onSubmit={handleFormSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-6">
+              {/* Name Input */}
+              <div className="col-span-1">
+                <label className="flex items-center text-sm font-medium text-gray-300 mb-1"><User className="w-4 h-4 mr-2"/> Full Name</label>
                 <input
                   type="text"
                   name="name"
                   placeholder="Your Name"
-                  className="w-full border border-gray-700 bg-black px-4 py-2 rounded-lg outline-none text-white"
+                  className="w-full border border-gray-700 bg-black px-4 py-2 rounded-lg focus:ring-[#8b1289] focus:border-[#8b1289] transition-all text-white"
                   value={form.name}
                   onChange={handleFormChange}
                   required
                 />
+              </div>
+
+              {/* Email Input */}
+              <div className="col-span-1">
+                <label className="flex items-center text-sm font-medium text-gray-300 mb-1"><Mail className="w-4 h-4 mr-2"/> Email Address</label>
                 <input
                   type="email"
                   name="email"
                   placeholder="Your Email"
-                  className="w-full border border-gray-700 bg-black px-4 py-2 rounded-lg outline-none text-white"
+                  className="w-full border border-gray-700 bg-black px-4 py-2 rounded-lg focus:ring-[#8b1289] focus:border-[#8b1289] transition-all text-white"
                   value={form.email}
                   onChange={handleFormChange}
                   required
                 />
+              </div>
 
-                {/* Choose Role */}
-                <select
-                  name="jobTitle"
-                  value={form.jobTitle}
-                  onChange={handleFormChange}
-                  className="w-full border border-gray-700 bg-black px-4 py-2 rounded-lg outline-none text-white"
-                  required
-                >
-                  <option value="">Select Role</option>
-                  {jobs.map((job, i) => (
-                    <option key={i} value={job.title} className="bg-black text-white">
-                      {job.title}
-                    </option>
-                  ))}
-                </select>
-
+              {/* Job Type */}
+              <div className="col-span-1">
+                <label className="flex items-center text-sm font-medium text-gray-300 mb-1"><Clock className="w-4 h-4 mr-2"/> Preferred Job Type</label>
                 <select
                   name="jobType"
                   value={form.jobType}
                   onChange={handleFormChange}
-                  className="w-full border border-gray-700 bg-black px-4 py-2 rounded-lg outline-none text-white"
+                  className="w-full border border-gray-700 bg-black px-4 py-2 rounded-lg appearance-none focus:ring-[#8b1289] focus:border-[#8b1289] transition-all text-white"
                   required
                 >
-                  <option value="">Select Job Type</option>
-                  <option value="Full-Time" className="bg-black text-white">
-                    Full-Time
-                  </option>
-                  <option value="Part-Time" className="bg-black text-white">
-                    Part-Time
-                  </option>
-                  <option value="Remote" className="bg-black text-white">
-                    Remote
-                  </option>
-                  <option value="Contract" className="bg-black text-white">
-                    Contract
-                  </option>
+                  <option value="" className="bg-black text-gray-400">Select Job Type</option>
+                  <option value="Full-Time">Full-Time</option>
+                  <option value="Part-Time">Part-Time</option>
+                  <option value="Remote">Remote</option>
+                  <option value="Contract">Contract</option>
                 </select>
+              </div>
 
+              {/* Experience */}
+              <div className="col-span-1">
+                <label className="flex items-center text-sm font-medium text-gray-300 mb-1"><Briefcase className="w-4 h-4 mr-2"/> Years of Experience</label>
                 <select
                   name="experience"
                   value={form.experience}
                   onChange={handleFormChange}
-                  className="w-full border border-gray-700 bg-black px-4 py-2 rounded-lg outline-none text-white"
+                  className="w-full border border-gray-700 bg-black px-4 py-2 rounded-lg appearance-none focus:ring-[#8b1289] focus:border-[#8b1289] transition-all text-white"
                   required
                 >
-                  <option value="">Years of Experience</option>
+                  <option value="" className="bg-black text-gray-400">Years of Experience</option>
                   {Array.from({ length: 21 }, (_, i) => (
                     <option key={i} value={i} className="bg-black text-white">
                       {i} {i === 1 ? "year" : "years"}
                     </option>
                   ))}
                 </select>
+              </div>
 
-                <div>
-                  <label className="block mb-1 font-medium">Upload Resume</label>
-                  <input
-                    type="file"
-                    name="resume"
-                    accept=".pdf,.doc,.docx"
-                    onChange={handleFormChange}
-                    className="w-full border border-gray-700 bg-black px-4 py-2 rounded-lg outline-none text-white"
-                  />
+              {/* Resume Upload */}
+              <div className="col-span-full">
+                <label className="flex items-center text-sm font-medium text-gray-300 mb-1"><FileText className="w-4 h-4 mr-2"/> Upload Resume (.pdf, .doc, .docx)</label>
+                <input
+                  type="file"
+                  name="resume"
+                  accept=".pdf,.doc,.docx"
+                  onChange={handleFormChange}
+                  className="w-full text-sm text-gray-400 file:mr-4 file:py-2 file:px-4 file:rounded-full file:border-0 file:text-sm file:font-semibold file:bg-[#8b1289] file:text-white hover:file:bg-[#a0229f] transition-all"
+                />
+              </div>
+
+              {/* Resume Preview */}
+              {form.resume && (
+                <div className="col-span-full border border-[#8b1289] p-3 rounded-lg bg-gray-800 mt-2">
+                  <p className="font-semibold text-white">File Selected:</p>
+                  <p className="text-sm text-gray-200 truncate">{form.resume.name}</p>
                 </div>
+              )}
 
-                {form.resume && (
-                  <div className="border p-3 rounded-lg bg-gray-800 mt-2">
-                    <p className="font-semibold text-gray-200">Resume Preview:</p>
-                    <p className="text-sm text-gray-400">{form.resume.name}</p>
-                  </div>
-                )}
-
-                <div className="flex flex-col sm:flex-row justify-end gap-3">
-                  <button
-                    type="button"
-                    onClick={() => setShowForm(false)}
-                    className="px-4 py-2 rounded-lg border border-gray-500 text-gray-300 hover:bg-gray-700"
-                  >
-                    Cancel
-                  </button>
-                  <button
-                    type="submit"
-                    className="px-4 py-2 rounded-lg bg-[#8b1289] hover:bg-[#8b1289]/90 text-white"
-                  >
-                    Submit Application
-                  </button>
-                </div>
-              </form>
-            </motion.div>
+              {/* Action Buttons */}
+              <div className="col-span-full flex flex-col sm:flex-row justify-end gap-3 pt-4">
+                <button
+                  type="button"
+                  onClick={() => setShowForm(false)}
+                  className="px-6 py-2 rounded-lg border border-gray-600 text-gray-300 hover:bg-gray-800 transition-colors"
+                >
+                  Cancel
+                </button>
+                <button
+                  type="submit"
+                  className="px-6 py-2 rounded-lg bg-[#8b1289] hover:bg-[#a0229f] text-white font-semibold transition-colors shadow-md shadow-[#8b1289]/30"
+                >
+                  Submit Application via WhatsApp
+                </button>
+              </div>
+            </form>
           </motion.div>
         )}
       </AnimatePresence>

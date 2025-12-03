@@ -49,7 +49,7 @@ const HeroSection = () => {
           </h1>
 
           <p className="text-gray-300 text-sm sm:text-base md:text-lg lg:text-xl leading-relaxed">
-            At <span className="font-semibold text-[#81007f]">Deep Learner Academy</span>, we empower
+            At <span className="font-semibold text-[#81007f]">DeepLearner Academy</span>, we empower
             students with hands-on IT training, real-world projects, and expert mentorship. Whether
             you’re starting your journey or advancing your expertise, we help you{" "}
             <span className="font-semibold">learn today</span> with confidence and

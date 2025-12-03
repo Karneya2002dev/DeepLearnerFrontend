@@ -401,7 +401,7 @@ const Workshops = () => {
       setIsSuccess(true);
 
       // Construct WhatsApp message
-      const phoneNumber = "916384942259"; // your WhatsApp number
+      const phoneNumber = "919486827259"; // your WhatsApp number
       const message = `Hello! I want to register for the workshop "${selectedWorkshop?.title}". 
 Name: ${form.name} 
 Email: ${form.email} 
@@ -460,7 +460,7 @@ Current Status: ${form.currentStatus}`;
                 <img src={w.image} alt={w.title} className="rounded-xl w-full h-40 sm:h-48 object-cover" />
               </div>
               <div className="p-4 sm:p-6 flex-1 flex flex-col">
-                <span className="bg-gray-800 text-xs sm:text-sm px-3 py-1 rounded-full inline-block mb-3">{w.registered}</span>
+                {/* <span className="bg-gray-800 text-xs sm:text-sm px-3 py-1 rounded-full inline-block mb-3">{w.registered}</span> */}
                 <h3 className="text-lg sm:text-xl font-bold">{w.title}</h3>
                 <p className="text-gray-400 text-sm mt-1 flex-1">{w.description}</p>
                 <div className="mt-3 sm:mt-4 flex items-center justify-between text-xs sm:text-sm">

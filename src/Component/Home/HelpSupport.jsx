@@ -7,7 +7,7 @@ export default function DeepLearnerContact() {
   const [submitted, setSubmitted] = useState(false);
   const [openFaq, setOpenFaq] = useState(null);
 
-  const whatsappNumber = "916384942259"; // Change your number
+  const whatsappNumber = "919486827259"; // Change your number
 
   const timeSlots = [
     "09:00 AM", "09:30 AM", "10:00 AM", "10:30 AM",
@@ -170,21 +170,21 @@ export default function DeepLearnerContact() {
           <aside className="bg-white/5 backdrop-blur-xl border border-white/10 rounded-3xl shadow-2xl p-8 flex flex-col gap-8 transition-all duration-500 hover:scale-[1.02]">
             <div>
               <h4 className="text-sm font-medium text-indigo-400">Email</h4>
-              <p className="text-sm text-gray-300 mt-1">support@deeplearner.in</p>
+              <p className="text-sm text-gray-300 mt-1">deeplearneracademy@gmail.com</p>
             </div>
 
             <div>
               <h4 className="text-sm font-medium text-indigo-400">Phone</h4>
-              <p className="text-sm text-gray-300 mt-1">+91 98765 43210</p>
+              <p className="text-sm text-gray-300 mt-1">+91 94868 27259</p>
             </div>
 
             <div>
               <h4 className="text-sm font-medium text-indigo-400">Follow Us</h4>
               <div className="flex gap-3 mt-2">
-                <a href="https://instagram.com/yourprofile" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-pink-500 flex items-center justify-center text-white text-lg animate-pulse">
+                <a href="https://www.instagram.com/deeplearner.academy" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-pink-500 flex items-center justify-center text-white text-lg animate-pulse">
                   <FaInstagram />
                 </a>
-                <a href="https://linkedin.com/in/yourprofile" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-blue-700 flex items-center justify-center text-white text-lg animate-pulse">
+                <a href="https://www.linkedin.com/showcase/deep-learner-dla/" target="_blank" rel="noopener noreferrer" className="w-10 h-10 rounded-full bg-blue-700 flex items-center justify-center text-white text-lg animate-pulse">
                   <FaLinkedin />
                 </a>
               </div>

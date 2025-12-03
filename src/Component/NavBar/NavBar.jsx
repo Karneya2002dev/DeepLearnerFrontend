@@ -367,18 +367,18 @@ const Navbar = () => {
       setIsLoading(false);
       setIsSuccess(true);
 
-      const message = `Hello! 👋
+      const message = `Hello! 
 I submitted a *Callback Request* on Deep Learner.
 
-🧑 Name: ${callbackForm.name}
-📧 Email: ${callbackForm.email}
-📞 Phone: ${callbackForm.phone}
-🎓 Status: ${callbackForm.status}
-📘 Course: ${callbackForm.course}
-💬 Message: ${callbackForm.message || "N/A"}`;
+ Name: ${callbackForm.name}
+Email: ${callbackForm.email}
+ Phone: ${callbackForm.phone}
+Status: ${callbackForm.status}
+Course: ${callbackForm.course}
+Message: ${callbackForm.message || "N/A"}`;
 
       setTimeout(() => {
-        const phoneNumber = "919638494225";
+        const phoneNumber = "919486827259";
         window.open(
           `https://wa.me/${phoneNumber}?text=${encodeURIComponent(message)}`,
           "_blank"

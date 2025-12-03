@@ -572,7 +572,7 @@ Status: ${formData.currentStatus}
 `;
 
   // Redirect to WhatsApp
-  window.open(`https://wa.me/916384942259?text=${encodeURIComponent(message)}`, "_blank");
+  window.open(`https://wa.me/919486827259?text=${encodeURIComponent(message)}`, "_blank");
 
   setTimeout(() => {
     setSubmitted(true);
@@ -747,7 +747,7 @@ Status: ${formData.currentStatus}
       >
         <div className="flex items-center gap-3 mb-6">
           <motion.div whileHover={{ rotate: 360 }} transition={{ duration: 1.2 }}>
-            <Wrench className="text-purple-300" size={30} />
+            {/* <Wrench className="text-purple-300" size={30} /> */}
           </motion.div>
           <h3 className="text-2xl font-semibold text-white">Tools You’ll Master</h3>
         </div>
@@ -775,7 +775,7 @@ Status: ${formData.currentStatus}
       >
         <div className="flex items-center gap-3 mb-6">
           <motion.div whileHover={{ rotate: 15 }} transition={{ type: "spring" }}>
-            <BadgeCheck className="text-blue-300" size={30} />
+            {/* <BadgeCheck className="text-blue-300" size={30} /> */}
           </motion.div>
           <h3 className="text-2xl font-semibold text-white">Career Roles</h3>
         </div>
@@ -802,12 +802,12 @@ Status: ${formData.currentStatus}
     >
       <div className="flex items-center gap-3 mb-6">
         <motion.div animate={{ scale: [1, 1.2, 1] }} transition={{ repeat: Infinity, duration: 2 }}>
-          <Wallet className="text-pink-300" size={30} />
+          {/* <Wallet className="text-pink-300" size={30} /> */}
         </motion.div>
         <h3 className="text-2xl font-semibold text-white">Expected Salary Range</h3>
       </div>
       <p className="text-gray-200 text-lg leading-relaxed">
-        💰{" "}
+        {" "}
         {typeof course.salary === "string"
           ? course.salary
           : course.salary?.min && course.salary?.max

@@ -79,9 +79,10 @@ export default function WallOfLove() {
         <div className="relative z-10 max-w-6xl mx-auto">
           {/* Title */}
           <div className="text-center mb-12">
-            <h2 className="text-4xl font-extrabold">
-              Stories of <span className="text-[#81007f]">Satisfaction</span>
-            </h2>
+          <h2 className="text-4xl sm:text-5xl font-extrabold leading-tight">
+  From <span className="text-[#81007f]">Learners</span> to <span className="text-[#81007f]">Leaders</span>
+</h2>
+
             <p className="text-gray-400 mt-2">
               Meet our students & hear their success stories.
             </p>
