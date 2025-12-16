@@ -1,13 +1,13 @@
 import React from "react";
 import { motion } from "framer-motion";
 
-import paytm from "../../assets/com/paay.png";
+import paytm from "../../assets/com/p2.jpg";
 import hp from "../../assets/com/hp.png";
-import Accenture from "../../assets/com/accen1.png";
-import Zomato from "../../assets/com/zomatoo.png";
-import Wipro from "../../assets/com/wiproo.png";
-import HCL from "../../assets/com/h.png";
-import Marq from "../../assets/com/whitemarqwon.png";
+import Accenture from "../../assets/com/a2.jpg";
+import Zomato from "../../assets/com/z2.jpg";
+import Wipro from "../../assets/com/w2.jpg";
+import HCL from "../../assets/com/h2.jpg";
+import Marq from "../../assets/com/m2.jpg";
 import tcs from "../../assets/com/tcs.png";
 import ama from "../../assets/com/ama.png";
 
@@ -41,12 +41,12 @@ const CompaniesHiring = () => {
         {/* FULL-WIDTH Scrolling Logos */}
        
          <motion.div
-  className="flex items-center gap-16 w-max"
-  animate={{ x: ["0%", "-100%"] }}
+  className="flex items-center gap-30 w-max"
+   animate={{ x: ["-10%", "-50%"] }}
   transition={{
     repeat: Infinity,
     repeatType: "loop",
-    duration: 55,   // Increased from 25 to 55 for slower movement
+    duration: 40,   // Increased from 25 to 55 for slower movement
     ease: "linear",
   }}
 >
