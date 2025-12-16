@@ -59,10 +59,32 @@ export default function AuthPage() {
       </div>
 
       <motion.div
-        initial={{ y: 40, opacity: 0 }}
-        animate={{ y: 0, opacity: 1 }}
-        className="auth-card w-full max-w-md rounded-3xl backdrop-blur-2xl bg-white/5 p-6 sm:p-10 border border-white/10 shadow-[0_0_50px_rgba(120,0,140,0.5)] relative"
-      >
+  initial={{ y: 40, opacity: 0 }}
+  animate={{ y: 0, opacity: 1 }}
+  className="
+    auth-card
+    relative
+    w-full max-w-md
+    rounded-3xl
+    p-6 sm:p-10
+
+    backdrop-blur-[20px]
+    bg-white/[0.08]
+
+    border border-white/20
+    shadow-[0_8px_40px_rgba(168,85,247,0.45)]
+
+    before:absolute
+    before:inset-0
+    before:rounded-3xl
+    before:bg-gradient-to-br
+    before:from-white/20
+    before:to-transparent
+    before:opacity-30
+    before:pointer-events-none
+  "
+>
+
         <h1 className="text-center text-white text-4xl font-semibold mb-8 tracking-wide">
           {isLogin ? "Log in" : "Sign up"}
         </h1>
@@ -115,10 +137,17 @@ export default function AuthPage() {
               <button type="submit" className="w-full bg-white text-black font-semibold py-3 rounded-full hover:bg-gray-200 transition">
                 Log in
               </button>
+<p className="text-center text-gray-400 text-sm mt-4">
+  Don't have an account?{' '}
+  <button
+    type="button"
+    onClick={() => setIsLogin(false)}
+    className="text-white font-medium underline hover:text-gray-200 transition-colors duration-200"
+  >
+    Sign up
+  </button>
+</p>
 
-              <p className="text-center text-gray-300 text-sm mt-3">
-                or <button type="button" onClick={() => setIsLogin(false)} className="underline hover:text-white">Sign up</button>
-              </p>
             </motion.form>
           ) : (
             <motion.form

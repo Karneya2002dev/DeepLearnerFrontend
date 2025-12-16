@@ -5,14 +5,14 @@ import { Briefcase, Mail, User, Clock, FileText, X } from "lucide-react";
 // --- Configuration Data ---
 
 const jobs = [
-  { title: "React Developer", category: "Web Development", experience: "3+ years" },
-  { title: "MERN Stack Developer", category: "Full Stack", experience: "4+ years" },
-  { title: "UI/UX Designer", category: "UI/UX", experience: "2+ years" },
-  { title: "Game Development Mentor (Python)", category: "Game Development", experience: "5+ years" },
-  { title: "Java Full Stack", category: "Full Stack", experience: "4+ years" },
-  { title: "Python Developer", category: "Programming", experience: "3+ years" },
-  { title: "Digital Marketing Specialist", category: "Digital Marketing", experience: "2+ years" },
-  { title: "React Native Developer", category: "Mobile App (React Native)", experience: "3+ years" },
+  { title: "React Developer", category: "Web Development",  },
+  { title: "MERN Stack Developer", category: "Full Stack", },
+  { title: "UI/UX Designer", category: "UI/UX",  },
+  { title: "Game Development Mentor (Python)", category: "Game Development",  },
+  { title: "Java Full Stack", category: "Full Stack",  },
+  { title: "Python Developer", category: "Programming",  },
+  { title: "Digital Marketing Specialist", category: "Digital Marketing", },
+  { title: "React Native Developer", category: "Mobile App (React Native)", },
 ];
 
 const allCategories = Array.from(new Set(jobs.map((job) => job.category))).map(
@@ -77,8 +77,8 @@ const JobCard = ({ job, index, openForm }) => (
     <p className="text-sm font-semibold text-[#d24bd0] mb-3">{job.category}</p>
 
     <div className="flex items-center text-gray-400 text-sm mb-4">
-        <Clock className="w-4 h-4 mr-2" />
-        <span className="font-medium">Required Experience: {job.experience}</span>
+        {/* <Clock className="w-4 h-4 mr-2" /> */}
+        {/* <span className="font-medium">Required Experience: {job.experience}</span> */}
     </div>
 
 <button
