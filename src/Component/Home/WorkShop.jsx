@@ -341,12 +341,197 @@
 
 
 
+// import React, { useEffect, useRef, useState } from "react";
+// import { X, CheckCircle2 } from "lucide-react";
+// import gsap from "gsap";
+// import { motion } from "framer-motion";
+// import { useSelector } from "react-redux";
+// import logo from '../../assets/loogoo1.png';
+
+// gsap.registerPlugin();
+
+// const bounceStyles = `
+// @keyframes bounce-seq-1 {0%,80%,100%{transform:translateY(0);}40%{transform:translateY(-10px);}}
+// @keyframes bounce-seq-2 {0%,80%,100%{transform:translateY(0);}20%{transform:translateY(-10px);}}
+// @keyframes bounce-seq-3 {0%,80%,100%{transform:translateY(0);}60%{transform:translateY(-10px);}}
+// .bounce-1{animation:bounce-seq-1 1s infinite ease-in-out;}
+// .bounce-2{animation:bounce-seq-2 1s infinite ease-in-out;}
+// .bounce-3{animation:bounce-seq-3 1s infinite ease-in-out;}
+// `;
+
+// const Workshops = () => {
+//   const workshops = useSelector((state) => state.courses.workshops);
+
+//   const cardsRef = useRef([]);
+//   const buttonRef = useRef([]);
+
+//   const [isModalOpen, setIsModalOpen] = useState(false);
+//   const [selectedWorkshop, setSelectedWorkshop] = useState(null);
+//   const [isSuccess, setIsSuccess] = useState(false);
+//   const [isLoading, setIsLoading] = useState(false);
+//   const [form, setForm] = useState({ name: "", email: "", phone: "", currentStatus: "" });
+//   const [errorMsg, setErrorMsg] = useState("");
+
+//   const handleChange = (e) => setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
+
+//   useEffect(() => {
+//     cardsRef.current.forEach((card, i) => {
+//       if (card) {
+//         gsap.from(card, { opacity: 0, y: 50, duration: 1, delay: i * 0.2 });
+//         gsap.to(card, { scale: 1.02, duration: 0.3, paused: true, ease: "power1.inOut", repeat: 0, yoyo: true });
+//       }
+//     });
+//     buttonRef.current.forEach(btn => gsap.from(btn, { scale: 0, opacity: 0, duration: 0.8 }));
+//   }, [workshops]);
+
+//   useEffect(() => {
+//     if (isModalOpen) {
+//       gsap.fromTo(".modal-content", { y: -50, opacity: 0, scale: 0.9 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "power3.out" });
+//     }
+//   }, [isModalOpen]);
+
+//   const handleSubmit = (e) => {
+//   e.preventDefault();
+//   setIsLoading(true);
+//   setErrorMsg("");
+
+//   // Simulate API call
+//   setTimeout(() => {
+//     if (form.name && form.email && form.phone && form.currentStatus) {
+//       setIsSuccess(true);
+
+//       // Construct WhatsApp message
+//       const phoneNumber = "919486827259"; // your WhatsApp number
+//       const message = `Hello! I want to register for the workshop "${selectedWorkshop?.title}". 
+// Name: ${form.name} 
+// Email: ${form.email} 
+// Phone: ${form.phone} 
+// Current Status: ${form.currentStatus}`;
+
+//       const encodedMessage = encodeURIComponent(message);
+//       const waUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+
+//       // Reset form
+//       setForm({ name: "", email: "", phone: "", currentStatus: "" });
+
+//       // Redirect after a short delay (optional)
+//       setTimeout(() => {
+//         setIsSuccess(false);
+//         setIsModalOpen(false);
+//         window.open(waUrl, "_blank"); // open WhatsApp in new tab
+//       }, 1500);
+
+//     } else {
+//       setErrorMsg("Please fill all fields correctly.");
+//     }
+//     setIsLoading(false);
+//   }, 1200);
+// };
+
+//   return (
+//     <section className="py-26 bg-black text-white">
+//       <style>{bounceStyles}</style>
+
+//       {/* Title */}
+//       <div className="text-center mb-10 sm:mb-12 px-4">
+//         <h2 className="text-3xl sm:text-4xl font-extrabold">
+//           Ongoing <span className="text-[#8b1289]">Workshops</span>
+//         </h2>
+//         <p className="text-gray-400 mt-2 text-sm sm:text-base max-w-2xl mx-auto">
+//           Attend the Free Course Workshops and Get to Know All the Details.
+//         </p>
+//         <div className="flex items-center justify-center mt-6">
+//           <motion.div initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} transition={{ duration: 0.8 }} className="flex-1 max-w-[120px] sm:max-w-xs border-t border-gray-700 origin-right" />
+//           <motion.div animate={{ scale: [1, 1.3, 1], rotate: [0, 15, -15, 0] }} transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}>
+//             <img src={logo} alt="Logo" className="mx-2 sm:mx-3 h-6 sm:h-8 w-auto object-contain" />
+//           </motion.div>
+//           <motion.div initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} transition={{ duration: 0.8, ease: "easeInOut", delay: 0.2 }} className="flex-1 max-w-[120px] sm:max-w-xs border-t border-gray-700 origin-left" />
+//         </div>
+//       </div>
+
+//       {/* Workshop Cards */}
+//       {workshops.length === 0 ? (
+//         <p className="text-center text-gray-400 mt-10">No workshops available.</p>
+//       ) : (
+//         <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto px-4 sm:px-6">
+//           {workshops.map((w, i) => (
+//             <div key={w.id} ref={el => cardsRef.current[i] = el} className="bg-[#111] rounded-2xl overflow-hidden shadow-lg border border-gray-800 flex flex-col hover:shadow-[#8b1289]/40 transition-shadow duration-300">
+//               <div className="p-4 sm:p-6">
+//                 <img src={w.image} alt={w.title} className="rounded-xl w-full h-40 sm:h-48 object-cover" />
+//               </div>
+//               <div className="p-4 sm:p-6 flex-1 flex flex-col">
+//                 {/* <span className="bg-gray-800 text-xs sm:text-sm px-3 py-1 rounded-full inline-block mb-3">{w.registered}</span> */}
+//                 <h3 className="text-lg sm:text-xl font-bold">{w.title}</h3>
+//                 <p className="text-gray-400 text-sm mt-1 flex-1">{w.description}</p>
+//                 <div className="mt-3 sm:mt-4 flex items-center justify-between text-xs sm:text-sm">
+//                   <span className="flex items-center gap-1 text-yellow-400">⭐ {w.rating}</span>
+//                 </div>
+//                 <div className="mt-4 sm:mt-6 flex items-center justify-between">
+//                   <div>
+//                     <span className="text-base sm:text-lg font-bold">₹{w.price}</span>{" "}
+//                     <span className="text-gray-500 line-through text-sm sm:text-base">₹{w.old_price}</span>
+//                   </div>
+//                   <button ref={el => buttonRef.current[i] = el} className="bg-[#6e0f6c] hover:bg-[#6e0f6c] text-white px-4 sm:px-5 py-2 rounded-lg text-sm sm:text-base font-semibold transition" onClick={() => { setSelectedWorkshop(w); setIsModalOpen(true); }}>
+//                     {w.button_text}
+//                   </button>
+//                 </div>
+//               </div>
+//             </div>
+//           ))}
+//         </div>
+//       )}
+
+//       {/* Modal */}
+//       {isModalOpen && (
+//         <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 px-4">
+//           <div className="modal-content bg-[#111] text-white p-6 sm:p-8 rounded-2xl max-w-md w-full relative">
+//             <button className="absolute top-3 right-3 text-gray-400 hover:text-white" onClick={() => setIsModalOpen(false)}><X size={22} /></button>
+//             <h3 className="text-xl sm:text-2xl font-bold mb-4">Register for {selectedWorkshop?.title}</h3>
+
+//             {isLoading ? (
+//               <div className="flex flex-col items-center justify-center py-8">
+//                 <div className="flex space-x-2">
+//                   <div className="w-3 h-3 bg-[#8b1289] rounded-full bounce-1"></div>
+//                   <div className="w-3 h-3 bg-[#8b1289] rounded-full bounce-2"></div>
+//                   <div className="w-3 h-3 bg-[#8b1289] rounded-full bounce-3"></div>
+//                 </div>
+//                 <p className="mt-4 text-sm sm:text-base text-gray-300">Submitting your registration...</p>
+//               </div>
+//             ) : !isSuccess ? (
+//               <form className="space-y-3 sm:space-y-4" onSubmit={handleSubmit}>
+//                 {["name","email","phone"].map(f => (
+//                   <input key={f} type={f==="email"?"email":f==="phone"?"tel":"text"} name={f} value={form[f]} onChange={handleChange} placeholder={f==="phone"?"Phone Number":f==="email"?"Email":"Full Name"} className="w-full p-2.5 sm:p-3 rounded-lg bg-gray-800 text-white text-sm sm:text-base outline-none focus:ring-2 focus:ring-[#8b1289]" required />
+//                 ))}
+//                 <select name="currentStatus" value={form.currentStatus} onChange={handleChange} className="w-full p-2.5 sm:p-3 rounded-lg bg-gray-800 text-white text-sm sm:text-base outline-none focus:ring-2 focus:ring-[#8b1289]}" required>
+//                   <option value="">-- Select Current Status --</option>
+//                   <option value="Student">Student</option>
+//                   <option value="Working Professional">Working Professional</option>
+//                   <option value="Job Seeker">Job Seeker</option>
+//                   <option value="Other">Other</option>
+//                 </select>
+//                 {errorMsg && <p className="text-red-500 text-sm">{errorMsg}</p>}
+//                 <button type="submit" className="w-full bg-[#8b1289] hover:bg-[#6e0f6c] py-2.5 sm:py-3 rounded-lg font-semibold text-sm sm:text-base transition">Confirm</button>
+//               </form>
+//             ) : (
+//               <div className="flex flex-col items-center justify-center py-6">
+//                 <CheckCircle2 size={40} className="text-[#8b1289] mb-3" />
+//                 <p className="text-lg font-semibold">Successfully Registered!</p>
+//               </div>
+//             )}
+//           </div>
+//         </div>
+//       )}
+//     </section>
+//   );
+// };
+
+// export default Workshops;
 import React, { useEffect, useRef, useState } from "react";
 import { X, CheckCircle2 } from "lucide-react";
 import gsap from "gsap";
 import { motion } from "framer-motion";
 import { useSelector } from "react-redux";
-import logo from '../../assets/loogoo1.png';
+import logo from "../../assets/loogoo1.png";
 
 gsap.registerPlugin();
 
@@ -369,153 +554,180 @@ const Workshops = () => {
   const [selectedWorkshop, setSelectedWorkshop] = useState(null);
   const [isSuccess, setIsSuccess] = useState(false);
   const [isLoading, setIsLoading] = useState(false);
-  const [form, setForm] = useState({ name: "", email: "", phone: "", currentStatus: "" });
   const [errorMsg, setErrorMsg] = useState("");
 
-  const handleChange = (e) => setForm(prev => ({ ...prev, [e.target.name]: e.target.value }));
+  const [form, setForm] = useState({
+    name: "",
+    email: "",
+    phone: "",
+    currentStatus: "",
+  });
+
+  const handleChange = (e) =>
+    setForm((prev) => ({ ...prev, [e.target.name]: e.target.value }));
 
   useEffect(() => {
     cardsRef.current.forEach((card, i) => {
       if (card) {
         gsap.from(card, { opacity: 0, y: 50, duration: 1, delay: i * 0.2 });
-        gsap.to(card, { scale: 1.02, duration: 0.3, paused: true, ease: "power1.inOut", repeat: 0, yoyo: true });
       }
     });
-    buttonRef.current.forEach(btn => gsap.from(btn, { scale: 0, opacity: 0, duration: 0.8 }));
+    buttonRef.current.forEach((btn) =>
+      gsap.from(btn, { scale: 0, opacity: 0, duration: 0.8 })
+    );
   }, [workshops]);
 
   useEffect(() => {
     if (isModalOpen) {
-      gsap.fromTo(".modal-content", { y: -50, opacity: 0, scale: 0.9 }, { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "power3.out" });
+      gsap.fromTo(
+        ".modal-content",
+        { y: -50, opacity: 0, scale: 0.9 },
+        { y: 0, opacity: 1, scale: 1, duration: 0.5, ease: "power3.out" }
+      );
     }
   }, [isModalOpen]);
 
   const handleSubmit = (e) => {
-  e.preventDefault();
-  setIsLoading(true);
-  setErrorMsg("");
+    e.preventDefault();
+    setIsLoading(true);
+    setErrorMsg("");
 
-  // Simulate API call
-  setTimeout(() => {
-    if (form.name && form.email && form.phone && form.currentStatus) {
-      setIsSuccess(true);
+    setTimeout(() => {
+      if (form.name && form.email && form.phone && form.currentStatus) {
+        setIsSuccess(true);
 
-      // Construct WhatsApp message
-      const phoneNumber = "919486827259"; // your WhatsApp number
-      const message = `Hello! I want to register for the workshop "${selectedWorkshop?.title}". 
-Name: ${form.name} 
-Email: ${form.email} 
-Phone: ${form.phone} 
-Current Status: ${form.currentStatus}`;
+        const adminEmail = "yourcompany@email.com"; // 🔴 CHANGE THIS
+        const subject = `Workshop Registration - ${selectedWorkshop?.title}`;
 
-      const encodedMessage = encodeURIComponent(message);
-      const waUrl = `https://wa.me/${phoneNumber}?text=${encodedMessage}`;
+        const body = `
+Hello Team,
 
-      // Reset form
-      setForm({ name: "", email: "", phone: "", currentStatus: "" });
+I would like to register for the workshop.
 
-      // Redirect after a short delay (optional)
-      setTimeout(() => {
-        setIsSuccess(false);
-        setIsModalOpen(false);
-        window.open(waUrl, "_blank"); // open WhatsApp in new tab
-      }, 1500);
+Workshop: ${selectedWorkshop?.title}
 
-    } else {
-      setErrorMsg("Please fill all fields correctly.");
-    }
-    setIsLoading(false);
-  }, 1200);
-};
+Name: ${form.name}
+Email: ${form.email}
+Phone: ${form.phone}
+Current Status: ${form.currentStatus}
+
+Thank you.
+        `;
+
+        const mailUrl = `mailto:${adminEmail}?subject=${encodeURIComponent(
+          subject
+        )}&body=${encodeURIComponent(body)}`;
+
+        setForm({ name: "", email: "", phone: "", currentStatus: "" });
+
+        setTimeout(() => {
+          setIsSuccess(false);
+          setIsModalOpen(false);
+          window.location.href = mailUrl; // 📧 Redirect to Mail
+        }, 1500);
+      } else {
+        setErrorMsg("Please fill all fields correctly.");
+      }
+      setIsLoading(false);
+    }, 1200);
+  };
 
   return (
     <section className="py-26 bg-black text-white">
       <style>{bounceStyles}</style>
 
       {/* Title */}
-      <div className="text-center mb-10 sm:mb-12 px-4">
-        <h2 className="text-3xl sm:text-4xl font-extrabold">
+      <div className="text-center mb-12 px-4">
+        <h2 className="text-4xl font-extrabold">
           Ongoing <span className="text-[#8b1289]">Workshops</span>
         </h2>
-        <p className="text-gray-400 mt-2 text-sm sm:text-base max-w-2xl mx-auto">
+        <p className="text-gray-400 mt-2 max-w-2xl mx-auto">
           Attend the Free Course Workshops and Get to Know All the Details.
         </p>
+
         <div className="flex items-center justify-center mt-6">
-          <motion.div initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} transition={{ duration: 0.8 }} className="flex-1 max-w-[120px] sm:max-w-xs border-t border-gray-700 origin-right" />
-          <motion.div animate={{ scale: [1, 1.3, 1], rotate: [0, 15, -15, 0] }} transition={{ repeat: Infinity, duration: 2, ease: "easeInOut" }}>
-            <img src={logo} alt="Logo" className="mx-2 sm:mx-3 h-6 sm:h-8 w-auto object-contain" />
-          </motion.div>
-          <motion.div initial={{ scaleX: 0 }} whileInView={{ scaleX: 1 }} transition={{ duration: 0.8, ease: "easeInOut", delay: 0.2 }} className="flex-1 max-w-[120px] sm:max-w-xs border-t border-gray-700 origin-left" />
+          <motion.div className="flex-1 max-w-xs border-t border-gray-700" />
+          <motion.img
+            src={logo}
+            alt="Logo"
+            className="mx-3 h-8"
+            animate={{ scale: [1, 1.3, 1], rotate: [0, 15, -15, 0] }}
+            transition={{ repeat: Infinity, duration: 2 }}
+          />
+          <motion.div className="flex-1 max-w-xs border-t border-gray-700" />
         </div>
       </div>
 
-      {/* Workshop Cards */}
-      {workshops.length === 0 ? (
-        <p className="text-center text-gray-400 mt-10">No workshops available.</p>
-      ) : (
-        <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-6 sm:gap-8 max-w-6xl mx-auto px-4 sm:px-6">
-          {workshops.map((w, i) => (
-            <div key={w.id} ref={el => cardsRef.current[i] = el} className="bg-[#111] rounded-2xl overflow-hidden shadow-lg border border-gray-800 flex flex-col hover:shadow-[#8b1289]/40 transition-shadow duration-300">
-              <div className="p-4 sm:p-6">
-                <img src={w.image} alt={w.title} className="rounded-xl w-full h-40 sm:h-48 object-cover" />
-              </div>
-              <div className="p-4 sm:p-6 flex-1 flex flex-col">
-                {/* <span className="bg-gray-800 text-xs sm:text-sm px-3 py-1 rounded-full inline-block mb-3">{w.registered}</span> */}
-                <h3 className="text-lg sm:text-xl font-bold">{w.title}</h3>
-                <p className="text-gray-400 text-sm mt-1 flex-1">{w.description}</p>
-                <div className="mt-3 sm:mt-4 flex items-center justify-between text-xs sm:text-sm">
-                  <span className="flex items-center gap-1 text-yellow-400">⭐ {w.rating}</span>
-                </div>
-                <div className="mt-4 sm:mt-6 flex items-center justify-between">
-                  <div>
-                    <span className="text-base sm:text-lg font-bold">₹{w.price}</span>{" "}
-                    <span className="text-gray-500 line-through text-sm sm:text-base">₹{w.old_price}</span>
-                  </div>
-                  <button ref={el => buttonRef.current[i] = el} className="bg-[#6e0f6c] hover:bg-[#6e0f6c] text-white px-4 sm:px-5 py-2 rounded-lg text-sm sm:text-base font-semibold transition" onClick={() => { setSelectedWorkshop(w); setIsModalOpen(true); }}>
-                    {w.button_text}
-                  </button>
-                </div>
+      {/* Cards */}
+      <div className="grid grid-cols-1 sm:grid-cols-2 lg:grid-cols-3 gap-8 max-w-6xl mx-auto px-6">
+        {workshops.map((w, i) => (
+          <div
+            key={w.id}
+            ref={(el) => (cardsRef.current[i] = el)}
+            className="bg-[#111] rounded-2xl border border-gray-800 shadow-lg"
+          >
+            <div className="p-6">
+              <img src={w.image} alt={w.title} className="rounded-xl h-48 w-full object-cover" />
+              <h3 className="text-xl font-bold mt-4">{w.title}</h3>
+              <p className="text-gray-400 text-sm mt-2">{w.description}</p>
+
+              <div className="flex justify-between items-center mt-4">
+                <span className="font-bold text-lg">₹{w.price}</span>
+                <button
+                  ref={(el) => (buttonRef.current[i] = el)}
+                  onClick={() => {
+                    setSelectedWorkshop(w);
+                    setIsModalOpen(true);
+                  }}
+                  className="bg-[#8b1289] px-4 py-2 rounded-lg font-semibold"
+                >
+                  {w.button_text}
+                </button>
               </div>
             </div>
-          ))}
-        </div>
-      )}
+          </div>
+        ))}
+      </div>
 
       {/* Modal */}
       {isModalOpen && (
-        <div className="fixed inset-0 bg-black/70 backdrop-blur-sm flex items-center justify-center z-50 px-4">
-          <div className="modal-content bg-[#111] text-white p-6 sm:p-8 rounded-2xl max-w-md w-full relative">
-            <button className="absolute top-3 right-3 text-gray-400 hover:text-white" onClick={() => setIsModalOpen(false)}><X size={22} /></button>
-            <h3 className="text-xl sm:text-2xl font-bold mb-4">Register for {selectedWorkshop?.title}</h3>
+        <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
+          <div className="modal-content bg-[#111] p-8 rounded-2xl w-full max-w-md relative">
+            <button
+              onClick={() => setIsModalOpen(false)}
+              className="absolute top-4 right-4"
+            >
+              <X />
+            </button>
 
             {isLoading ? (
-              <div className="flex flex-col items-center justify-center py-8">
-                <div className="flex space-x-2">
+              <div className="text-center">
+                <div className="flex justify-center space-x-2">
                   <div className="w-3 h-3 bg-[#8b1289] rounded-full bounce-1"></div>
                   <div className="w-3 h-3 bg-[#8b1289] rounded-full bounce-2"></div>
                   <div className="w-3 h-3 bg-[#8b1289] rounded-full bounce-3"></div>
                 </div>
-                <p className="mt-4 text-sm sm:text-base text-gray-300">Submitting your registration...</p>
               </div>
             ) : !isSuccess ? (
-              <form className="space-y-3 sm:space-y-4" onSubmit={handleSubmit}>
-                {["name","email","phone"].map(f => (
-                  <input key={f} type={f==="email"?"email":f==="phone"?"tel":"text"} name={f} value={form[f]} onChange={handleChange} placeholder={f==="phone"?"Phone Number":f==="email"?"Email":"Full Name"} className="w-full p-2.5 sm:p-3 rounded-lg bg-gray-800 text-white text-sm sm:text-base outline-none focus:ring-2 focus:ring-[#8b1289]" required />
-                ))}
-                <select name="currentStatus" value={form.currentStatus} onChange={handleChange} className="w-full p-2.5 sm:p-3 rounded-lg bg-gray-800 text-white text-sm sm:text-base outline-none focus:ring-2 focus:ring-[#8b1289]}" required>
-                  <option value="">-- Select Current Status --</option>
-                  <option value="Student">Student</option>
-                  <option value="Working Professional">Working Professional</option>
-                  <option value="Job Seeker">Job Seeker</option>
-                  <option value="Other">Other</option>
+              <form onSubmit={handleSubmit} className="space-y-4">
+                <input name="name" placeholder="Full Name" onChange={handleChange} value={form.name} required className="w-full p-3 bg-gray-800 rounded" />
+                <input name="email" type="email" placeholder="Email" onChange={handleChange} value={form.email} required className="w-full p-3 bg-gray-800 rounded" />
+                <input name="phone" placeholder="Phone" onChange={handleChange} value={form.phone} required className="w-full p-3 bg-gray-800 rounded" />
+                <select name="currentStatus" onChange={handleChange} value={form.currentStatus} required className="w-full p-3 bg-gray-800 rounded">
+                  <option value="">Select Status</option>
+                  <option>Student</option>
+                  <option>Working Professional</option>
+                  <option>Job Seeker</option>
                 </select>
-                {errorMsg && <p className="text-red-500 text-sm">{errorMsg}</p>}
-                <button type="submit" className="w-full bg-[#8b1289] hover:bg-[#6e0f6c] py-2.5 sm:py-3 rounded-lg font-semibold text-sm sm:text-base transition">Confirm</button>
+                {errorMsg && <p className="text-red-500">{errorMsg}</p>}
+                <button className="w-full bg-[#8b1289] py-3 rounded-lg font-bold">
+                  Confirm Registration
+                </button>
               </form>
             ) : (
-              <div className="flex flex-col items-center justify-center py-6">
-                <CheckCircle2 size={40} className="text-[#8b1289] mb-3" />
-                <p className="text-lg font-semibold">Successfully Registered!</p>
+              <div className="text-center">
+                <CheckCircle2 size={48} className="mx-auto text-green-500" />
+                <p className="mt-4 text-lg font-semibold">Registration Successful</p>
               </div>
             )}
           </div>

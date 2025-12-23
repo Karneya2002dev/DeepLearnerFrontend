@@ -8,23 +8,22 @@ import Zomato from "../../assets/com/z2.jpg";
 import Wipro from "../../assets/com/w2.jpg";
 import HCL from "../../assets/com/h2.jpg";
 import Marq from "../../assets/com/m2.jpg";
+import MarqText from "../../assets/com/marqwon3.png";
 import tcs from "../../assets/com/tcs.png";
 import ama from "../../assets/com/ama.png";
 
 const CompaniesHiring = () => {
   const companies = [
-    { name: "Accenture", img: Accenture },
-    { name: "Paytm", img: paytm },
-    { name: "Zomato", img: Zomato },
-    { name: "Wipro", img: Wipro },
-    { name: "HP", img: hp },
-    { name: "HCL", img: HCL },
+    { img: Accenture },
+    { img: paytm },
+    { img: Zomato },
+    { img: Wipro },
+    { img: hp },
+    { img: HCL },
     { name: "MarqWon", img: Marq },
-    { name: "TCS", img: tcs },
-    { name: "Amazon", img: ama },
+    { img: tcs },
+    { img: ama },
   ];
-
-  const duplicated = [...companies, ...companies];
 
   return (
     <section className="relative bg-black py-20 overflow-hidden">
@@ -38,36 +37,52 @@ const CompaniesHiring = () => {
           Hiring Talent
         </h2>
 
-        {/* FULL-WIDTH Scrolling Logos */}
-       
-         <motion.div
-  className="flex items-center gap-30 w-max"
-   animate={{ x: ["-10%", "-50%"] }}
-  transition={{
-    repeat: Infinity,
-    repeatType: "loop",
-    duration: 40,   // Increased from 25 to 55 for slower movement
-    ease: "linear",
-  }}
->
-  {[...companies, ...companies, ...companies].map((company, index) => (
-    <div key={index} className="flex flex-col items-center justify-center">
-      <img
-        src={company.img}
-        alt={company.name}
-        className="h-16 md:h-20 object-contain opacity-90 hover:opacity-100 hover:scale-110 transition-transform duration-300"
-      />
-      <p className="text-white/80 text-sm mt-2">{company.name}</p>
-    </div>
-  ))}
-</motion.div>
-</div>
-        {/* Subtext */}
-        <p className="text-gray-400 mt-12 text-sm md:text-base text-center">
-  Trusted by leading global organizations for top talent.
-</p>
+        {/* Scrolling Logos */}
+        <motion.div
+          className="flex items-center gap-28 w-max"
+          animate={{ x: ["-10%", "-50%"] }}
+          transition={{
+            repeat: Infinity,
+            repeatType: "loop",
+            duration: 40,
+            ease: "linear",
+          }}
+        >
+          {[...companies, ...companies, ...companies].map((company, index) => {
+            const isMarqWon = company.name === "MarqWon";
 
-   
+            return (
+              <div
+                key={index}
+                className={`flex items-center justify-center ${
+                  isMarqWon ? "flex-row gap-1" : "flex-col"
+                }`}
+              >
+                {/* Main Logo */}
+                <img
+                  src={company.img}
+                  alt={company.name || "company logo"}
+                  className="h-16 md:h-20 object-contain opacity-90 hover:opacity-100 hover:scale-110 transition-transform duration-300"
+                />
+
+                {/* Text Image beside logo ONLY for MarqWon */}
+                {isMarqWon && (
+                  <img
+                    src={MarqText}
+                    alt="MarqWon"
+                    className="h-15 object-contain"
+                  />
+                )}
+              </div>
+            );
+          })}
+        </motion.div>
+      </div>
+
+      {/* Subtext */}
+      <p className="text-gray-400 mt-12 text-sm md:text-base text-center">
+        Trusted by leading global organizations for top talent.
+      </p>
     </section>
   );
 };
