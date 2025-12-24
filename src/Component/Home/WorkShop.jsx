@@ -596,7 +596,7 @@ const Workshops = () => {
       if (form.name && form.email && form.phone && form.currentStatus) {
         setIsSuccess(true);
 
-        const adminEmail = "deeplearneracademy@gmail.com"; // 🔴 CHANGE THIS
+        const adminEmail = "deeplearneracademy@gmail.com";
         const subject = `Workshop Registration - ${selectedWorkshop?.title}`;
 
         const body = `
@@ -614,16 +614,16 @@ Current Status: ${form.currentStatus}
 Thank you.
         `;
 
-        const mailUrl = `mailto:${adminEmail}?subject=${encodeURIComponent(
-          subject
-        )}&body=${encodeURIComponent(body)}`;
+        const gmailUrl = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
+          adminEmail
+        )}&su=${encodeURIComponent(subject)}&body=${encodeURIComponent(body)}`;
 
         setForm({ name: "", email: "", phone: "", currentStatus: "" });
 
         setTimeout(() => {
           setIsSuccess(false);
           setIsModalOpen(false);
-          window.location.href = mailUrl; // 📧 Redirect to Mail
+          window.open(gmailUrl, "_blank"); // ✅ OPEN GMAIL DIRECTLY
         }, 1500);
       } else {
         setErrorMsg("Please fill all fields correctly.");
@@ -693,20 +693,15 @@ Thank you.
       {isModalOpen && (
         <div className="fixed inset-0 bg-black/70 flex items-center justify-center z-50">
           <div className="modal-content bg-[#111] p-8 rounded-2xl w-full max-w-md relative">
-            <button
-              onClick={() => setIsModalOpen(false)}
-              className="absolute top-4 right-4"
-            >
+            <button onClick={() => setIsModalOpen(false)} className="absolute top-4 right-4">
               <X />
             </button>
 
             {isLoading ? (
-              <div className="text-center">
-                <div className="flex justify-center space-x-2">
-                  <div className="w-3 h-3 bg-[#8b1289] rounded-full bounce-1"></div>
-                  <div className="w-3 h-3 bg-[#8b1289] rounded-full bounce-2"></div>
-                  <div className="w-3 h-3 bg-[#8b1289] rounded-full bounce-3"></div>
-                </div>
+              <div className="flex justify-center space-x-2">
+                <div className="w-3 h-3 bg-[#8b1289] rounded-full bounce-1"></div>
+                <div className="w-3 h-3 bg-[#8b1289] rounded-full bounce-2"></div>
+                <div className="w-3 h-3 bg-[#8b1289] rounded-full bounce-3"></div>
               </div>
             ) : !isSuccess ? (
               <form onSubmit={handleSubmit} className="space-y-4">
