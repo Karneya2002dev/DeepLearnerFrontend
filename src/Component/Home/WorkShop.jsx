@@ -596,7 +596,7 @@ const Workshops = () => {
       if (form.name && form.email && form.phone && form.currentStatus) {
         setIsSuccess(true);
 
-        const adminEmail = "yourcompany@email.com"; // 🔴 CHANGE THIS
+        const adminEmail = "deeplearneracademy@gmail.com"; // 🔴 CHANGE THIS
         const subject = `Workshop Registration - ${selectedWorkshop?.title}`;
 
         const body = `
