@@ -91,7 +91,7 @@ export default function DeepLearnerContact() {
       <div className="max-w-6xl mx-auto">
         
         {/* Header */}
-        <header className="mb-16 text-center">
+        <header className="mb-16 text-center relative top-10">
           <h1 className="text-4xl md:text-6xl font-black text-white tracking-tight mb-4 bg-clip-text bg-gradient-to-r from-white to-gray-500">
             Talk with an Advisor
           </h1>

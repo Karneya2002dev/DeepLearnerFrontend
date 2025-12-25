@@ -49,49 +49,25 @@ const Navbar = () => {
     setCallbackForm({ ...callbackForm, [name]: value });
   };
 
- const handleCallbackSubmit = (e) => {
-  e.preventDefault();
-  const { name, email, phone, status, course, message } = callbackForm;
+  const handleCallbackSubmit = (e) => {
+    e.preventDefault();
+    const { name, email, phone, status, course, message } = callbackForm;
 
-  if (!name || !email || !phone || !status || !course) {
-    alert("Please fill in all required fields.");
-    return;
-  }
+    if (!name || !email || !phone || !status || !course) {
+      alert("Please fill in all required fields.");
+      return;
+    }
 
-  const emailSubject = "Callback Request - DeepLearner Academy";
-  const emailBody = `
-Hello! 👋
+    const emailSubject = "Callback Request - DeepLearner Academy";
+    const emailBody = `Hello! 👋\n\nI submitted a Callback Request.\n\nName: ${name}\nEmail: ${email}\nPhone: ${phone}\nStatus: ${status}\nCourse: ${course}\nMessage: ${message || "N/A"}`;
 
-I submitted a Callback Request on DeepLearner Academy.
+    const mailTo = "deeplearneracademy@gmail.com";
+    const gmailURL = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(mailTo)}&su=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
 
-Name: ${name}
-Email: ${email}
-Phone: ${phone}
-Status: ${status}
-Course: ${course}
-Message: ${message || "N/A"}
-  `;
-
-  const mailTo = "deeplearneracademy@gmail.com";
-
-  const gmailURL = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
-    mailTo
-  )}&su=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
-
-  window.open(gmailURL, "_blank");
-
-  setCallbackForm({
-    name: "",
-    email: "",
-    phone: "",
-    status: "",
-    course: "",
-    message: "",
-  });
-
-  setIsCallbackOpen(false);
-};
-
+    window.open(gmailURL, "_blank");
+    setCallbackForm({ name: "", email: "", phone: "", status: "", course: "", message: "" });
+    setIsCallbackOpen(false);
+  };
 
   return (
     <>
@@ -105,7 +81,7 @@ Message: ${message || "N/A"}
         style={{ fontFamily: "EB Garamond" }}
       >
         <Link to="/" className="flex items-center gap-2 group relative">
-          <div className="relative w-12 h-12 flex items-center justify-center">
+          <div className="relative w-10 h-10 md:w-12 md:h-12 flex items-center justify-center">
             <img
               src={logo}
               alt="Logo"
@@ -113,7 +89,7 @@ Message: ${message || "N/A"}
             />
             <div className="absolute inset-0 bg-[#81007f] rounded-full blur-xl opacity-0 group-hover:opacity-40 transition-opacity duration-500" />
           </div>
-          <h1 className="text-2xl font-bold tracking-tight text-white">
+          <h1 className="text-xl md:text-2xl font-bold tracking-tight text-white">
             Deep{" "}
             <span className="bg-gradient-to-r from-[#81007f] to-[#d100c4] bg-clip-text text-transparent">
               Learner
@@ -158,7 +134,7 @@ Message: ${message || "N/A"}
             className="lg:hidden text-white p-2 hover:bg-white/10 rounded-lg transition"
             onClick={() => setIsMobileMenuOpen(!isMobileMenuOpen)}
           >
-            {isMobileMenuOpen ? <X size={28} /> : <Menu size={28} />}
+            {isMobileMenuOpen ? <X size={24} /> : <Menu size={24} />}
           </button>
         </div>
       </nav>
@@ -170,9 +146,9 @@ Message: ${message || "N/A"}
             initial={{ opacity: 0, backdropFilter: "blur(0px)" }}
             animate={{ opacity: 1, backdropFilter: "blur(20px)" }}
             exit={{ opacity: 0, backdropFilter: "blur(0px)" }}
-            className="fixed inset-0 z-50 bg-black/90 lg:hidden flex flex-col p-8 pt-24"
+            className="fixed inset-0 z-50 bg-black/95 lg:hidden flex flex-col p-8 pt-24"
           >
-            <div className="space-y-4">
+            <div className="space-y-6">
               {navLinks.map((link, i) => (
                 <motion.div
                   initial={{ x: -20, opacity: 0 }}
@@ -183,8 +159,8 @@ Message: ${message || "N/A"}
                   <Link
                     to={link.path}
                     onClick={() => setIsMobileMenuOpen(false)}
-                    className={`text-3xl font-bold block text-white hover:text-[#81007f] ${
-                      location.pathname === link.path ? "underline" : ""
+                    className={`text-xl font-bold block text-white hover:text-[#81007f] transition-colors ${
+                      location.pathname === link.path ? "text-[#81007f]" : ""
                     }`}
                   >
                     {link.name}
@@ -197,7 +173,7 @@ Message: ${message || "N/A"}
                 setIsMobileMenuOpen(false);
                 setIsCallbackOpen(true);
               }}
-              className="mt-12 py-5 bg-gradient-to-r from-[#81007f] to-[#d100c4] text-white rounded-2xl text-xl font-bold"
+              className="mt-12 py-4 bg-gradient-to-r from-[#81007f] to-[#d100c4] text-white rounded-2xl text-base font-bold shadow-lg"
             >
               Get Free Demo
             </button>
@@ -221,42 +197,39 @@ Message: ${message || "N/A"}
               initial={{ scale: 0.9, y: 20, opacity: 0 }}
               animate={{ scale: 1, y: 0, opacity: 1 }}
               exit={{ scale: 0.9, y: 20, opacity: 0 }}
-              className="bg-[#0a0a0a] border border-white/10 text-white p-8 rounded-[2.5rem] w-full max-w-lg relative overflow-hidden shadow-2xl"
+              className="bg-[#0a0a0a] border border-white/10 text-white p-6 md:p-8 rounded-[2rem] w-full max-w-lg relative overflow-hidden shadow-2xl"
             >
-              <div className="absolute -top-24 -right-24 w-64 h-64 bg-[#81007f] rounded-full blur-[120px] opacity-20" />
-
               <button
                 onClick={() => setIsCallbackOpen(false)}
                 className="absolute right-6 top-6 text-gray-500 hover:text-white transition"
               >
-                <X size={24} />
+                <X size={20} />
               </button>
 
-              <div className="text-center mb-10">
-                <h3 className="text-3xl font-bold bg-gradient-to-b from-white to-gray-500 bg-clip-text text-transparent">
+              <div className="text-center mb-8">
+                <h3 className="text-xl md:text-3xl font-bold bg-gradient-to-b from-white to-gray-500 bg-clip-text text-transparent">
                   Request a Free Demo Class
                 </h3>
-                <p className="text-gray-500 mt-2 text-xs uppercase tracking-[0.3em]">
+                <p className="text-gray-500 mt-2 text-[10px] uppercase tracking-[0.3em]">
                   Executive Learning Access
                 </p>
               </div>
 
-              {/* --- CALLBACK FORM --- */}
-              <form onSubmit={handleCallbackSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-4">
+              <form onSubmit={handleCallbackSubmit} className="grid grid-cols-1 md:grid-cols-2 gap-3 md:gap-4">
                 <div className="relative col-span-2 md:col-span-1">
-                  <UserCircle className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={18} />
+                  <UserCircle className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={16} />
                   <input
                     name="name"
                     value={callbackForm.name}
                     onChange={handleCallbackChange}
                     placeholder="Full Name"
                     required
-                    className="w-full bg-white/5 border border-white/10 p-4 pl-12 rounded-2xl focus:border-[#81007f] outline-none transition-all focus:ring-1 focus:ring-[#81007f]"
+                    className="w-full bg-white/5 border border-white/10 p-3 md:p-4 pl-11 rounded-xl text-sm md:text-base focus:border-[#81007f] outline-none transition-all"
                   />
                 </div>
 
                 <div className="relative col-span-2 md:col-span-1">
-                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={18} />
+                  <Mail className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={16} />
                   <input
                     name="email"
                     type="email"
@@ -264,30 +237,30 @@ Message: ${message || "N/A"}
                     onChange={handleCallbackChange}
                     placeholder="Email"
                     required
-                    className="w-full bg-white/5 border border-white/10 p-4 pl-12 rounded-2xl focus:border-[#81007f] outline-none transition-all focus:ring-1 focus:ring-[#81007f]"
+                    className="w-full bg-white/5 border border-white/10 p-3 md:p-4 pl-11 rounded-xl text-sm md:text-base focus:border-[#81007f] outline-none transition-all"
                   />
                 </div>
 
                 <div className="relative col-span-2">
-                  <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={18} />
+                  <Phone className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={16} />
                   <input
                     name="phone"
                     value={callbackForm.phone}
                     onChange={handleCallbackChange}
                     placeholder="Phone Number"
                     required
-                    className="w-full bg-white/5 border border-white/10 p-4 pl-12 rounded-2xl focus:border-[#81007f] outline-none transition-all focus:ring-1 focus:ring-[#81007f]"
+                    className="w-full bg-white/5 border border-white/10 p-3 md:p-4 pl-11 rounded-xl text-sm md:text-base focus:border-[#81007f] outline-none transition-all"
                   />
                 </div>
 
                 <div className="relative col-span-2 md:col-span-1">
-                  <User className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={18} />
+                  <User className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={16} />
                   <select
                     name="status"
                     value={callbackForm.status}
                     onChange={handleCallbackChange}
                     required
-                    className="w-full bg-white/5 border border-white/10 p-4 pl-12 rounded-2xl focus:border-[#81007f] outline-none appearance-none text-gray-400"
+                    className="w-full bg-white/5 border border-white/10 p-3 md:p-4 pl-11 rounded-xl text-sm md:text-base focus:border-[#81007f] outline-none appearance-none text-gray-400"
                   >
                     <option value="">Status</option>
                     <option value="Student">Student</option>
@@ -297,19 +270,17 @@ Message: ${message || "N/A"}
                 </div>
 
                 <div className="relative col-span-2 md:col-span-1">
-                  <BookOpen className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={18} />
+                  <BookOpen className="absolute left-4 top-1/2 -translate-y-1/2 text-gray-500" size={16} />
                   <select
                     name="course"
                     value={callbackForm.course}
                     onChange={handleCallbackChange}
                     required
-                    className="w-full bg-white/5 border border-white/10 p-4 pl-12 rounded-2xl focus:border-[#81007f] outline-none appearance-none text-gray-400"
+                    className="w-full bg-white/5 border border-white/10 p-3 md:p-4 pl-11 rounded-xl text-sm md:text-base focus:border-[#81007f] outline-none appearance-none text-gray-400"
                   >
                     <option value="">Course</option>
                     {courseOptions.map((c) => (
-                      <option key={c} value={c}>
-                        {c}
-                      </option>
+                      <option key={c} value={c}>{c}</option>
                     ))}
                   </select>
                 </div>
@@ -320,14 +291,14 @@ Message: ${message || "N/A"}
                     value={callbackForm.message}
                     onChange={handleCallbackChange}
                     placeholder="Message (optional)"
-                    className="w-full bg-white/5 border border-white/10 p-4 rounded-2xl focus:border-[#81007f] outline-none transition-all focus:ring-1 focus:ring-[#81007f]"
-                    rows={3}
+                    className="w-full bg-white/5 border border-white/10 p-4 rounded-xl text-sm md:text-base focus:border-[#81007f] outline-none transition-all"
+                    rows={2}
                   />
                 </div>
 
-                <button className="col-span-2 group relative overflow-hidden flex items-center justify-center gap-3 py-5 mt-4 bg-white text-black font-black rounded-2xl hover:bg-[#81007f] hover:text-white transition-all duration-500">
+                <button className="col-span-2 group relative overflow-hidden flex items-center justify-center gap-3 py-4 mt-2 bg-white text-black font-black rounded-xl hover:bg-[#81007f] hover:text-white transition-all duration-500 text-sm md:text-base">
                   <span className="relative z-10">SEND MAIL</span>
-                  <Send size={18} className="relative z-10 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
+                  <Send size={16} className="relative z-10 group-hover:translate-x-1 group-hover:-translate-y-1 transition-transform" />
                 </button>
               </form>
             </motion.div>
