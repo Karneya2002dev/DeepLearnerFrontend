@@ -561,26 +561,50 @@ const handleSubmit = (e) => {
 
   setSubmitting(true);
 
-  const message = `
-Hi! I want to enroll in the ${course.title} course.
+  const emailSubject = `Course Enrollment Request - ${course.title}`;
 
-*Enrollment Details*:
+  const emailBody = `
+Hello DeepLearner Academy Team 👋,
+
+I would like to enroll in the following course.
+
+📘 Course Name:
+${course.title}
+
+👤 Student Details:
 Name: ${formData.name}
 Email: ${formData.email}
 Phone: ${formData.phone}
-Status: ${formData.currentStatus}
-`;
+Current Status: ${formData.currentStatus}
 
-  // Redirect to WhatsApp
-  window.open(`https://wa.me/919486827259?text=${encodeURIComponent(message)}`, "_blank");
+Please contact me with further details regarding enrollment, schedule, and payment.
+
+Thank you,
+${formData.name}
+  `;
+
+  const receiverEmail = "deeplearneracademy@gmail.com";
+
+  const gmailURL = `https://mail.google.com/mail/?view=cm&fs=1&to=${encodeURIComponent(
+    receiverEmail
+  )}&su=${encodeURIComponent(emailSubject)}&body=${encodeURIComponent(emailBody)}`;
+
+  // Open Gmail compose
+  window.open(gmailURL, "_blank");
 
   setTimeout(() => {
     setSubmitted(true);
-    setFormData({ name: "", email: "", phone: "", currentStatus: "" });
+    setFormData({
+      name: "",
+      email: "",
+      phone: "",
+      currentStatus: "",
+    });
     setIsModalOpen(false);
     setSubmitting(false);
   }, 1000);
 };
+
 
   if (!course) {
     return (
